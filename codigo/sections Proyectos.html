@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JACS — Proyectos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─────────────────────────────────────────
+       TOKENS
+    ───────────────────────────────────────── */
+    :root {
+      --ink:       #0c0c0c;
+      --paper:     #f5f0e8;
+      --muted:     rgba(245, 240, 232, 0.35);
+      --ghost:     rgba(245, 240, 232, 0.06);
+      --accent:    #c8a96e;
+      --accent-2:  #7c6fcd;
+
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --mono:  'DM Mono', monospace;
+
+      /* Carpetas — una por categoría */
+      --col-identidad:  #c8a96e;
+      --col-branding:   #5dcaa5;
+      --col-animacion:  #f0997b;
+      --col-3d:         #7c6fcd;
+      --col-impresion:  #85b7eb;
+      --col-frontend:   #97c459;
+    }
+
+    /* ─────────────────────────────────────────
+       RESET SEMÁNTICO
+    ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--serif);
+      min-height: 100vh;
+      padding: 3rem 5vw 6rem;
+    }
+
+    /* ─────────────────────────────────────────
+       CABECERA DE SECCIÓN
+    ───────────────────────────────────────── */
+    .proyectos-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.08);
+    }
+
+    .proyectos-header h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+
+    .proyectos-header p {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* ─────────────────────────────────────────
+       ARCHIVADOR — CONTENEDOR PRINCIPAL
+       Semántica: <section> con role="tablist"
+    ───────────────────────────────────────── */
+    .archivador {
+      position: relative;
+    }
+
+    /* ─────────────────────────────────────────
+       PESTAÑAS — SOLAPAS DE CARPETA
+       <nav> con lista de botones/tabs
+    ───────────────────────────────────────── */
+    .archivador__pestanas {
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0 0 0 2px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .archivador__pestanas::-webkit-scrollbar { display: none; }
+
+    /* Solapa individual — forma de pestaña de carpeta */
+    .pestana {
+      --color: var(--accent);              /* override por categoría */
+
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 20px 14px;
+      min-height: 46px;
+
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(245, 240, 232, 0.35);
+      white-space: nowrap;
+
+      background: rgba(245, 240, 232, 0.03);
+      border: 1px solid rgba(245, 240, 232, 0.07);
+      border-bottom: none;
+      border-radius: 5px 5px 0 0;
+
+      cursor: pointer;
+      flex-shrink: 0;
+
+      transition: color 0.25s, background 0.25s, border-color 0.25s;
+    }
+
+    /* Punto de color de la categoría */
+    .pestana__punto {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color);
+      opacity: 0.4;
+      flex-shrink: 0;
+      transition: opacity 0.25s;
+    }
+
+    /* Contador de proyectos en la pestaña */
+    .pestana__cuenta {
+      font-size: 8px;
+      padding: 1px 5px;
+      border-radius: 2px;
+      background: rgba(245, 240, 232, 0.04);
+      color: rgba(245, 240, 232, 0.2);
+      transition: all 0.25s;
+    }
+
+    /* Estado activo — carpeta abierta */
+    .pestana[aria-selected="true"] {
+      color: var(--paper);
+      background: rgba(245, 240, 232, 0.06);
+      border-color: rgba(245, 240, 232, 0.12);
+      border-bottom-color: rgba(245, 240, 232, 0.06); /* se funde con el cuerpo */
+    }
+
+    .pestana[aria-selected="true"] .pestana__punto {
+      opacity: 1;
+    }
+
+    .pestana[aria-selected="true"] .pestana__cuenta {
+      background: color-mix(in srgb, var(--color) 15%, transparent);
+      color: var(--color);
+    }
+
+    /* Línea de color inferior en activo */
+    .pestana[aria-selected="true"]::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--color);
+      border-radius: 2px 2px 0 0;
+    }
+
+    .pestana:hover:not([aria-selected="true"]) {
+      color: rgba(245, 240, 232, 0.65);
+      background: rgba(245, 240, 232, 0.04);
+    }
+
+    /* ─────────────────────────────────────────
+       CUERPO DEL ARCHIVADOR
+    ───────────────────────────────────────── */
+    .archivador__cuerpo {
+      background: rgba(245, 240, 232, 0.04);
+      border: 1px solid rgba(245, 240, 232, 0.1);
+      border-radius: 0 6px 6px 6px;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+      min-height: 420px;
+    }
+
+    /* Línea vertical de color — "lomo" de la carpeta */
+    .archivador__cuerpo::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--color-activo, var(--accent));
+      border-radius: 6px 0 0 6px;
+      transition: background 0.4s;
+    }
+
+    /* ─────────────────────────────────────────
+       PANEL DE CATEGORÍA
+       <section role="tabpanel"> con data attr
+    ───────────────────────────────────────── */
+    .categoria {
+      display: none;         /* oculto por defecto */
+      animation: fadeIn 0.35s ease forwards;
+    }
+
+    .categoria[aria-hidden="false"] {
+      display: block;        /* activo */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* Meta de la categoría */
+    .categoria__meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.8rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.06);
+    }
+
+    .categoria__nombre {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+    }
+
+    .categoria__nombre em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .categoria__info {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* ─────────────────────────────────────────
+       GRID DE PROYECTOS
+       <ul> semántico — lista de proyectos
+    ───────────────────────────────────────── */
+    .proyectos-lista {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    /* ─────────────────────────────────────────
+       TARJETA DE PROYECTO
+       <article> — unidad semántica
+    ───────────────────────────────────────── */
+    .proyecto {
+      background: var(--ghost);
+      border: 1px solid rgba(245, 240, 232, 0.07);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.3s;
+    }
+
+    .proyecto:hover {
+      transform: translateY(-3px);
+      border-color: rgba(200, 169, 110, 0.2);
+    }
+
+    /* Miniatura / preview visual */
+    .proyecto__visual {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: rgba(245, 240, 232, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Overlay hover */
+    .proyecto__visual::after {
+      content: 'Ver proyecto →';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 0.75rem;
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: linear-gradient(to top, rgba(12,12,12,0.85), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .proyecto:hover .proyecto__visual::after {
+      opacity: 1;
+    }
+
+    /* Contenido textual */
+    .proyecto__contenido {
+      padding: 0.85rem 1rem 1rem;
+    }
+
+    .proyecto__categoria {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color, var(--accent));
+      margin-bottom: 0.3rem;
+    }
+
+    .proyecto__titulo {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.25;
+      color: var(--paper);
+      margin-bottom: 0.4rem;
+    }
+
+    .proyecto__desc {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.1em;
+      color: rgba(245, 240, 232, 0.25);
+      line-height: 1.5;
+    }
+
+    .proyecto__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 1rem;
+      border-top: 1px solid rgba(245, 240, 232, 0.05);
+    }
+
+    .proyecto__año {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      color: rgba(245, 240, 232, 0.2);
+    }
+
+    .proyecto__flecha {
+      font-size: 12px;
+      color: var(--color, var(--accent));
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    .proyecto:hover .proyecto__flecha {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─────────────────────────────────────────
+       ESTADO VACÍO
+    ───────────────────────────────────────── */
+    .sin-proyectos {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      gap: 1rem;
+      color: rgba(245, 240, 232, 0.18);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .sin-proyectos::before {
+      content: '◻';
+      font-size: 2rem;
+      opacity: 0.2;
+    }
+
+    /* ─────────────────────────────────────────
+       COLORES POR CATEGORÍA
+       Sobreescribe --color y --color-activo
+    ───────────────────────────────────────── */
+    .pestana--identidad  { --color: var(--col-identidad);  }
+    .pestana--branding   { --color: var(--col-branding);   }
+    .pestana--animacion  { --color: var(--col-animacion);  }
+    .pestana--3d         { --color: var(--col-3d);         }
+    .pestana--impresion  { --color: var(--col-impresion);  }
+    .pestana--frontend   { --color: var(--col-frontend);   }
+
+    .categoria--identidad .proyecto__categoria { color: var(--col-identidad);  }
+    .categoria--branding  .proyecto__categoria { color: var(--col-branding);   }
+    .categoria--animacion .proyecto__categoria { color: var(--col-animacion);  }
+    .categoria--3d        .proyecto__categoria { color: var(--col-3d);         }
+    .categoria--impresion .proyecto__categoria { color: var(--col-impresion);  }
+    .categoria--frontend  .proyecto__categoria { color: var(--col-frontend);   }
+
+    .categoria--identidad .proyecto__flecha { color: var(--col-identidad);  }
+    .categoria--branding  .proyecto__flecha { color: var(--col-branding);   }
+    .categoria--animacion .proyecto__flecha { color: var(--col-animacion);  }
+    .categoria--3d        .proyecto__flecha { color: var(--col-3d);         }
+    .categoria--impresion .proyecto__flecha { color: var(--col-impresion);  }
+    .categoria--frontend  .proyecto__flecha { color: var(--col-frontend);   }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE MOBILE
+    ───────────────────────────────────────── */
+    @media (max-width: 640px) {
+      body { padding: 1.5rem 4vw 5rem; }
+
+      .archivador__cuerpo { padding: 1.2rem; }
+
+      .pestana { padding: 8px 14px 12px; font-size: 8px; }
+
+      .proyectos-lista {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════
+       CABECERA
+  ════════════════════════════════════════ -->
+  <header class="proyectos-header">
+    <h2>Proyectos</h2>
+    <p>Selecciona una categoría</p>
+  </header>
+
+  <!-- ════════════════════════════════════════
+       ARCHIVADOR PRINCIPAL
+       role="tablist" para accesibilidad
+  ════════════════════════════════════════ -->
+  <section class="archivador" aria-label="Categorías de proyectos">
+
+    <!-- PESTAÑAS -->
+    <nav class="archivador__pestanas" role="tablist" aria-label="Modalidades de diseño">
+
+      <button class="pestana pestana--identidad"
+              role="tab"
+              id="tab-identidad"
+              aria-controls="panel-identidad"
+              aria-selected="true">
+        <span class="pestana__punto" aria-hidden="true"></span>
+        Identidad Visual
+        <span class="pestana__cuenta" aria-label="3 proyectos">3</span>
+      </button>
+
+      <button class="pestana pestana--branding"
+              role="tab"
+              id="tab-branding"
+              aria-controls="panel-branding"
+              aria-selected="false">
+        <span class="pestana__punto" aria-hidden="true"></span>
+        Branding
+        <span class="pestana__cuenta" aria-label="2 proyectos">2</span>
+      </button>
+
+      <button class="pestana pestana--animacion"
+              role="tab"
+              id="tab-animacion"
+              aria-controls="panel-animacion"
+              aria-selected="false">
+        <span class="pestana__punto" aria-hidden="true"></span>
+        Animación
+        <span class="pestana__cuenta" aria-label="1 proyecto">1</span>
+      </button>
+
+      <button class="pestana pestana--3d"
+              role="tab"
+              id="tab-3d"
+              aria-controls="panel-3d"
+              aria-selected="false">
+        <span class="pestana__punto" aria-hidden="true"></span>
+        Modelado 3D
+        <span class="pestana__cuenta" aria-label="2 proyectos">2</span>
+      </button>
+
+      <button class="pestana pestana--impresion"
+              role="tab"
+              id="tab-impresion"
+              aria-controls="panel-impresion"
+              aria-selected="false">
+        <span class="pestana__punto" aria-hidden="true"></span>
+        Impresión 3D
+        <span class="pestana__cuenta" aria-label="2 proyectos">2</span>
+      </button>
+
+      <button class="pestana pestana--frontend"
+              role="tab"
+              id="tab-frontend"
+              aria-controls="panel-frontend"
+              aria-selected="false">
+        <span class="pestana__punto" aria-hidden="true"></span>
+        Front-End
+        <span class="pestana__cuenta" aria-label="0 proyectos">0</span>
+      </button>
+
+    </nav>
+
+    <!-- CUERPO DEL ARCHIVADOR -->
+    <div class="archivador__cuerpo">
+
+      <!-- ── PANEL: IDENTIDAD VISUAL ── -->
+      <section class="categoria categoria--identidad"
+               id="panel-identidad"
+               role="tabpanel"
+               aria-labelledby="tab-identidad"
+               aria-hidden="false">
+
+        <header class="categoria__meta">
+          <h3 class="categoria__nombre">Identidad <em>Visual</em></h3>
+          <p class="categoria__info">3 proyectos<br>Logotipo · Sistema · Papelería</p>
+        </header>
+
+        <ul class="proyectos-lista" aria-label="Proyectos de Identidad Visual">
+
+          <li>
+            <article class="proyecto" tabindex="0" aria-label="Apartamentos Reyemar">
+              <div class="proyecto__visual">
+                <!-- Sustituir por <img> o thumbnail real -->
+              </div>
+              <div class="proyecto__contenido">
+                <p class="proyecto__categoria">Identidad Visual</p>
+                <h4 class="proyecto__titulo">Apartamentos Reyemar</h4>
+                <p class="proyecto__desc">Logo · Paleta · Merchandising · Social Media</p>
+              </div>
+              <footer class="proyecto__footer">
+                <time class="proyecto__año" datetime="2024">2024</time>
+                <span class="proyecto__flecha" aria-hidden="true">→</span>
+              </footer>
+            </article>
+          </li>
+
+          <li>
+            <article class="proyecto" tabindex="0" aria-label="Aureum Psicología">
+              <div class="proyecto__visual"></div>
+              <div class="proyecto__contenido">
+                <p class="proyecto__categoria">Identidad Visual</p>
+                <h4 class="proyecto__titulo">Aureum — Centro de Psicología</h4>
+                <p class="proyecto__desc">Logo · Tarjetas · Díptico · Carpeta</p>
+              </div>
+              <footer class="proyecto__footer">
+                <time class="proyecto__año" datetime="2024">2024</time>
+                <span class="proyecto__flecha" aria-hidden="true">→</span>
+              </footer>
+            </article>
+          </li>
+
+          <li>
+            <article class="proyecto" tabindex="0" aria-label="NatyCruz Costura">
+              <div class="proyecto__visual"></div>
+              <div class="proyecto__contenido">
+                <p class="proyecto__categoria">Identidad Visual</p>
+                <h4 class="proyecto__titulo">NatyCruz — Costura Flamenca</h4>
+                <p class="proyecto__desc">Logo · RRSS · Cartelería · Publicidad</p>
+              </div>
+              <footer class="proyecto__footer">
+                <time class="proyecto__año" datetime="2023">2023</time>
+                <span class="proyecto__flecha" aria-hidden="true">→</span>
+              </footer>
+            </article>
+          </li>
+
+        </ul>
+      </section>
+
+      <!-- ── PANEL: BRANDING ── -->
+      <section class="categoria categoria--branding"
+               id="panel-branding"
+               role="tabpanel"
+               aria-labelledby="tab-branding"
+               aria-hidden="true">
+
+        <header class="categoria__meta">
+          <h3 class="categoria__nombre">Branding <em>& Social</em></h3>
+          <p class="categoria__info">2 proyectos<br>Marca · Community · Contenido</p>
+        </header>
+
+        <ul class="proyectos-lista">
+          <li>
+            <article class="proyecto" tabindex="0">
+              <div class="proyecto__visual"></div>
+              <div class="proyecto__contenido">
+                <p class="proyecto__categoria">Branding</p>
+                <h4 class="proyecto__titulo">De Paso — Cafetería Bar</h4>
+                <p class="proyecto__desc">Logo · Tipografía custom NASAL · Señalética · RRSS</p>
+              </div>
+              <footer class="proyecto__footer">
+                <time class="proyecto__año" datetime="2024">2024</time>
+                <span class="proyecto__flecha" aria-hidden="true">→</span>
+              </footer>
+            </article>
+          </li>
+          <li>
+            <article class="proyecto" tabindex="0">
+              <div class="proyecto__visual"></div>
+              <div class="proyecto__contenido">
+                <p class="proyecto__categoria">Branding</p>
+                <h4 class="proyecto__titulo">Peña Bética Cultural Algabeña</h4>
+                <p class="proyecto__desc">Escudo · Paleta · Merch · Facebook · Señalética</p>
+              </div>
+              <footer class="proyecto__footer">
+                <time class="proyecto__año" datetime="2023">2023</time>
+                <span class="proyecto__flecha" aria-hidden="true">→</span>
+              </footer>
+            </article>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ── PANEL: ANIMACIÓN ── -->
+      <section class="categoria categoria--animacion"
+               id="panel-animacion"
+               role="tabpanel"
+               aria-labelledby="tab-animacion"
+               aria-hidden="true">
+
+        <header class="categoria__meta">
+          <h3 class="categoria__nombre">Ani<em>mación</em></h3>
+          <p class="categoria__info">1 proyecto<br>Motion · After Effects</p>
+        </header>
+
+        <ul class="proyectos-lista">
+          <li>
+            <article class="proyecto" tabindex="0">
+              <div class="proyecto__visual"></div>
+              <div class="proyecto__contenido">
+                <p class="proyecto__categoria">Animación</p>
+                <h4 class="proyecto__titulo">Motion Branding — HOY010</h4>
+                <p class="proyecto__desc">After Effects · Animación de logotipo · Intros</p>
+              </div>
+              <footer class="proyecto__footer">
+                <time class="proyecto__año" datetime="2024">2024</time>
+                <span class="proyecto__flecha" aria-hidden="true">→</span>
+              </footer>
+            </article>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ── PANEL: MODELADO 3D ── -->
+      <section class="categoria categoria--3d"
+               id="panel-3d"
+               role="tabpanel"
+               aria-labelledby="tab-3d"
+               aria-hidden="true">
+
+        <header class="categoria__meta">
+          <h3 class="categoria__nombre">Modelado <em>3D</em></h3>
+          <p class="categoria__info">2 proyectos<br>Blender · Maya · Arnold</p>
+        </header>
+
+        <ul class="proyectos-lista">
+          <li>
+            <article class="proyecto" tabindex="0">
+              <div class="proyecto__visual"></div>
+              <div class="proyecto__contenido">
+                <p class="proyecto__categoria">Modelado 3D</p>
+                <h4 class="proyecto__titulo">Gothic Manor — Arquitectura Victoriana</h4>
+                <p class="proyecto__desc">Blender · Iluminación HDRI · Render foto-realista</p>
+              </div>
+              <footer class="proyecto__footer">
+                <time class="proyecto__año" datetime="2024">2024</time>
+                <span class="proyecto__flecha" aria-hidden="true">→</span>
+              </footer>
+            </article>
+          </li>
+          <li>
+            <article class="proyecto" tabindex="0">
+              <div class="proyecto__visual"></div>
+              <div class="proyecto__contenido">
+                <p class="proyecto__categoria">Modelado 3D</p>
+                <h4 class="proyecto__titulo">Habitación Isométrica</h4>
+                <p class="proyecto__desc">Blender · Low-poly · Iluminación de neón</p>
+              </div>
+              <footer class="proyecto__footer">
+                <time class="proyecto__año" datetime="2023">2023</time>
+                <span class="proyecto__flecha" aria-hidden="true">→</span>
+              </footer>
+            </article>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ── PANEL: IMPRESIÓN 3D ── -->
+      <section class="categoria categoria--impresion"
+               id="panel-impresion"
+               role="tabpanel"
+               aria-labelledby="tab-impresion"
+               aria-hidden="true">
+
+        <header class="categoria__meta">
+          <h3 class="categoria__nombre">Impresión <em>3D</em></h3>
+          <p class="categoria__info">2 proyectos<br>FDM · Modelado · Pintura</p>
+        </header>
+
+        <ul class="proyectos-lista">
+          <li>
+            <article class="proyecto" tabindex="0">
+              <div class="proyecto__visual"></div>
+              <div class="proyecto__contenido">
+                <p class="proyecto__categoria">Impresión 3D</p>
+                <h4 class="proyecto__titulo">Deadpool Bust — Figura pintada</h4>
+                <p class="proyecto__desc">Modelado · Impresión FDM · Pintura acrílica a mano</p>
+              </div>
+              <footer class="proyecto__footer">
+                <time class="proyecto__año" datetime="2024">2024</time>
+                <span class="proyecto__flecha" aria-hidden="true">→</span>
+              </footer>
+            </article>
+          </li>
+          <li>
+            <article class="proyecto" tabindex="0">
+              <div class="proyecto__visual"></div>
+              <div class="proyecto__contenido">
+                <p class="proyecto__categoria">Impresión 3D</p>
+                <h4 class="proyecto__titulo">Logo JACS volumétrico</h4>
+                <p class="proyecto__desc">Diseño propio · FDM · Acabado profesional</p>
+              </div>
+              <footer class="proyecto__footer">
+                <time class="proyecto__año" datetime="2024">2024</time>
+                <span class="proyecto__flecha" aria-hidden="true">→</span>
+              </footer>
+            </article>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ── PANEL: FRONT-END ── -->
+      <section class="categoria categoria--frontend"
+               id="panel-frontend"
+               role="tabpanel"
+               aria-labelledby="tab-frontend"
+               aria-hidden="true">
+
+        <header class="categoria__meta">
+          <h3 class="categoria__nombre">Front<em>-End</em></h3>
+          <p class="categoria__info">Próximamente<br>HTML · CSS · JavaScript</p>
+        </header>
+
+        <p class="sin-proyectos" role="status">
+          Proyectos en preparación
+        </p>
+
+      </section>
+
+    </div><!-- /archivador__cuerpo -->
+
+  </section><!-- /archivador -->
+
+
+  <!-- ════════════════════════════════════════
+       JS — LÓGICA DE TABS
+       Mínimo, accesible, sin dependencias
+  ════════════════════════════════════════ -->
+  <script>
+    const CATEGORIAS = {
+      identidad: { color: 'var(--col-identidad)' },
+      branding:  { color: 'var(--col-branding)'  },
+      animacion: { color: 'var(--col-animacion)' },
+      '3d':      { color: 'var(--col-3d)'        },
+      impresion: { color: 'var(--col-impresion)' },
+      frontend:  { color: 'var(--col-frontend)'  },
+    };
+
+    const cuerpo    = document.querySelector('.archivador__cuerpo');
+    const pestanas  = document.querySelectorAll('[role="tab"]');
+    const paneles   = document.querySelectorAll('[role="tabpanel"]');
+
+    function activar(id) {
+      // Pestañas
+      pestanas.forEach(p => {
+        const activa = p.id === `tab-${id}`;
+        p.setAttribute('aria-selected', activa);
+      });
+
+      // Paneles
+      paneles.forEach(p => {
+        const activo = p.id === `panel-${id}`;
+        p.setAttribute('aria-hidden', !activo);
+      });
+
+      // Color del lomo del archivador
+      const color = CATEGORIAS[id]?.color ?? 'var(--accent)';
+      cuerpo.style.setProperty('--color-activo', color);
+    }
+
+    pestanas.forEach(p => {
+      p.addEventListener('click', () => {
+        const id = p.id.replace('tab-', '');
+        activar(id);
+      });
+
+      // Navegación con teclado (←→) — accesibilidad
+      p.addEventListener('keydown', e => {
+        const lista = [...pestanas];
+        const i = lista.indexOf(p);
+        if (e.key === 'ArrowRight') lista[(i + 1) % lista.length].focus();
+        if (e.key === 'ArrowLeft')  lista[(i - 1 + lista.length) % lista.length].focus();
+        if (e.key === 'Enter' || e.key === ' ') p.click();
+      });
+    });
+
+    // Estado inicial
+    activar('identidad');
+  </script>
+
+</body>
+</html>

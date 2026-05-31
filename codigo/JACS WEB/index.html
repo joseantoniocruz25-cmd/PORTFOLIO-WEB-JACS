@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>José Antonio Cruz Segura — Diseñador y Desarrollador Web</title>
+
+    <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+    <header>
+
+        <nav class="site-nav" id="siteNav" aria-label="Navegación principal">
+            <a class="site-nav__logo" href="#" aria-label="Inicio — José Antonio Cruz Segura">JACS</a>
+            <ul class="site-nav__links" role="list">
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero-section" aria-labelledby="hero-heading">
+            <div class="hero-sticky">
+
+                <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+                    poster="assets/hero-poster.jpg" aria-hidden="true">
+                    <source src="assets/hero-bg.mp4" type="video/mp4">
+                    <source src="assets/hero-bg.webm" type="video/webm">
+                </video>
+
+                <div class="hero-bg" aria-hidden="true"></div>
+                <div class="hero-overlay" aria-hidden="true"></div>
+
+                <div class="hero-text">
+                    <h1 id="hero-heading" class="sr-only">José Antonio Cruz Segura</h1>
+                    <p class="full-name" id="fullName" aria-hidden="true">Jose Antonio<br>Cruz Segura</p>
+                    <p class="logo-mark" id="logoMark" aria-hidden="true">JACS</p>
+                </div>
+
+                <div class="scroll-cue" id="scrollCue" aria-hidden="true">
+                    <span class="scroll-cue__label">Scroll</span>
+                    <span class="scroll-cue__track"></span>
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+
+
+    <main id="main-content">
+        <section class="work-section" id="proyectos" aria-labelledby="proyectos-heading">
+            <h2 id="proyectos-heading" class="sr-only">Proyectos</h2>
+            <p>Tu contenido aquí</p>
+        </section>
+    </main>
+
+
+    <footer class="site-footer" role="contentinfo">
+        <p class="site-footer__name">José Antonio Cruz Segura</p>
+        <ul class="site-footer__links" role="list" aria-label="Perfiles profesionales">
+            <li><a href="https://linkedin.com/in/TUUSUARIO" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
+            <li><a href="https://github.com/TUUSUARIO" rel="noopener noreferrer" target="_blank">GitHub</a></li>
+            <li><a href="https://behance.net/TUUSUARIO" rel="noopener noreferrer" target="_blank">Behance</a></li>
+        </ul>
+        <p class="site-footer__copy">
+            <small>&copy; <span id="year"></span> José Antonio Cruz Segura</small>
+        </p>
+    </footer>
+
+
+    <noscript>
+        <style>
+            .full-name {
+                opacity: 1 !important;
+                transform: none !important;
+                animation: none !important;
+            }
+
+            .site-nav__links {
+                opacity: 1 !important;
+            }
+        </style>
+    </noscript>
+
+</body>
+
+</html>

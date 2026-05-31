@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JACS — Hero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;600&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'BigDeal';
+      src: url('data:font/truetype;base64,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') format('truetype');
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #081D4D;
+      --gray:   #707379;
+      --silver: #A7A9B4;
+      --white:  #F2F3F7;
+      --accent: #C8D4F0;
+      --border: rgba(167,169,180,0.15);
+    }
+    html { scroll-behavior: auto; }
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Outfit', sans-serif;
+      cursor: none;
+    }
+ 
+    /* ── CURSOR (solo desktop) ── */
+    #cur, #curR { display: none; }
+    @media (hover: hover) {
+      #cur  { display:block; width:9px;height:9px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference; }
+      #curR { display:block; width:30px;height:30px;border:1px solid var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;opacity:0.4; }
+    }
+ 
+    /* ── WRAPPER SCROLL (mobile: 300vh para pin; desktop: 100vh) ── */
+    #hero-wrap {
+      height: 100vh;
+    }
+    @media (max-width: 768px) {
+      #hero-wrap { height: 300vh; }
+    }
+ 
+    /* ── HERO ── */
+    #hero {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    @media (max-width: 768px) {
+      #hero { position: sticky; top: 0; }
+    }
+ 
+    .h-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(167,169,180,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167,169,180,0.05) 1px, transparent 1px);
+      background-size: 55px 55px;
+    }
+    .h-blob {
+      position: absolute; top: -20%; right: -15%;
+      width: 65vw; height: 65vw; max-width: 620px;
+      background: radial-gradient(ellipse at center, rgba(200,212,240,0.09) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: blob 8s ease-in-out infinite;
+    }
+    @keyframes blob { 0%,100%{transform:scale(1);}50%{transform:scale(1.07);} }
+ 
+    /* ── NOMBRE COMPLETO (fase 1) ── */
+    #name-stage {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.08em; z-index: 2;
+      opacity: 0;
+    }
+    .nline {
+      display: flex; align-items: baseline; justify-content: center;
+      white-space: nowrap;
+    }
+    .nl {
+      font-family: 'BigDeal', sans-serif;
+      font-size: clamp(1.8rem, 4.8vw, 4.8rem);
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.04em;
+      line-height: 1.05;
+      display: inline-block;
+    }
+    .nl.ini { color: #ffffff; }
+    /* espacio entre palabras */
+    .nl.sp  { color: transparent; width: 0.28em; pointer-events: none; }
+ 
+    /* ── LETRAS VOLANDO ── */
+    .fly {
+      position: absolute;
+      font-family: 'BigDeal', sans-serif;
+      line-height: 1;
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+    }
+ 
+    /* ── POST-ANIMACIÓN (fase 4) ── */
+    #hero-after {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding-bottom: 4rem;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0.65rem;
+      z-index: 5;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    .h-eyebrow {
+      font-size: 0.64rem; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--gray);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .h-eyebrow::before, .h-eyebrow::after {
+      content:''; display:block; width:24px; height:1px; background:var(--gray);
+    }
+    .h-role {
+      font-size: clamp(0.78rem, 1.4vw, 0.94rem);
+      color: var(--silver); font-weight: 300;
+      letter-spacing: 0.05em; text-align: center;
+      padding: 0 1rem;
+    }
+    .h-cta { margin-top:0.35rem; display:flex; gap:0.85rem; flex-wrap:wrap; justify-content:center; }
+    .btn {
+      padding: 0.75rem 1.8rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.74rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none; border-radius: 3px;
+      transition: all 0.22s; cursor: none; border: none;
+    }
+    .bp { background: var(--accent); color: var(--navy); }
+    .bp:hover { background: var(--white); transform: translateY(-2px); }
+    .bo { border:1.5px solid var(--border); color:var(--silver); background:transparent; }
+    .bo:hover { border-color:var(--accent); color:var(--white); transform:translateY(-2px); }
+ 
+    /* ── SCROLL HINT ── */
+    #scroll-hint {
+      position: absolute; bottom: 1.4rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center;
+      gap: 5px; z-index: 6; opacity: 0;
+    }
+    .s-line {
+      width:1px; height:38px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: sp 2s ease-in-out infinite;
+    }
+    @keyframes sp { 0%,100%{opacity:.3;transform:scaleY(1);}50%{opacity:1;transform:scaleY(1.12);} }
+    .s-txt { font-size:.58rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gray); }
+  </style>
+</head>
+<body>
+ 
+<div id="cur"></div>
+<div id="curR"></div>
+ 
+<div id="hero-wrap">
+  <main id="hero" aria-label="Presentación José Antonio Cruz Segura">
+    <div class="h-grid"></div>
+    <div class="h-blob"></div>
+ 
+    <div id="name-stage" aria-hidden="true">
+      <div class="nline">
+        <span class="nl ini" id="hJ">J</span><span class="nl">O</span><span class="nl">S</span><span class="nl">É</span><span class="nl sp">&nbsp;</span><span class="nl ini" id="hA">A</span><span class="nl">N</span><span class="nl">T</span><span class="nl">O</span><span class="nl">N</span><span class="nl">I</span><span class="nl">O</span>
+      </div>
+      <div class="nline">
+        <span class="nl ini" id="hC">C</span><span class="nl">R</span><span class="nl">U</span><span class="nl">Z</span><span class="nl sp">&nbsp;</span><span class="nl ini" id="hS">S</span><span class="nl">E</span><span class="nl">G</span><span class="nl">U</span><span class="nl">R</span><span class="nl">A</span>
+      </div>
+    </div>
+ 
+    <div id="hero-after" aria-live="polite">
+      <p class="h-eyebrow">Diseñador Creativo · Sevilla</p>
+      <p class="h-role">Visual Branding &nbsp;·&nbsp; Arte 3D &nbsp;·&nbsp; Desarrollo Front-End</p>
+      <nav class="h-cta">
+        <a href="#projects" class="btn bp">Ver proyectos</a>
+        <a href="#contact"  class="btn bo">Contactar</a>
+      </nav>
+    </div>
+ 
+    <div id="scroll-hint" aria-hidden="true">
+      <div class="s-line"></div>
+      <span class="s-txt">Scroll</span>
+    </div>
+  </main>
+</div>
+ 
+<script>
+(function () {
+ 
+  /* ── Cursor (desktop) ── */
+  const cur  = document.getElementById('cur');
+  const curR = document.getElementById('curR');
+  if (cur) {
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+    (function tick(){
+      cur.style.transform  = `translate(${mx-4.5}px,${my-4.5}px)`;
+      rx+=(mx-rx)*0.13; ry+=(my-ry)*0.13;
+      curR.style.transform = `translate(${rx-15}px,${ry-15}px)`;
+      requestAnimationFrame(tick);
+    })();
+  }
+ 
+  /* ── Elementos ── */
+  const hero    = document.getElementById('hero');
+  const wrap    = document.getElementById('hero-wrap');
+  const stage   = document.getElementById('name-stage');
+  const after   = document.getElementById('hero-after');
+  const hint    = document.getElementById('scroll-hint');
+  const nonInit = stage.querySelectorAll('.nl:not(.ini):not(.sp)');
+  const srcs    = { J:'hJ', A:'hA', C:'hC', S:'hS' };
+  Object.keys(srcs).forEach(k => { srcs[k] = document.getElementById(srcs[k]); });
+ 
+  /* ── Helpers ── */
+  const clamp  = (v,a=0,b=1) => Math.min(b, Math.max(a, v));
+  const lerp   = (a,b,t) => a + (b-a)*t;
+  const ease   = t => t<0.5 ? 2*t*t : -1+(4-2*t)*t;
+  const pRange = (p,a,b) => ease(clamp((p-a)/(b-a)));
+ 
+  function snap(el) {
+    const er = el.getBoundingClientRect();
+    const hr = hero.getBoundingClientRect();
+    return { l: er.left-hr.left, t: er.top-hr.top, fs: parseFloat(getComputedStyle(el).fontSize) };
+  }
+ 
+  /* ── Calcular targets: JACS horizontal, letras muy juntas ── */
+  function calcTargets() {
+    const W  = hero.offsetWidth, H = hero.offsetHeight;
+    const cx = W / 2, cy = H * 0.40;
+ 
+    /* Tamaño final — escala con viewport */
+    const fs = clamp(W * 0.205, 60, 240);
+ 
+    /* Ratios de ancho real para BigDeal */
+    const rW  = { J:0.57, A:0.68, C:0.63, S:0.65 };
+    /* Gap muy ajustado — prácticamente kerning de tipografía */
+    const gap = fs * 0.042;
+ 
+    const order = ['J','A','C','S'];
+    const totalW = order.reduce((s,k) => s + fs*rW[k], 0) + gap * 3;
+    let cur = cx - totalW / 2;
+ 
+    const tgts = {};
+    order.forEach(k => {
+      tgts[k] = { l: cur, t: cy - fs*0.5, fs };
+      cur += fs*rW[k] + gap;
+    });
+    return tgts;
+  }
+ 
+  /* ── Estado compartido ── */
+  let flyEls   = {};
+  let snaps    = {};
+  let targets  = {};
+  let ready    = false;
+ 
+  /* Inicializar: mostrar stage un frame, medir, crear fly-elements ── */
+  function init() {
+    stage.style.opacity = '1';
+ 
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      Object.keys(srcs).forEach(k => { snaps[k] = snap(srcs[k]); });
+      targets = calcTargets();
+      stage.style.opacity = '0';
+ 
+      const order = ['J','A','C','S'];
+      order.forEach(k => {
+        const s   = snaps[k];
+        const fly = document.createElement('div');
+        fly.className    = 'fly';
+        fly.textContent  = k;
+        fly.style.cssText = `left:${s.l}px;top:${s.t}px;font-size:${s.fs}px;color:#ffffff;opacity:0;`;
+        hero.appendChild(fly);
+        flyEls[k] = fly;
+      });
+ 
+      ready = true;
+      applyProgress(0);
+ 
+      if (isMobile) {
+        window.addEventListener('scroll', onScroll, { passive: true });
+      } else {
+        runTimed();
+      }
+    }));
+  }
+ 
+  /* ── Aplicar estado según progreso 0→1 ── */
+  function applyProgress(p) {
+    if (!ready) return;
+ 
+    /* F1: nombre aparece */
+    const p1 = pRange(p, 0, 0.10);
+    stage.style.opacity = p1.toString();
+    Object.keys(srcs).forEach(k => { flyEls[k].style.opacity = p1 > 0.01 ? '1' : '0'; });
+ 
+    /* F1b: posición inicial de flies = snaps (siguen al nombre) */
+    if (p < 0.38) {
+      Object.keys(srcs).forEach(k => {
+        const s = snaps[k];
+        flyEls[k].style.left     = s.l + 'px';
+        flyEls[k].style.top      = s.t + 'px';
+        flyEls[k].style.fontSize = s.fs + 'px';
+      });
+    }
+ 
+    /* F2: no-iniciales se desvanecen */
+    const p2 = pRange(p, 0.12, 0.42);
+    nonInit.forEach(el => { el.style.opacity = (1 - p2).toString(); });
+ 
+    /* F2b: ocultar stage cuando las flies toman el relevo */
+    if (p > 0.38) stage.style.opacity = '0';
+ 
+    /* F3: vuelan a JACS */
+    const p3 = pRange(p, 0.40, 0.78);
+    Object.keys(srcs).forEach(k => {
+      const s = snaps[k], t = targets[k];
+      flyEls[k].style.left     = lerp(s.l, t.l, p3) + 'px';
+      flyEls[k].style.top      = lerp(s.t, t.t, p3) + 'px';
+      flyEls[k].style.fontSize = lerp(s.fs, t.fs, p3) + 'px';
+    });
+ 
+    /* F4: tagline y CTAs */
+    const p4 = pRange(p, 0.80, 1.0);
+    after.style.opacity   = p4.toString();
+    after.style.transform = `translateY(${lerp(14, 0, p4)}px)`;
+ 
+    /* Scroll hint: aparece cuando animación completa */
+    hint.style.opacity = p4 > 0.9 ? '0.5' : '0';
+  }
+ 
+  /* ── MOBILE: scroll driven ── */
+  const isMobile = window.matchMedia('(max-width: 768px)').matches || 'ontouchstart' in window;
+ 
+  function onScroll() {
+    const maxScroll = wrap.offsetHeight - window.innerHeight;
+    const p = clamp(window.scrollY / maxScroll);
+    applyProgress(p);
+  }
+ 
+  /* ── DESKTOP: time driven ── */
+  function runTimed() {
+    const steps = [
+      [300,  0.0],
+      [600,  0.08],
+      [1800, 0.14],
+      [2600, 0.42],
+      [2700, 0.44],
+      [3000, 0.60],
+      [3800, 0.78],
+      [4300, 0.88],
+      [5000, 1.0],
+    ];
+    steps.forEach(([ms, p]) => {
+      setTimeout(() => applyProgress(p), ms);
+    });
+    /* Tween suave entre steps */
+    let startT = null, fromP = 0, toP = 0, stepIdx = 0;
+    function tweenTick(ts) {
+      if (!startT) startT = ts;
+      const elapsed = ts - startT;
+      const [ms, p] = steps[stepIdx] || [9999, 1];
+      if (elapsed >= ms && stepIdx < steps.length - 1) {
+        fromP = steps[stepIdx][1];
+        stepIdx++;
+        toP = steps[stepIdx][1];
+        startT = ts;
+      }
+      const localP = clamp(elapsed / Math.max(1, (steps[stepIdx]||steps[steps.length-1])[0] - (steps[stepIdx-1]||[0])[0]));
+      applyProgress(lerp(fromP, toP, ease(localP)));
+      requestAnimationFrame(tweenTick);
+    }
+    requestAnimationFrame(tweenTick);
+  }
+ 
+  /* ── Arrancar ── */
+  init();
+ 
+  /* Recalcular si cambia el tamaño */
+  window.addEventListener('resize', () => {
+    Object.keys(srcs).forEach(k => { snaps[k] = snap(srcs[k]); });
+    targets = calcTargets();
+  });
+ 
+})();
+</script>
+</body>
+</html>
