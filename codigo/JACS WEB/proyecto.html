@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+    ╔═══════════════════════════════════════════╗
+    ║  Cambia estos valores en cada proyecto:  ║
+    ║  • <title>                               ║
+    ║  • <meta name="description">            ║
+    ║  • data-slug en <body>                  ║
+    ╚═══════════════════════════════════════════╝
+  -->
+  <title>Apartamentos Reyemar — JACS Portfolio</title>
+  <meta name="description" content="Identidad visual completa para Apartamentos Reyemar: logotipo, paleta cromática, papelería y aplicaciones de marca.">
+
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ══════════════════════════════════════════
+       TOKENS — misma paleta que index.html
+    ══════════════════════════════════════════ */
+    :root {
+      --clr-bg:      #0F2038;
+      --clr-bg-2:    #162F4F;
+      --clr-surface: #1C3A5C;
+      --clr-text:    #E4DDD0;
+      --clr-accent:  #40759C;
+      --clr-muted:   rgba(228, 221, 208, 0.40);
+      --clr-border:  rgba(228, 221, 208, 0.10);
+      --font-family: 'Satoshi', sans-serif;
+      --font:        'Satoshi', sans-serif;
+      --font-logo:   "aBidDeal", 'Satoshi', sans-serif;
+      --card-radius: clamp(10px, 1.2vw, 16px);
+      --content-w:   min(92vw, 1200px);
+    }
+
+    /* ══ RESET ══ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      font-family: var(--font-family);
+      overflow-x: hidden;
+    }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    .skip-link {
+      position: fixed; top: -100%; left: 1rem; z-index: 9999;
+      background: var(--clr-accent); color: var(--clr-bg);
+      font-family: var(--font); font-size: .85rem; font-weight: 900;
+      letter-spacing: .05em; text-decoration: none; text-transform: uppercase;
+      padding: .6rem 1.2rem; transition: top .2s ease;
+    }
+    .skip-link:focus { top: 1rem; }
+
+
+    /* ════════════════════════════════════════
+       VIEW TRANSITIONS
+    ════════════════════════════════════════ */
+    @view-transition { navigation: auto; }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: .5s;
+      animation-timing-function: cubic-bezier(.16,1,.3,1);
+    }
+
+    ::view-transition-new(root):only-child {
+      animation: rootFadeIn .4s ease;
+    }
+
+    @keyframes rootFadeIn { from { opacity: 0; } }
+
+
+    /* ════════════════════════════════════════
+       NAV
+    ════════════════════════════════════════ */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3vw;
+      background: rgba(15,32,56,.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--clr-border);
+    }
+
+    .site-nav__logo {
+      font-family: var(--font-logo); font-weight: 900; font-size: 1.1rem;
+      letter-spacing: -.01em; color: var(--clr-text);
+      text-decoration: none; transition: color .2s ease;
+    }
+    .site-nav__logo:hover,
+    .site-nav__logo:focus-visible { color: var(--clr-accent); }
+
+    .site-nav__back {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .58rem; font-weight: 900; letter-spacing: .35em;
+      text-transform: uppercase; color: var(--clr-muted);
+      text-decoration: none; transition: color .2s ease;
+    }
+    .site-nav__back:hover,
+    .site-nav__back:focus-visible { color: var(--clr-text); }
+
+    .site-nav__back svg {
+      width: 14px; height: 14px;
+      fill: none; stroke: currentColor;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+      transition: transform .2s ease;
+      flex-shrink: 0;
+    }
+    .site-nav__back:hover svg { transform: translateX(-3px); }
+
+
+    /* ════════════════════════════════════════
+       LOGO DEL CLIENTE — fondo del hero
+    ════════════════════════════════════════ */
+    .project-hero__brand-bg {
+      position: absolute;
+      right:  -3%;
+      bottom: -5%;
+      width:  clamp(240px, 48vw, 720px);
+      height: auto;
+      mix-blend-mode: screen;
+      opacity: var(--brand-opacity, 0.35);
+      pointer-events: none;
+      user-select:    none;
+      z-index:        2;
+      animation:      fadeIn .9s ease .3s both;
+    }
+
+
+    /* ════════════════════════════════════════
+       HERO DEL PROYECTO
+    ════════════════════════════════════════ */
+    .project-hero {
+      position: relative;
+      height: 100svh;
+      min-height: 480px;
+      overflow: hidden;
+    }
+
+    .project-hero__img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .project-hero__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(15,32,56,.12)  0%,
+        rgba(15,32,56,.30)  45%,
+        rgba(15,32,56,.95) 100%
+      );
+    }
+
+    .project-hero__content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: clamp(2rem,5vw,4rem) clamp(1.4rem,5vw,4rem);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .project-hero__meta {
+      display: flex; flex-direction: column; gap: .6rem;
+    }
+
+    .project-hero__eyebrow {
+      font-size: .55rem; font-weight: 900; letter-spacing: .5em;
+      text-transform: uppercase; color: var(--clr-accent);
+      opacity: 0; transform: translateY(12px);
+      animation: slideUp .7s cubic-bezier(.16,1,.3,1) .15s forwards;
+    }
+
+    .project-hero__title {
+      font-family: var(--font); font-weight: 900;
+      font-size: clamp(2.2rem, 7vw, 6.5rem);
+      letter-spacing: -.02em; text-transform: uppercase;
+      color: var(--clr-text); line-height: .92;
+      opacity: 0; transform: translateY(16px);
+      animation: slideUp .8s cubic-bezier(.16,1,.3,1) .25s forwards;
+    }
+
+    .project-hero__scroll {
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      opacity: 0; animation: fadeIn .6s ease .8s forwards;
+      padding-bottom: .2rem;
+    }
+    .project-hero__scroll span {
+      font-size: .48rem; letter-spacing: .4em; text-transform: uppercase;
+      color: var(--clr-muted);
+    }
+    .project-hero__scroll-line {
+      width: 1px; height: 40px;
+      background: rgba(228,221,208,.15); position: relative; overflow: hidden;
+    }
+    .project-hero__scroll-line::after {
+      content: ''; position: absolute; top: -60%; left: 0;
+      width: 100%; height: 50%; background: var(--clr-accent);
+      animation: trackSlide 1.8s ease-in-out 1s infinite;
+    }
+
+
+    /* ════════════════════════════════════════
+       LAYOUT WRAPPER
+    ════════════════════════════════════════ */
+    .project-body {
+      max-width: var(--content-w);
+      margin: 0 auto;
+      padding: 0 clamp(1.4rem, 4vw, 3rem);
+    }
+
+
+    /* ════════════════════════════════════════
+       DESCRIPCIÓN + PROCESO
+    ════════════════════════════════════════ */
+    .project-intro {
+      padding: clamp(4rem, 8vw, 7rem) 0 clamp(3rem, 6vw, 5rem);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 7rem);
+      align-items: start;
+      border-bottom: 1px solid var(--clr-border);
+    }
+
+    .project-desc__label {
+      display: block;
+      font-size: .54rem; font-weight: 900; letter-spacing: .5em;
+      text-transform: uppercase; color: var(--clr-accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .project-desc__text {
+      font-size: clamp(.95rem, 1.6vw, 1.2rem);
+      font-weight: 400; line-height: 1.75;
+      color: var(--clr-text);
+    }
+    .project-desc__text p + p { margin-top: 1.1rem; }
+
+    .project-quote {
+      margin-top: clamp(2rem, 4vw, 3rem);
+      padding-left: 1.4rem;
+      border-left: 2px solid var(--clr-accent);
+    }
+    .project-quote__text {
+      font-family: var(--font); font-weight: 900;
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      letter-spacing: -.01em; line-height: 1.25;
+      color: var(--clr-text);
+    }
+    .project-quote__author {
+      display: block; margin-top: .6rem;
+      font-size: .56rem; font-weight: 400;
+      letter-spacing: .3em; text-transform: uppercase;
+      color: var(--clr-muted);
+    }
+
+    .project-meta__label {
+      display: block;
+      font-size: .54rem; font-weight: 900; letter-spacing: .5em;
+      text-transform: uppercase; color: var(--clr-accent);
+      margin-bottom: 1.4rem;
+    }
+
+    /* Ficha técnica */
+    .project-specs {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .1rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid var(--clr-border);
+      border-radius: var(--card-radius);
+      overflow: hidden;
+    }
+    .project-specs__item {
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--clr-border);
+      background: var(--clr-surface);
+    }
+    .project-specs__item:nth-child(odd)  { border-right: 1px solid var(--clr-border); }
+    .project-specs__item:last-child,
+    .project-specs__item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+    .project-specs__key {
+      display: block; font-size: .5rem; font-weight: 900;
+      letter-spacing: .35em; text-transform: uppercase;
+      color: var(--clr-accent); margin-bottom: .3rem;
+    }
+    .project-specs__val {
+      font-size: .82rem; font-weight: 400;
+      letter-spacing: .05em; color: var(--clr-text);
+    }
+
+    /* Proceso creativo */
+    .process-steps { list-style: none; display: flex; flex-direction: column; }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: .8rem;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--clr-border);
+      align-items: start;
+    }
+    .process-step:first-child { border-top: 1px solid var(--clr-border); }
+
+    .process-step__num {
+      font-family: var(--font); font-weight: 900;
+      font-size: .65rem; color: var(--clr-accent);
+      letter-spacing: .05em; padding-top: .1rem;
+    }
+    .process-step__title {
+      font-weight: 900; font-size: .82rem;
+      letter-spacing: .03em; color: var(--clr-text);
+      margin-bottom: .25rem; text-transform: uppercase;
+    }
+    .process-step__desc {
+      font-size: .78rem; font-weight: 400;
+      line-height: 1.6; color: var(--clr-muted);
+    }
+
+
+    /* ════════════════════════════════════════
+       GALERÍA
+    ════════════════════════════════════════ */
+    .project-gallery {
+      padding: clamp(3rem, 6vw, 5rem) 0;
+    }
+
+    .gallery-label {
+      display: block; font-size: .54rem; font-weight: 900;
+      letter-spacing: .5em; text-transform: uppercase;
+      color: var(--clr-accent); margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: clamp(200px, 22vw, 320px);
+      gap: clamp(8px, 1.2vw, 14px);
+      grid-auto-flow: dense;
+    }
+
+    .gallery-item {
+      position: relative; overflow: hidden;
+      border-radius: var(--card-radius);
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      cursor: zoom-in;
+    }
+
+    .gallery-item.img--wide { grid-column: span 2; }
+    .gallery-item.img--tall { grid-row:    span 2; }
+    .gallery-item.img--full { grid-column: span 3; }
+
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform .6s cubic-bezier(.16,1,.3,1);
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .gallery-item__caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: .7rem 1rem;
+      background: linear-gradient(transparent, rgba(15,32,56,.85));
+      font-size: .52rem; font-weight: 400; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--clr-muted);
+      opacity: 0; transform: translateY(4px);
+      transition: opacity .3s ease, transform .3s ease;
+    }
+    .gallery-item:hover .gallery-item__caption {
+      opacity: 1; transform: translateY(0);
+    }
+
+
+    /* ════════════════════════════════════════
+       LIGHTBOX
+    ════════════════════════════════════════ */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(10,20,38,.96);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+
+    .lightbox__img {
+      max-width: 90vw; max-height: 90vh;
+      object-fit: contain; border-radius: 6px;
+      transform: scale(.96);
+      transition: transform .35s cubic-bezier(.16,1,.3,1);
+    }
+    .lightbox.open .lightbox__img { transform: scale(1); }
+
+    .lightbox__close {
+      position: absolute; top: 1.4rem; right: 1.4rem;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(228,221,208,.1); border: 1px solid var(--clr-border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--clr-text);
+      transition: background .2s ease;
+    }
+    .lightbox__close:hover { background: rgba(228,221,208,.2); }
+    .lightbox__close svg {
+      width: 16px; height: 16px; fill: none;
+      stroke: currentColor; stroke-width: 1.5;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .lightbox__nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(228,221,208,.08); border: 1px solid var(--clr-border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--clr-text);
+      transition: background .2s ease;
+    }
+    .lightbox__nav:hover { background: rgba(64,117,156,.3); }
+    .lightbox__nav svg {
+      width: 18px; height: 18px; fill: none;
+      stroke: currentColor; stroke-width: 1.5;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .lightbox__prev { left: 1.4rem; }
+    .lightbox__next { right: 1.4rem; }
+
+    .lightbox__counter {
+      position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%);
+      font-size: .52rem; font-weight: 400; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--clr-muted);
+    }
+
+
+    /* ════════════════════════════════════════
+       NAVEGACIÓN ANTERIOR · SIGUIENTE
+    ════════════════════════════════════════ */
+    .project-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--clr-border);
+    }
+
+    .project-nav__item {
+      display: flex; flex-direction: column;
+      gap: .6rem; padding: clamp(2rem, 4vw, 3.5rem);
+      text-decoration: none; position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--clr-border);
+      transition: background .3s ease;
+    }
+    .project-nav__item:first-child { border-right: 1px solid var(--clr-border); }
+
+    .project-nav__item::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: var(--thumb);
+      background-size: cover; background-position: center;
+      opacity: 0; transition: opacity .4s ease;
+    }
+    .project-nav__item:hover::before { opacity: .12; }
+    .project-nav__item:hover { background: var(--clr-surface); }
+
+    .project-nav__dir {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .52rem; font-weight: 900; letter-spacing: .4em;
+      text-transform: uppercase; color: var(--clr-accent);
+      position: relative; z-index: 1;
+    }
+    .project-nav__dir svg {
+      width: 14px; height: 14px; fill: none;
+      stroke: currentColor; stroke-width: 1.5;
+      stroke-linecap: round; stroke-linejoin: round;
+      transition: transform .25s ease; flex-shrink: 0;
+    }
+    .project-nav__item:first-child:hover .project-nav__dir svg { transform: translateX(-4px); }
+    .project-nav__item:last-child:hover  .project-nav__dir svg { transform: translateX(4px); }
+
+    .project-nav__name {
+      font-family: var(--font); font-weight: 900;
+      font-size: clamp(1.2rem, 3vw, 2.2rem);
+      letter-spacing: -.01em; text-transform: uppercase;
+      color: var(--clr-text); line-height: 1;
+      position: relative; z-index: 1;
+    }
+
+    .project-nav__category {
+      font-size: .52rem; font-weight: 400; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--clr-muted);
+      position: relative; z-index: 1;
+    }
+
+    .project-nav__item--next { align-items: flex-end; text-align: right; }
+
+
+    /* ════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════ */
+    .site-footer {
+      background: var(--clr-bg);
+      border-top: 1px solid var(--clr-border);
+      padding: 3rem 5vw;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1.2rem; text-align: center;
+    }
+    .site-footer__name {
+      font-size: .6rem; font-weight: 900; letter-spacing: .5em;
+      text-transform: uppercase; color: var(--clr-text);
+    }
+    .site-footer__links { list-style: none; display: flex; gap: 1.8rem; flex-wrap: wrap; justify-content: center; }
+    .site-footer__links a {
+      font-size: .58rem; font-weight: 400; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--clr-muted);
+      text-decoration: none; transition: color .2s ease;
+    }
+    .site-footer__links a:hover,
+    .site-footer__links a:focus-visible { color: var(--clr-accent); }
+    .site-footer__copy {
+      font-size: .58rem; font-weight: 400;
+      letter-spacing: .2em; color: var(--clr-muted);
+    }
+
+
+    /* ════════════════════════════════════════
+       REVEAL AL SCROLL
+    ════════════════════════════════════════ */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1),
+                  transform .7s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.in-view   { opacity: 1; transform: translateY(0); }
+    .reveal--delay-1  { transition-delay: .1s; }
+    .reveal--delay-2  { transition-delay: .2s; }
+    .reveal--delay-3  { transition-delay: .3s; }
+
+
+    /* ════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════ */
+
+    /* ── Tablet (≤ 860px) ── */
+    @media (max-width: 860px) {
+      .project-intro {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .gallery-item.img--full { grid-column: span 2; }
+    }
+
+    /* ── Mobile (≤ 640px) ── */
+    @media (max-width: 640px) {
+      .site-nav { padding: 1rem 5vw; }
+
+      .project-hero { min-height: 420px; }
+      .project-hero__scroll { display: none; }
+
+      /* Ficha técnica: 1 columna */
+      .project-specs {
+        grid-template-columns: 1fr;
+      }
+      .project-specs__item:nth-child(odd) { border-right: none; }
+      .project-specs__item { border-bottom: 1px solid var(--clr-border); }
+      .project-specs__item:last-child { border-bottom: none; }
+
+      /* Galería: 1 columna */
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: clamp(220px, 55vw, 320px);
+      }
+      .gallery-item.img--wide,
+      .gallery-item.img--full { grid-column: span 1; }
+      .gallery-item.img--tall  { grid-row: span 1; }
+
+      /* Captions siempre visibles en touch */
+      .gallery-item__caption { opacity: 1; transform: translateY(0); }
+
+      /* Nav proyectos: columna única */
+      .project-nav { grid-template-columns: 1fr; }
+      .project-nav__item:first-child { border-right: none; }
+      .project-nav__item--next { align-items: flex-start; text-align: left; }
+
+      /* Lightbox: oculta flechas (swipe en móvil) */
+      .lightbox__nav { display: none; }
+    }
+
+    /* ── Mobile pequeño (≤ 400px) ── */
+    @media (max-width: 400px) {
+      .site-nav__back span { display: none; }
+      .project-hero__title { font-size: clamp(1.9rem, 9vw, 2.8rem); }
+    }
+
+    /* ── Dispositivos táctiles ── */
+    @media (hover: none) {
+      .gallery-item__caption { opacity: 1; transform: translateY(0); }
+      .gallery-item:hover img { transform: none; }
+      .project-nav__item:hover::before { opacity: 0; }
+    }
+
+
+    /* ════════════════════════════════════════
+       KEYFRAMES
+    ════════════════════════════════════════ */
+    @keyframes slideUp    { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn     { to { opacity: 1; } }
+    @keyframes trackSlide { 0% { top: -60%; } 100% { top: 110%; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-delay:    .01ms !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<!--
+  ╔═══════════════════════════════════════════════╗
+  ║  data-slug: debe coincidir con el href        ║
+  ║  de la tarjeta en el grid (último segmento).  ║
+  ║  Ej: href="proyectos/reyemar" → "reyemar"    ║
+  ╚═══════════════════════════════════════════════╝
+-->
+<body data-slug="reyemar">
+
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+  <!-- ═══════════════════════════════════════════
+       CABECERA Y NAVEGACIÓN
+  ═══════════════════════════════════════════ -->
+  <header>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a class="site-nav__logo" href="../index.html"
+         aria-label="Inicio — José Antonio Cruz Segura">JACS</a>
+
+      <a class="site-nav__back" href="../index.html#proyectos"
+         aria-label="Volver a todos los proyectos">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M13 8H3M7 12l-4-4 4-4"/>
+        </svg>
+        <span>Proyectos</span>
+      </a>
+    </nav>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════
+       CONTENIDO PRINCIPAL
+  ═══════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <article aria-labelledby="project-title">
+
+      <!-- ── HERO ── -->
+      <section class="project-hero" aria-label="Imagen principal del proyecto">
+
+        <!--
+          ╔═══════════════════════════════════════╗
+          ║  Cambia src por la imagen principal   ║
+          ║  del proyecto (misma que en el grid). ║
+          ║  width/height = dimensiones reales.   ║
+          ╚═══════════════════════════════════════╝
+        -->
+        <img
+          class="project-hero__img"
+          src="../assets/proyectos/reyemar.jpg"
+          alt="Branding Apartamentos Reyemar — identidad visual completa"
+          width="1920" height="1080"
+          fetchpriority="high"
+        >
+
+        <div class="project-hero__overlay" aria-hidden="true"></div>
+
+        <!--
+          ╔══════════════════════════════════════════╗
+          ║  LOGO DEL CLIENTE — fondo del hero      ║
+          ║                                          ║
+          ║  Formato recomendado: SVG o PNG          ║
+          ║  con fondo transparente.                 ║
+          ║                                          ║
+          ║  Ajusta la intensidad con:               ║
+          ║  <body style="--brand-opacity: 0.38">    ║
+          ╚══════════════════════════════════════════╝
+        -->
+        <img
+          class="project-hero__brand-bg"
+          src="../assets/proyectos/reyemar-logo.svg"
+          alt=""
+          aria-hidden="true"
+          width="720"
+          height="420"
+        >
+
+        <div class="project-hero__content">
+          <div class="project-hero__meta">
+            <p class="project-hero__eyebrow">Branding · Identidad Visual</p>
+            <h1 class="project-hero__title" id="project-title">
+              Apartamentos<br>Reyemar
+            </h1>
+          </div>
+
+          <div class="project-hero__scroll" aria-hidden="true">
+            <span>Scroll</span>
+            <span class="project-hero__scroll-line"></span>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ── DESCRIPCIÓN + PROCESO ── -->
+      <div class="project-body">
+
+        <section class="project-intro reveal" aria-labelledby="desc-heading">
+
+          <!-- Columna izquierda: descripción editorial -->
+          <div class="project-desc">
+            <span class="project-desc__label" id="desc-heading">Descripción</span>
+
+            <div class="project-desc__text">
+              <!--
+                ╔═══════════════════════════════════════╗
+                ║  Descripción del proyecto.            ║
+                ║  Uno o varios párrafos <p>.           ║
+                ╚═══════════════════════════════════════╝
+              -->
+              <p>Apartamentos Reyemar necesitaba una identidad visual que transmitiera la calidez y distinción de su oferta turística en el sur de España. El encargo abarcó desde el diseño del logotipo hasta la papelería corporativa completa y las aplicaciones de marca para entorno físico.</p>
+              <p>El carmín elegido (#801629) parte de la paleta de la arquitectura local y establece un diálogo directo con los materiales nobles del establecimiento. La tipografía serif refuerza la sensación de hospitalidad con raíces.</p>
+            </div>
+
+            <!--
+              Pull quote — frase que resume el proyecto.
+            -->
+            <blockquote class="project-quote">
+              <p class="project-quote__text">
+                "Una marca que se siente como en casa desde el primer vistazo."
+              </p>
+              <cite class="project-quote__author">Cliente · Apartamentos Reyemar</cite>
+            </blockquote>
+          </div>
+
+          <!-- Columna derecha: ficha técnica + proceso -->
+          <div class="project-meta">
+
+            <span class="project-meta__label">Ficha técnica</span>
+            <ul class="project-specs" aria-label="Datos del proyecto">
+              <!--
+                ╔══════════════════════════════════════╗
+                ║  Cambia los valores según el         ║
+                ║  proyecto. Mantén pares de items.    ║
+                ╚══════════════════════════════════════╝
+              -->
+              <li class="project-specs__item">
+                <span class="project-specs__key">Cliente</span>
+                <span class="project-specs__val">Apartamentos Reyemar</span>
+              </li>
+              <li class="project-specs__item">
+                <span class="project-specs__key">Año</span>
+                <span class="project-specs__val">2024</span>
+              </li>
+              <li class="project-specs__item">
+                <span class="project-specs__key">Disciplina</span>
+                <span class="project-specs__val">Branding</span>
+              </li>
+              <li class="project-specs__item">
+                <span class="project-specs__key">Sector</span>
+                <span class="project-specs__val">Hostelería</span>
+              </li>
+              <li class="project-specs__item">
+                <span class="project-specs__key">Herramientas</span>
+                <span class="project-specs__val">Illustrator · Photoshop</span>
+              </li>
+              <li class="project-specs__item">
+                <span class="project-specs__key">Entregables</span>
+                <span class="project-specs__val">Logo · Papelería · Signage</span>
+              </li>
+            </ul>
+
+            <span class="project-meta__label">Proceso</span>
+            <ol class="process-steps" aria-label="Etapas del proceso creativo">
+              <!--
+                ╔══════════════════════════════════════╗
+                ║  Describe las fases reales de tu     ║
+                ║  proceso para este proyecto.         ║
+                ╚══════════════════════════════════════╝
+              -->
+              <li class="process-step">
+                <span class="process-step__num" aria-hidden="true">01</span>
+                <div>
+                  <h2 class="process-step__title">Briefing y análisis</h2>
+                  <p class="process-step__desc">Estudio del sector, competencia local y valores de marca que el cliente quería proyectar.</p>
+                </div>
+              </li>
+              <li class="process-step">
+                <span class="process-step__num" aria-hidden="true">02</span>
+                <div>
+                  <h2 class="process-step__title">Conceptualización</h2>
+                  <p class="process-step__desc">Exploración de territorios visuales. Bocetos a mano de tres direcciones de diseño distintas.</p>
+                </div>
+              </li>
+              <li class="process-step">
+                <span class="process-step__num" aria-hidden="true">03</span>
+                <div>
+                  <h2 class="process-step__title">Diseño y refinamiento</h2>
+                  <p class="process-step__desc">Desarrollo digital de la dirección elegida. Ajuste de proporciones, tipografía y paleta cromática.</p>
+                </div>
+              </li>
+              <li class="process-step">
+                <span class="process-step__num" aria-hidden="true">04</span>
+                <div>
+                  <h2 class="process-step__title">Aplicaciones y entrega</h2>
+                  <p class="process-step__desc">Maquetación de papelería corporativa, señalética y guía de marca en formato PDF.</p>
+                </div>
+              </li>
+            </ol>
+
+          </div>
+        </section>
+
+
+        <!-- ── GALERÍA ── -->
+        <section class="project-gallery reveal reveal--delay-1" aria-labelledby="gallery-heading">
+
+          <h2 class="gallery-label" id="gallery-heading">Galería</h2>
+
+          <!--
+            ╔═══════════════════════════════════════════╗
+            ║  ESTRUCTURA DE LA GALERÍA                ║
+            ║                                          ║
+            ║  Clases de tamaño:                       ║
+            ║    (sin clase)   → 1 columna, 1 fila     ║
+            ║    .img--wide    → 2 columnas            ║
+            ║    .img--tall    → 2 filas               ║
+            ║    .img--full    → 3 columnas            ║
+            ║                                          ║
+            ║  data-full: ruta a imagen alta res.      ║
+            ║  para el lightbox. Omite si es la misma.║
+            ╚═══════════════════════════════════════════╝
+          -->
+          <div class="gallery-grid">
+
+            <figure class="gallery-item img--wide">
+              <img src="../assets/proyectos/reyemar-01.jpg"
+                   alt="Logotipo Apartamentos Reyemar sobre fondo oscuro"
+                   width="900" height="320" loading="lazy">
+              <figcaption class="gallery-item__caption">Logotipo principal</figcaption>
+            </figure>
+
+            <figure class="gallery-item img--tall">
+              <img src="../assets/proyectos/reyemar-02.jpg"
+                   alt="Aplicación del logotipo sobre fondo carmín"
+                   width="450" height="640" loading="lazy">
+              <figcaption class="gallery-item__caption">Variante negativa</figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+              <img src="../assets/proyectos/reyemar-03.jpg"
+                   alt="Tarjeta de visita corporativa"
+                   width="450" height="320" loading="lazy">
+              <figcaption class="gallery-item__caption">Tarjeta de visita</figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+              <img src="../assets/proyectos/reyemar-04.jpg"
+                   alt="Taza con logotipo bordado"
+                   width="450" height="320" loading="lazy">
+              <figcaption class="gallery-item__caption">Merchandising</figcaption>
+            </figure>
+
+            <figure class="gallery-item img--full">
+              <img src="../assets/proyectos/reyemar-05.jpg"
+                   alt="Mockup completo de la identidad corporativa"
+                   width="1200" height="320" loading="lazy">
+              <figcaption class="gallery-item__caption">Sistema de identidad completo</figcaption>
+            </figure>
+
+          </div>
+        </section>
+
+      </div><!-- /project-body -->
+
+    </article>
+
+
+    <!-- ── NAVEGACIÓN ANTERIOR · SIGUIENTE ── -->
+    <!--
+      ╔═════════════════════════════════════════════╗
+      ║  Cambia href, data-thumb, nombre y          ║
+      ║  categoría según el orden real de proyectos ║
+      ╚═════════════════════════════════════════════╝
+    -->
+    <nav class="project-nav" aria-label="Navegación entre proyectos">
+
+      <a class="project-nav__item project-nav__item--prev"
+         href="al-alba-chill.html"
+         style="--thumb: url('../assets/proyectos/al-alba.jpg')">
+        <span class="project-nav__dir">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M13 8H3M7 12l-4-4 4-4"/>
+          </svg>
+          Anterior
+        </span>
+        <span class="project-nav__name">Al Alba Chill</span>
+        <span class="project-nav__category">Social Media</span>
+      </a>
+
+      <a class="project-nav__item project-nav__item--next"
+         href="de-paso.html"
+         style="--thumb: url('../assets/proyectos/de-paso.jpg')">
+        <span class="project-nav__dir">
+          Siguiente
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </span>
+        <span class="project-nav__name">De Paso</span>
+        <span class="project-nav__category">Branding</span>
+      </a>
+
+    </nav>
+
+  </main>
+
+
+  <!-- ── LIGHTBOX ── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de imagen">
+    <button class="lightbox__close" id="lbClose" aria-label="Cerrar">
+      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4 4l8 8M12 4l-8 8"/>
+      </svg>
+    </button>
+    <button class="lightbox__nav lightbox__prev" id="lbPrev" aria-label="Imagen anterior">
+      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M10 3L5 8l5 5"/>
+      </svg>
+    </button>
+    <img class="lightbox__img" id="lbImg" src="" alt="">
+    <button class="lightbox__nav lightbox__next" id="lbNext" aria-label="Imagen siguiente">
+      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M6 3l5 5-5 5"/>
+      </svg>
+    </button>
+    <span class="lightbox__counter" id="lbCounter" aria-live="polite"></span>
+  </div>
+
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__name">José Antonio Cruz Segura</p>
+    <ul class="site-footer__links" aria-label="Perfiles profesionales">
+      <li><a href="https://linkedin.com/in/TUUSUARIO" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
+      <li><a href="https://github.com/TUUSUARIO"      rel="noopener noreferrer" target="_blank">GitHub</a></li>
+      <li><a href="https://behance.net/TUUSUARIO"     rel="noopener noreferrer" target="_blank">Behance</a></li>
+    </ul>
+    <p class="site-footer__copy">
+      <small>&copy; <span id="year"></span> José Antonio Cruz Segura</small>
+    </p>
+  </footer>
+
+
+  <script>
+    /* ══════════════════════════════════════
+       VIEW TRANSITION — conecta la imagen hero
+       con la tarjeta del grid usando el slug
+    ══════════════════════════════════════ */
+    const slug    = document.body.dataset.slug;
+    const heroImg = document.querySelector('.project-hero__img');
+    if (slug && heroImg) {
+      heroImg.style.viewTransitionName = `project-${slug}`;
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+
+    /* ══════════════════════════════════════
+       REVEAL AL SCROLL
+    ══════════════════════════════════════ */
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    revealEls.forEach(el => revealObs.observe(el));
+
+
+    /* ══════════════════════════════════════
+       LIGHTBOX
+    ══════════════════════════════════════ */
+    const lightbox    = document.getElementById('lightbox');
+    const lbImg       = document.getElementById('lbImg');
+    const lbCounter   = document.getElementById('lbCounter');
+    const galleryImgs = [...document.querySelectorAll('.gallery-item img')];
+    let currentIdx    = 0;
+
+    function openLightbox(idx) {
+      currentIdx = idx;
+      const img  = galleryImgs[idx];
+      lbImg.src  = img.dataset.full || img.src;
+      lbImg.alt  = img.alt;
+      lbCounter.textContent = `${idx + 1} / ${galleryImgs.length}`;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lbClose').focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(dir) {
+      currentIdx = (currentIdx + dir + galleryImgs.length) % galleryImgs.length;
+      const img  = galleryImgs[currentIdx];
+      lbImg.src  = img.dataset.full || img.src;
+      lbImg.alt  = img.alt;
+      lbCounter.textContent = `${currentIdx + 1} / ${galleryImgs.length}`;
+    }
+
+    document.querySelectorAll('.gallery-item').forEach((item, i) => {
+      item.addEventListener('click', () => openLightbox(i));
+    });
+
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    document.getElementById('lbPrev').addEventListener('click', () => navigate(-1));
+    document.getElementById('lbNext').addEventListener('click', () => navigate(1));
+
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape')     closeLightbox();
+      if (e.key === 'ArrowLeft')  navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
+  </script>
+
+</body>
+</html>
