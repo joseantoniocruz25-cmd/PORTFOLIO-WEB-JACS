@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="animations.css">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
@@ -45,6 +46,7 @@
                     <h1 id="hero-heading" class="sr-only">José Antonio Cruz Segura</h1>
                     <p class="full-name" id="fullName" aria-hidden="true">Jose Antonio<br>Cruz Segura</p>
                     <p class="logo-mark" id="logoMark" aria-hidden="true">JACS</p>
+                    <p class="slogan" id="slogan" aria-hidden="true">Píxeles, polígonos y actitud</p>
                 </div>
 
                 <div class="scroll-cue" id="scrollCue" aria-hidden="true">
@@ -58,12 +60,233 @@
     </header>
 
 
-    <main id="main-content">
-        <section class="work-section" id="proyectos" aria-labelledby="proyectos-heading">
-            <h2 id="proyectos-heading" class="sr-only">Proyectos</h2>
-            <p>Tu contenido aquí</p>
-        </section>
-    </main>
+<main id="main-content">
+ 
+    <!-- ── SECCIÓN PROYECTOS ── -->
+    <section class="projects-section" id="proyectos" aria-labelledby="proyectos-heading">
+ 
+      <div class="projects-header">
+ 
+        <div class="projects-title-group">
+          <span class="projects-eyebrow">Selección de trabajo</span>
+          <h2 class="projects-title" id="proyectos-heading">Proyectos</h2>
+        </div>
+ 
+        <!-- Filtros de categoría -->
+        <div class="filters" role="group" aria-label="Filtrar proyectos por categoría">
+          <button class="filter-btn active" data-filter="all"          aria-pressed="true">
+            <span>Todos</span>
+          </button>
+          <button class="filter-btn" data-filter="branding"            aria-pressed="false">
+            <span>Branding</span>
+          </button>
+          <button class="filter-btn" data-filter="social"              aria-pressed="false">
+            <span>Social Media</span>
+          </button>
+          <button class="filter-btn" data-filter="3d"                  aria-pressed="false">
+            <span>3D</span>
+          </button>
+        </div>
+ 
+      </div>
+ 
+      <!-- ══════════════════════════════════════
+           BENTO GRID
+           Estructura 4 columnas:
+           Fila 1-2: [Reyemar 2×2] [Al Alba 1×2] [Hoyo10 1×2]
+           Fila 3:   [De Paso 2×1            ] [Peña Bética 1×1] [Chicharrón 1×1]
+           Fila 4:   [Silvio 1×1] [3D 2×1            ] [WibraNet 1×1]
+      ══════════════════════════════════════ -->
+      <div class="bento-grid" id="bentoGrid">
+ 
+        <!--
+          ╔═══════════════════════════════════════╗
+          ║  INSTRUCCIONES DE IMAGEN              ║
+          ║                                       ║
+          ║  Cada tarjeta tiene:                  ║
+          ║    <img class="card__img"             ║
+          ║         src="assets/proyectos/        ║
+          ║              nombre.jpg"              ║
+          ║         alt="Descripción breve">      ║
+          ║                                       ║
+          ║  Tamaño recomendado según celda:      ║
+          ║    2×2 → 900×700 px                   ║
+          ║    2×1 → 900×380 px                   ║
+          ║    1×2 → 450×700 px                   ║
+          ║    1×1 → 450×380 px                   ║
+          ║                                       ║
+          ║  El href enlaza a la página propia    ║
+          ║  del proyecto (sin extensión para     ║
+          ║  URLs limpias, o con .html si usas    ║
+          ║  un servidor estático).               ║
+          ╚═══════════════════════════════════════╝
+        -->
+ 
+        <!-- 1 · Reyemar — Branding · 2×2 · DESTACADO -->
+        <a class="bento-card card--2x2"
+           href="proyectos/reyemar"
+           data-category="branding"
+           aria-label="Ver proyecto Apartamentos Reyemar">
+          <img class="card__img" src="assets/proyectos/reyemar.jpg"
+               alt="Branding Apartamentos Reyemar"
+               width="900" height="700" loading="lazy">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <span class="card__category">Branding</span>
+            <p class="card__name">Apartamentos<br>Reyemar</p>
+          </div>
+          <div class="card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+ 
+        <!-- 2 · Al Alba Chill — Social Media · 1×2 -->
+        <a class="bento-card card--1x2"
+           href="proyectos/al-alba-chill"
+           data-category="social"
+           aria-label="Ver proyecto Al Alba Chill">
+          <img class="card__img" src="assets/proyectos/al-alba.jpg"
+               alt="Social Media Al Alba Chill"
+               width="450" height="700" loading="lazy">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <span class="card__category">Social Media</span>
+            <p class="card__name">Al Alba<br>Chill</p>
+          </div>
+          <div class="card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+ 
+        <!-- 3 · Hoyo10 — Social Media · 1×2 -->
+        <a class="bento-card card--1x2"
+           href="proyectos/hoyo10"
+           data-category="social"
+           aria-label="Ver proyecto Hoyo10">
+          <img class="card__img" src="assets/proyectos/hoyo10.jpg"
+               alt="Social Media Hoyo10"
+               width="450" height="700" loading="lazy">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <span class="card__category">Social Media</span>
+            <p class="card__name">Hoyo10</p>
+          </div>
+          <div class="card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+ 
+        <!-- 4 · De Paso — Branding · 2×1 -->
+        <a class="bento-card card--2x1"
+           href="proyectos/de-paso"
+           data-category="branding"
+           aria-label="Ver proyecto De Paso Cervecería">
+          <img class="card__img" src="assets/proyectos/de-paso.jpg"
+               alt="Branding De Paso Cervecería"
+               width="900" height="380" loading="lazy">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <span class="card__category">Branding</span>
+            <p class="card__name">De Paso</p>
+          </div>
+          <div class="card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+ 
+        <!-- 5 · Peña Bética — Branding · 1×1 -->
+        <a class="bento-card card--1x1"
+           href="proyectos/pena-betica"
+           data-category="branding"
+           aria-label="Ver proyecto Peña Bética Cultural Algabeña">
+          <img class="card__img" src="assets/proyectos/pena-betica.jpg"
+               alt="Branding Peña Bética Cultural Algabeña"
+               width="450" height="380" loading="lazy">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <span class="card__category">Branding</span>
+            <p class="card__name">Peña Bética</p>
+          </div>
+          <div class="card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+ 
+        <!-- 6 · Silvio — Social Media · 1×1 -->
+        <a class="bento-card card--1x1"
+           href="proyectos/silvio"
+           data-category="social"
+           aria-label="Ver proyecto Silvio Café y Copas">
+          <img class="card__img" src="assets/proyectos/silvio.jpg"
+               alt="Social Media Silvio Café y Copas"
+               width="450" height="380" loading="lazy">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <span class="card__category">Social Media</span>
+            <p class="card__name">Silvio</p>
+          </div>
+          <div class="card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+ 
+        <!-- 7 · Proyectos 3D — 3D · 2×1 -->
+        <a class="bento-card card--2x1"
+           href="proyectos/3d"
+           data-category="3d"
+           aria-label="Ver proyectos 3D">
+          <img class="card__img" src="assets/proyectos/3d.jpg"
+               alt="Proyectos de modelado e impresión 3D"
+               width="900" height="380" loading="lazy">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <span class="card__category">3D</span>
+            <p class="card__name">Modelado &amp;<br>Impresión 3D</p>
+          </div>
+          <div class="card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+ 
+        <!-- 8 · Real Deportivo Chicharrón — Branding · 1×1 -->
+        <a class="bento-card card--1x1"
+           href="proyectos/chicharron"
+           data-category="branding"
+           aria-label="Ver proyecto Real Deportivo Chicharrón">
+          <img class="card__img" src="assets/proyectos/chicharron.jpg"
+               alt="Visual Branding Real Deportivo Chicharrón"
+               width="450" height="380" loading="lazy">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <span class="card__category">Branding</span>
+            <p class="card__name">RD Chicharrón</p>
+          </div>
+          <div class="card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+ 
+      </div><!-- /bento-grid -->
+ 
+    </section>
+ 
+  </main>
 
 
     <footer class="site-footer" role="contentinfo">

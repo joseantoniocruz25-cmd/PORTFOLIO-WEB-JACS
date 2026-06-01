@@ -2,15 +2,19 @@
    TOKENS DE DISEÑO — cambia aquí los colores
 ══════════════════════════════════════════ */
 :root {
-  --clr-bg:     #0b0b0a;
-  --clr-bg-2:   #111110;
-  --clr-text:   #f0ece4;
-  --clr-accent: #c8a96e;
-  --clr-muted:  rgba(240, 236, 228, 0.38);
-  --font-family: 'Satoshi', sans-slab-serif;
-  --font-logo: "aBidDeal", sans-serif;
-  
-  }
+  --clr-bg:      #0F2038;                       /* noche marina del mural */
+  --clr-bg-2:    #162F4F;                       /* marino extraído del mural */
+  --clr-text:    #E4DDD0;                       /* crema de la pared */
+  --clr-accent:  #40759C;                       /* royal blue del mural */
+  --clr-muted:   rgba(228, 221, 208, 0.40);
+  --clr-surface: #162F4F;                       /* fondo de tarjetas */
+  --clr-border:  rgba(228, 221, 208, 0.10);     /* bordes sutiles */
+  --card-radius: clamp(10px, 1.2vw, 16px);
+  --grid-gap:    clamp(0.5rem, 1vw, 1rem);
+  --font-family: 'Satoshi', sans-serif;
+  --font:        'Satoshi', sans-serif;
+  --font-logo:   "aBidDeal", sans-serif;
+}
 
 /* ══ RESET ══ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -66,7 +70,7 @@ body {
 }
 
 .site-nav.scrolled {
-  background: rgba(11, 11, 10, 0.82);
+  background: #0F2038CC; /* fondo con opacidad para efecto blur */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -188,6 +192,32 @@ body {
   will-change: opacity, transform;
 }
 
+.slogan {
+  position: absolute;
+  top: calc(50% + clamp(3.2rem, 13.5vw, 11.8rem));
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-family);
+  font-size: clamp(0.52rem, 1.05vw, 0.75rem);
+  font-weight: 400;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.slogan__char,
+.slogan__space {
+  display: inline-block;
+}
+
+.slogan__char {
+  animation: charBounce 2.7s ease infinite;
+}
+
+
 .scroll-cue {
   position: absolute;
   bottom: 2.4rem;
@@ -231,22 +261,214 @@ body {
 }
 
 
-/* ════════════════════════════════════════
-   SECCIÓN SIGUIENTE (placeholder)
-════════════════════════════════════════ */
-.work-section {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--clr-bg-2);
-  color: var(--clr-muted);
-  font-size: 0.62rem;
-  font-weight: 400;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-}
+ /* ════════════════════════════════════════
+       SECCIÓN PROYECTOS
+    ════════════════════════════════════════ */
+    .projects-section {
+      background: var(--clr-bg);
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.2rem, 4vw, 4rem);
+    }
+ 
+    /* ── Cabecera de sección ── */
+    .projects-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: clamp(2.5rem, 4vw, 4rem);
+      flex-wrap: wrap;
+    }
+ 
+    .projects-title-group { display: flex; flex-direction: column; gap: .5rem; }
+ 
+    .projects-eyebrow {
+      font-size: .58rem; font-weight: 400; letter-spacing: .55em;
+      text-transform: uppercase; color: var(--clr-accent);
+    }
+ 
+    .projects-title {
+      font-family: var(--font); font-weight: 900;
+      font-size: clamp(2.4rem, 6vw, 5rem); letter-spacing: -.02em;
+      text-transform: uppercase; color: var(--clr-text); line-height: .92;
+    }
+ 
+    /* ── Filtros ── */
+    .filters {
+      display: flex; gap: .5rem; flex-wrap: wrap;
+      align-self: flex-end;
+    }
+ 
+    .filter-btn {
+      position: relative; cursor: pointer; border: none;
+      background: transparent; font-family: var(--font);
+      font-size: .58rem; font-weight: 900; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--clr-muted);
+      padding: .5rem 1.1rem; border-radius: 100px;
+      border: 1px solid var(--clr-border);
+      transition: color .25s ease, border-color .25s ease;
+      overflow: hidden;
+    }
+ 
+    /* Relleno animado del botón activo */
+    .filter-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--clr-accent);
+      border-radius: inherit;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s cubic-bezier(.16,1,.3,1);
+      z-index: 0;
+    }
+    .filter-btn span { position: relative; z-index: 1; }
+ 
+    .filter-btn.active {
+      color: var(--clr-bg); border-color: var(--clr-accent);
+    }
+    .filter-btn.active::before { transform: scaleX(1); }
+    .filter-btn:hover:not(.active) {
+      color: var(--clr-text); border-color: var(--clr-muted);
+    }
+ 
+ 
+    /* ── Bento grid ── */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: clamp(160px, 20vw, 240px);
+      gap: var(--grid-gap);
+      grid-auto-flow: dense;
+    }
+ 
+    /* Tamaños de celda */
+    .card--2x2 { grid-column: span 2; grid-row: span 2; }
+    .card--2x1 { grid-column: span 2; }
+    .card--1x2 { grid-row:    span 2; }
+    .card--1x1 { grid-row:    span 1; }
+ 
+    /* ── Tarjeta base ── */
+    .bento-card {
+      position: relative; overflow: hidden;
+      border-radius: var(--card-radius);
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      text-decoration: none; display: block;
+      cursor: pointer;
+ 
+      /* Estado para filtro */
+      transition:
+        opacity .4s cubic-bezier(.16,1,.3,1),
+        transform .4s cubic-bezier(.16,1,.3,1),
+        border-color .3s ease;
+    }
+ 
+    /* Tarjeta oculta por filtro */
+    .bento-card.hidden {
+      opacity: 0;
+      transform: scale(.95);
+      pointer-events: none;
+    }
+ 
+    /* Imagen de fondo de la tarjeta */
+    .card__img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .6s cubic-bezier(.16,1,.3,1);
+    }
+ 
+    /* Overlay degradado */
+    .card__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(15,32,56,.95) 0%,
+        rgba(15,32,56,.45) 45%,
+        rgba(15,32,56,.15) 100%
+      );
+      transition: background .4s ease;
+    }
+ 
+    /* Info en la tarjeta */
+    .card__info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: clamp(.9rem, 2vw, 1.4rem);
+      transform: translateY(4px);
+      transition: transform .4s cubic-bezier(.16,1,.3,1);
+    }
+ 
+    .card__category {
+      display: inline-block;
+      font-size: .5rem; font-weight: 900; letter-spacing: .35em;
+      text-transform: uppercase; color: var(--clr-accent);
+      margin-bottom: .45rem;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .3s ease .05s, transform .3s ease .05s;
+    }
+ 
+    .card__name {
+      font-family: var(--font); font-weight: 900;
+      font-size: clamp(.95rem, 2vw, 1.5rem);
+      letter-spacing: -.01em; text-transform: uppercase;
+      color: var(--clr-text); line-height: 1;
+    }
+ 
+    /* Flecha de navegación */
+    .card__arrow {
+      position: absolute; top: clamp(.8rem, 1.5vw, 1.2rem);
+      right: clamp(.8rem, 1.5vw, 1.2rem);
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(64,117,156,.2);
+      border: 1px solid rgba(64,117,156,.4);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transform: translate(4px, -4px);
+      transition: opacity .3s ease, transform .3s ease, background .2s ease;
+    }
+    .card__arrow svg { width: 14px; height: 14px; fill: var(--clr-accent); }
+ 
+    /* Hover global de la tarjeta */
+    .bento-card:hover .card__img    { transform: scale(1.04); }
+    .bento-card:hover .card__overlay {
+      background: linear-gradient(to top,
+        rgba(15,32,56,.98) 0%,
+        rgba(15,32,56,.6)  45%,
+        rgba(15,32,56,.28) 100%);
+    }
+    .bento-card:hover .card__info    { transform: translateY(0); }
+    .bento-card:hover .card__category { opacity: 1; transform: translateY(0); }
+    .bento-card:hover .card__arrow   {
+      opacity: 1; transform: translate(0,0);
+      background: rgba(64,117,156,.4);
+    }
+    .bento-card:focus-visible {
+      outline: 2px solid var(--clr-accent);
+      outline-offset: 3px;
+    }
+ 
+    /* Tarjeta sin imagen — placeholder */
+    .card--placeholder {
+      background: var(--clr-bg-2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card__placeholder-label {
+      font-size: .55rem; font-weight: 900; letter-spacing: .35em;
+      text-transform: uppercase; color: var(--clr-border);
+    }
+ 
+    /* ── Reveal al scroll ── */
+    .bento-card {
+      opacity: 0; transform: translateY(24px);
+    }
+    .bento-card.in-view {
+      opacity: 1; transform: translateY(0);
+    }
+    .bento-card.hidden {
+      opacity: 0 !important; transform: scale(.95) !important;
+    }
+
 
 
 /* ════════════════════════════════════════
@@ -298,24 +520,74 @@ body {
 
 
 /* ════════════════════════════════════════
-   KEYFRAMES
+   RESPONSIVE
 ════════════════════════════════════════ */
-@keyframes nameIn {
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-@keyframes trackSlide {
-  0%   { top: -60%; }
-  100% { top: 110%; }
+
+/* ── Tablet (≤ 900px): bento pasa a 2 columnas ── */
+@media (max-width: 900px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: clamp(160px, 28vw, 280px);
+  }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-delay:    0.01ms !important;
-    transition-duration: 0.01ms !important;
+/* ── Mobile (≤ 640px) ── */
+@media (max-width: 640px) {
+
+  /* Navegación */
+  .site-nav {
+    padding: 1rem 5vw;
   }
-  .full-name { opacity: 1; transform: none; }
+  .site-nav__links {
+    gap: 1rem;
+  }
+
+  /* Hero: slogan deja de ser nowrap */
+  .slogan {
+    white-space: normal;
+    padding: 0 8vw;
+    letter-spacing: 0.3em;
+  }
+
+  /* Cabecera de proyectos: apila título y filtros */
+  .projects-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .filters {
+    align-self: flex-start;
+  }
+
+  /* Bento: 1 columna, todas las tarjetas se convierten en 1×1 */
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: clamp(220px, 58vw, 360px);
+  }
+  .card--2x2 { grid-column: span 1; grid-row: span 1; }
+  .card--2x1 { grid-column: span 1; }
+  .card--1x2 { grid-row:    span 1; }
+
+  /* Info de tarjeta siempre visible (sin hover en touch) */
+  .card__info     { transform: translateY(0); }
+  .card__category { opacity: 1; transform: translateY(0); }
+  .card__arrow    { opacity: 1; transform: translate(0, 0); }
+}
+
+/* ── Mobile pequeño (≤ 400px) ── */
+@media (max-width: 400px) {
+  .site-nav__links {
+    gap: 0.7rem;
+  }
+  .filter-btn {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.52rem;
+  }
+}
+
+/* ── Dispositivos táctiles: info de tarjeta siempre visible ── */
+@media (hover: none) {
+  .card__info     { transform: translateY(0); }
+  .card__category { opacity: 1; transform: translateY(0); }
+  .card__arrow    { opacity: 1; transform: translate(0, 0); }
 }

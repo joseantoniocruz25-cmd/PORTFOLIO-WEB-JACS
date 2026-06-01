@@ -21,3 +21,31 @@
   0%   { top: -60%; }
   100% { top: 110%; }
 }
+
+@keyframes charBounce {
+  0%   { transform: translateY(0); }
+  10%  { transform: translateY(-9px); }
+  20%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes filterSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-48px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay:    0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .full-name    { opacity: 1; transform: none; }
+  .slogan__char { animation: none; }
+}
