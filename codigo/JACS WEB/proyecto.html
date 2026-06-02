@@ -5,42 +5,668 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!--
-    ╔═══════════════════════════════════════════╗
-    ║  Cambia estos valores en cada proyecto:  ║
-    ║  • <title>                               ║
-    ║  • <meta name="description">            ║
-    ║  • data-slug en <body>                  ║
-    ╚═══════════════════════════════════════════╝
+    Cambia por proyecto:
+    • <title>
+    • <meta name="description">
+    • data-slug en <body>
   -->
   <title>Apartamentos Reyemar — JACS Portfolio</title>
   <meta name="description" content="Identidad visual completa para Apartamentos Reyemar: logotipo, paleta cromática, papelería y aplicaciones de marca.">
 
-  <link rel="preconnect" href="https://api.fontshare.com">
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="proyecto.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ══════════════════════════════════════════
+       TOKENS
+    ══════════════════════════════════════════ */
+    :root {
+      --clr-bg:      #0F2038;
+      --clr-bg-2:    #162F4F;
+      --clr-surface: #1C3A5C;
+      --clr-text:    #E4DDD0;
+      --clr-accent:  #40759C;
+      --clr-muted:   rgba(228,221,208,0.45);
+      --clr-border:  rgba(228,221,208,0.10);
+      --font:        'Raleway', sans-serif;
+      --card-radius: 10px;
+
+      /* Ancho máximo del cuerpo editorial */
+      --body-w:    min(90vw, 740px);
+      /* Ancho de imágenes que "sangran" más allá */
+      --bleed-w:   min(96vw, 1060px);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      font-family: var(--font);
+      overflow-x: hidden;
+    }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    .skip-link {
+      position: fixed; top: -100%; left: 1rem; z-index: 9999;
+      background: var(--clr-accent); color: var(--clr-bg);
+      font-family: var(--font); font-size: .85rem; font-weight: 900;
+      letter-spacing: .05em; text-decoration: none;
+      text-transform: uppercase; padding: .6rem 1.2rem;
+      transition: top .2s ease;
+    }
+    .skip-link:focus { top: 1rem; }
+
+
+    /* ════════════════════════════════════════
+       VIEW TRANSITIONS
+    ════════════════════════════════════════ */
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: .5s;
+      animation-timing-function: cubic-bezier(.16,1,.3,1);
+    }
+
+
+    /* ════════════════════════════════════════
+       NAV
+    ════════════════════════════════════════ */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3vw;
+      background: rgba(15,32,56,.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--clr-border);
+    }
+
+    .site-nav__logo {
+      font-family: var(--font); font-weight: 900; font-size: 1.1rem;
+      letter-spacing: -.01em; color: var(--clr-text);
+      text-decoration: none; transition: color .2s ease;
+    }
+    .site-nav__logo:hover { color: var(--clr-accent); }
+
+    .site-nav__back {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .58rem; font-weight: 900; letter-spacing: .35em;
+      text-transform: uppercase; color: var(--clr-muted);
+      text-decoration: none; transition: color .2s ease;
+    }
+    .site-nav__back:hover { color: var(--clr-text); }
+    .site-nav__back svg {
+      width: 14px; height: 14px; fill: none; stroke: currentColor;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+      transition: transform .2s ease;
+    }
+    .site-nav__back:hover svg { transform: translateX(-3px); }
+
+
+    /* ════════════════════════════════════════
+       HERO — imagen a pantalla completa
+    ════════════════════════════════════════ */
+    .project-hero {
+      position: relative;
+      height: 100svh; min-height: 500px;
+      overflow: hidden;
+    }
+
+    .project-hero__img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      /* view-transition-name asignado por JS */
+    }
+
+    /* Logo del cliente como fondo con screen blend */
+    .project-hero__brand-bg {
+      position: absolute;
+      right: -3%; bottom: -5%;
+      width: clamp(280px, 52vw, 700px);
+      height: auto;
+      mix-blend-mode: screen;
+      opacity: var(--brand-opacity, 0.35);
+      pointer-events: none; user-select: none;
+      z-index: 2;
+      animation: fadeIn .9s ease .3s both;
+    }
+
+    .project-hero__overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(
+        to bottom,
+        rgba(15,32,56,.10) 0%,
+        rgba(15,32,56,.25) 50%,
+        rgba(15,32,56,.96) 100%
+      );
+    }
+
+    /* Categoría + título sobre el hero */
+    .project-hero__content {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+      display: flex; align-items: flex-end;
+      justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+      padding: clamp(2rem,5vw,4rem) clamp(1.4rem,5vw,4rem);
+    }
+
+    .project-hero__eyebrow {
+      display: block; font-size: .55rem; font-weight: 900;
+      letter-spacing: .5em; text-transform: uppercase;
+      color: var(--clr-accent); margin-bottom: .7rem;
+      opacity: 0; transform: translateY(10px);
+      animation: slideUp .7s cubic-bezier(.16,1,.3,1) .2s forwards;
+    }
+
+    .project-hero__title {
+      font-family: var(--font); font-weight: 900;
+      font-size: clamp(3rem, 8vw, 7rem);
+      letter-spacing: -.025em; text-transform: uppercase;
+      color: var(--clr-text); line-height: .9;
+      opacity: 0; transform: translateY(14px);
+      animation: slideUp .8s cubic-bezier(.16,1,.3,1) .32s forwards;
+    }
+
+    /* Indicador scroll */
+    .project-hero__scroll {
+      display: flex; flex-direction: column;
+      align-items: center; gap: .5rem;
+      opacity: 0; animation: fadeIn .6s ease .9s forwards;
+      padding-bottom: .2rem; flex-shrink: 0;
+    }
+    .project-hero__scroll span {
+      font-size: .46rem; letter-spacing: .4em;
+      text-transform: uppercase; color: var(--clr-muted);
+    }
+    .project-hero__scroll-line {
+      width: 1px; height: 36px;
+      background: rgba(228,221,208,.15);
+      position: relative; overflow: hidden;
+    }
+    .project-hero__scroll-line::after {
+      content: ''; position: absolute; top: -60%; left: 0;
+      width: 100%; height: 50%; background: var(--clr-accent);
+      animation: trackSlide 1.8s ease-in-out 1s infinite;
+    }
+
+
+    /* ════════════════════════════════════════
+       CUERPO EDITORIAL — flujo de revista
+       Todo el contenido tras el hero.
+
+       Anchos disponibles:
+         .prose   → var(--body-w)   texto normal
+         .wide    → var(--bleed-w)  imágenes grandes
+         .full    → 100vw           imágenes a sangre
+    ════════════════════════════════════════ */
+    .project-article {
+      padding-top: clamp(4rem, 7vw, 7rem);
+    }
+
+    /* Centrado genérico */
+    .prose, .wide, .full { margin-left: auto; margin-right: auto; }
+    .prose { max-width: var(--body-w);  padding: 0 clamp(1.2rem, 4vw, 2rem); }
+    .wide  { max-width: var(--bleed-w); padding: 0 clamp(.6rem, 2vw, 1rem); }
+    .full  { max-width: 100%; padding: 0; }
+
+    /* Separación vertical entre bloques */
+    .block { margin-bottom: clamp(3rem, 6vw, 6rem); }
+    .block--tight { margin-bottom: clamp(1.5rem, 3vw, 3rem); }
+    .block--loose { margin-bottom: clamp(5rem, 9vw, 9rem); }
+
+
+    /* ── Número de sección ── */
+    .section-index {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: clamp(2rem, 4vw, 3.5rem);
+    }
+    .section-index__num {
+      font-family: var(--font); font-weight: 900;
+      font-size: clamp(4rem, 10vw, 8rem);
+      letter-spacing: -.04em; line-height: 1;
+      color: var(--clr-border);
+    }
+    .section-index__line {
+      flex: 1; height: 1px; background: var(--clr-border);
+    }
+    .section-index__label {
+      font-size: .52rem; font-weight: 900; letter-spacing: .5em;
+      text-transform: uppercase; color: var(--clr-accent);
+    }
+
+
+    /* ── Texto introductorio grande (lead) ── */
+    .lead {
+      font-family: var(--font); font-weight: 900;
+      font-size: clamp(1.5rem, 3.2vw, 2.6rem);
+      letter-spacing: -.02em; line-height: 1.2;
+      color: var(--clr-text);
+    }
+    .lead em {
+      font-style: normal; color: var(--clr-accent);
+    }
+
+
+    /* ── Párrafo de cuerpo ── */
+    .body-text {
+      font-size: clamp(.95rem, 1.6vw, 1.1rem);
+      font-weight: 400; line-height: 1.8;
+      color: var(--clr-muted);
+    }
+    .body-text + .body-text { margin-top: 1.1em; }
+
+
+    /* ── Pull quote ── */
+    .pull-quote {
+      border-left: 3px solid var(--clr-accent);
+      padding: .4rem 0 .4rem 1.6rem;
+      margin: clamp(2rem,4vw,3.5rem) 0;
+    }
+    .pull-quote__text {
+      font-family: var(--font); font-weight: 900;
+      font-size: clamp(1.2rem, 2.5vw, 1.9rem);
+      letter-spacing: -.015em; line-height: 1.2;
+      color: var(--clr-text);
+    }
+    .pull-quote__cite {
+      display: block; margin-top: .6rem;
+      font-size: .55rem; font-weight: 400;
+      letter-spacing: .3em; text-transform: uppercase;
+      color: var(--clr-muted); font-style: normal;
+    }
+
+
+    /* ── Datos clave en grande ── */
+    .data-strip {
+      display: flex; gap: 0;
+      border-top: 1px solid var(--clr-border);
+      border-bottom: 1px solid var(--clr-border);
+      padding: clamp(1.5rem,3vw,2.5rem) 0;
+      flex-wrap: wrap;
+    }
+    .data-item {
+      flex: 1; min-width: 140px;
+      padding: .6rem clamp(1rem,2.5vw,2rem);
+      border-right: 1px solid var(--clr-border);
+    }
+    .data-item:first-child { padding-left: 0; }
+    .data-item:last-child  { border-right: none; }
+    .data-item__key {
+      display: block; font-size: .5rem; font-weight: 900;
+      letter-spacing: .45em; text-transform: uppercase;
+      color: var(--clr-accent); margin-bottom: .35rem;
+    }
+    .data-item__val {
+      font-family: var(--font); font-weight: 900;
+      font-size: clamp(.9rem, 1.8vw, 1.2rem);
+      letter-spacing: -.01em; color: var(--clr-text);
+      line-height: 1.2;
+    }
+
+
+    /* ════════════════════════════════════════
+       IMÁGENES EDITORIALES
+
+       Tipos:
+         .img-editorial         → wide, ratio 16/9
+         .img-editorial--tall   → wide, ratio 4/3 + portrait izqda
+         .img-editorial--duo    → dos imágenes en fila
+         .img-editorial--offset → imagen + texto flotante
+    ════════════════════════════════════════ */
+
+    /* Contenedor base */
+    .img-editorial {
+      position: relative; overflow: hidden;
+      border-radius: var(--card-radius);
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+    }
+    .img-editorial img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform .7s cubic-bezier(.16,1,.3,1);
+    }
+    .img-editorial:hover img { transform: scale(1.03); }
+
+    /* Normal: 16/9 */
+    .img-editorial        { aspect-ratio: 16/9; }
+    /* Tall: 4/3 */
+    .img-editorial--tall  { aspect-ratio: 4/3; }
+    /* Apaisado corto */
+    .img-editorial--short { aspect-ratio: 21/9; }
+
+    /* Pies de foto */
+    .img-caption {
+      font-size: .54rem; font-weight: 400;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--clr-border);
+      margin-top: .7rem; padding-left: .2rem;
+    }
+
+    /* Dúo: dos imágenes en fila */
+    .img-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(.5rem, 1vw, .8rem);
+    }
+    .img-duo .img-editorial { aspect-ratio: 3/4; }
+
+    /* Offset: imagen grande izq + texto der */
+    .img-offset {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: clamp(1.5rem, 3vw, 3rem);
+      align-items: center;
+    }
+    .img-offset--reverse { direction: rtl; }
+    .img-offset--reverse > * { direction: ltr; }
+    .img-offset .img-editorial { aspect-ratio: 4/5; }
+    .img-offset__text { display: flex; flex-direction: column; gap: 1.2rem; }
+
+
+    /* ════════════════════════════════════════
+       GALERÍA FINAL — grid + lightbox + slider
+    ════════════════════════════════════════ */
+    .gallery-section {
+      padding: clamp(4rem, 7vw, 7rem) 0 0;
+      border-top: 1px solid var(--clr-border);
+    }
+
+    .gallery-section .section-index { padding: 0 clamp(.6rem, 2vw, 1rem); }
+
+    /* Grid bento */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: clamp(180px, 22vw, 300px);
+      gap: clamp(6px, 1vw, 12px);
+    }
+
+    .gallery-item {
+      position: relative; overflow: hidden;
+      border-radius: var(--card-radius);
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      cursor: zoom-in;
+    }
+    .gallery-item.img--wide  { grid-column: span 2; }
+    .gallery-item.img--tall  { grid-row: span 2; }
+    .gallery-item.img--full  { grid-column: span 3; }
+
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform .6s cubic-bezier(.16,1,.3,1);
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    .gallery-item figcaption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: .6rem 1rem;
+      background: linear-gradient(transparent, rgba(15,32,56,.85));
+      font-size: .5rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--clr-muted);
+      opacity: 0; transform: translateY(4px);
+      transition: opacity .3s ease, transform .3s ease;
+    }
+    .gallery-item:hover figcaption { opacity: 1; transform: translateY(0); }
+
+
+    /* ════════════════════════════════════════
+       LIGHTBOX + SLIDER
+    ════════════════════════════════════════ */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(8,18,32,.97);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1.2rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+
+    /* Imagen principal */
+    .lightbox__stage {
+      position: relative;
+      width: min(92vw, 1100px);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox__img {
+      max-width: 100%; max-height: 80vh;
+      object-fit: contain; border-radius: 6px;
+      transform: scale(.97);
+      transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .25s ease;
+    }
+    .lightbox.open .lightbox__img { transform: scale(1); }
+    .lightbox__img.switching { opacity: 0; transform: scale(.97); }
+
+    /* Botones de nav lateral */
+    .lightbox__nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(228,221,208,.08);
+      border: 1px solid var(--clr-border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--clr-text);
+      transition: background .2s ease;
+      flex-shrink: 0;
+    }
+    .lightbox__nav:hover { background: rgba(64,117,156,.3); }
+    .lightbox__nav svg {
+      width: 18px; height: 18px; fill: none; stroke: currentColor;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .lightbox__prev { left: -56px; }
+    .lightbox__next { right: -56px; }
+
+    /* Botón cerrar */
+    .lightbox__close {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(228,221,208,.1);
+      border: 1px solid var(--clr-border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--clr-text);
+      transition: background .2s ease;
+    }
+    .lightbox__close:hover { background: rgba(228,221,208,.2); }
+    .lightbox__close svg {
+      width: 16px; height: 16px; fill: none; stroke: currentColor;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* Thumbnails / slider inferior */
+    .lightbox__thumbs {
+      display: flex; gap: .4rem; overflow-x: auto;
+      max-width: min(92vw, 1100px);
+      scrollbar-width: none; padding: .2rem;
+    }
+    .lightbox__thumbs::-webkit-scrollbar { display: none; }
+
+    .lightbox__thumb {
+      width: 54px; height: 40px; flex-shrink: 0;
+      border-radius: 5px; overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color .2s ease, opacity .2s ease;
+      opacity: .5;
+    }
+    .lightbox__thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .lightbox__thumb.active { border-color: var(--clr-accent); opacity: 1; }
+    .lightbox__thumb:hover  { opacity: .8; }
+
+    /* Contador */
+    .lightbox__counter {
+      font-size: .52rem; font-weight: 400;
+      letter-spacing: .3em; text-transform: uppercase;
+      color: var(--clr-muted);
+    }
+
+
+    /* ════════════════════════════════════════
+       NAV ANTERIOR · SIGUIENTE
+    ════════════════════════════════════════ */
+    .project-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: clamp(4rem, 7vw, 7rem);
+      border-top: 1px solid var(--clr-border);
+    }
+
+    .project-nav__item {
+      display: flex; flex-direction: column; gap: .6rem;
+      padding: clamp(2rem,4vw,3.5rem);
+      text-decoration: none; position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--clr-border);
+      transition: background .3s ease;
+    }
+    .project-nav__item:first-child { border-right: 1px solid var(--clr-border); }
+    .project-nav__item::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: var(--thumb);
+      background-size: cover; background-position: center;
+      opacity: 0; transition: opacity .4s ease;
+    }
+    .project-nav__item:hover::before { opacity: .1; }
+    .project-nav__item:hover { background: var(--clr-surface); }
+
+    .project-nav__dir {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .52rem; font-weight: 900; letter-spacing: .4em;
+      text-transform: uppercase; color: var(--clr-accent);
+      position: relative; z-index: 1;
+    }
+    .project-nav__dir svg {
+      width: 14px; height: 14px; fill: none; stroke: currentColor;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+      transition: transform .25s ease; flex-shrink: 0;
+    }
+    .project-nav__item--prev:hover .project-nav__dir svg { transform: translateX(-4px); }
+    .project-nav__item--next:hover .project-nav__dir svg { transform: translateX(4px); }
+
+    .project-nav__name {
+      font-family: var(--font); font-weight: 900;
+      font-size: clamp(1.2rem, 3vw, 2.2rem);
+      letter-spacing: -.01em; text-transform: uppercase;
+      color: var(--clr-text); line-height: 1;
+      position: relative; z-index: 1;
+    }
+    .project-nav__category {
+      font-size: .52rem; font-weight: 400; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--clr-muted);
+      position: relative; z-index: 1;
+    }
+    .project-nav__item--next { align-items: flex-end; text-align: right; }
+
+
+    /* ════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════ */
+    .site-footer {
+      background: var(--clr-bg);
+      border-top: 1px solid var(--clr-border);
+      padding: 3rem 5vw;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1.2rem; text-align: center;
+    }
+    .site-footer__name {
+      font-size: .6rem; font-weight: 900; letter-spacing: .5em;
+      text-transform: uppercase; color: var(--clr-text);
+    }
+    .site-footer__links { list-style: none; display: flex; gap: 1.8rem; }
+    .site-footer__links a {
+      font-size: .58rem; font-weight: 400; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--clr-muted);
+      text-decoration: none; transition: color .2s ease;
+    }
+    .site-footer__links a:hover { color: var(--clr-accent); }
+    .site-footer__copy {
+      font-size: .58rem; font-weight: 400;
+      letter-spacing: .2em; color: var(--clr-muted);
+    }
+
+
+    /* ════════════════════════════════════════
+       REVEAL AL SCROLL
+    ════════════════════════════════════════ */
+    .reveal {
+      opacity: 0; transform: translateY(22px);
+      transition:
+        opacity .75s cubic-bezier(.16,1,.3,1),
+        transform .75s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .reveal--d1 { transition-delay: .1s; }
+    .reveal--d2 { transition-delay: .2s; }
+    .reveal--d3 { transition-delay: .3s; }
+
+
+    /* ════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════ */
+    @media (max-width: 860px) {
+      .img-offset { grid-template-columns: 1fr; }
+      .img-offset--reverse { direction: ltr; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); }
+      .gallery-item.img--full { grid-column: span 2; }
+      .lightbox__prev { left: -48px; }
+      .lightbox__next { right: -48px; }
+    }
+    @media (max-width: 540px) {
+      .img-duo { grid-template-columns: 1fr; }
+      .img-duo .img-editorial { aspect-ratio: 4/3; }
+      .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+      .gallery-item.img--wide,
+      .gallery-item.img--full { grid-column: span 1; }
+      .gallery-item.img--tall { grid-row: span 1; }
+      .project-nav { grid-template-columns: 1fr; }
+      .project-nav__item:first-child { border-right: none; }
+      .project-nav__item--next { align-items: flex-start; text-align: left; }
+      .lightbox__prev,
+      .lightbox__next { display: none; }
+    }
+
+
+    /* ════════════════════════════════════════
+       KEYFRAMES
+    ════════════════════════════════════════ */
+    @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn  { to { opacity: 1; } }
+    @keyframes trackSlide {
+      0%   { top: -60%; }
+      100% { top: 110%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-delay: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 
-<!--
-  ╔═══════════════════════════════════════════════╗
-  ║  data-slug: debe coincidir con el href        ║
-  ║  de la tarjeta en el grid (último segmento).  ║
-  ║  Ej: href="proyectos/reyemar" → "reyemar"    ║
-  ╚═══════════════════════════════════════════════╝
--->
 <body data-slug="reyemar">
 
   <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
 
-  <!-- ═══════════════════════════════════════════
-       CABECERA Y NAVEGACIÓN
-  ═══════════════════════════════════════════ -->
   <header>
     <nav class="site-nav" aria-label="Navegación principal">
       <a class="site-nav__logo" href="../index.html"
          aria-label="Inicio — José Antonio Cruz Segura">JACS</a>
-
-      <a class="site-nav__back" href="../index.html#proyectos"
-         aria-label="Volver a todos los proyectos">
+      <a class="site-nav__back" href="../index.html#proyectos">
         <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path d="M13 8H3M7 12l-4-4 4-4"/>
         </svg>
@@ -50,304 +676,420 @@
   </header>
 
 
-  <!-- ═══════════════════════════════════════════
-       CONTENIDO PRINCIPAL
-  ═══════════════════════════════════════════ -->
   <main id="main-content">
+  <article aria-labelledby="project-title">
 
-    <article aria-labelledby="project-title">
 
-      <!-- ── HERO ── -->
-      <section class="project-hero" aria-label="Imagen principal del proyecto">
+    <!-- ══════════════════════════════════════
+         1 · HERO — imagen a pantalla completa
+    ══════════════════════════════════════ -->
+    <section class="project-hero" aria-label="Imagen principal del proyecto">
+
+      <!--
+        Imagen hero: misma que en la tarjeta del grid.
+        fetchpriority="high" para mejorar el LCP.
+      -->
+      <img
+        class="project-hero__img"
+        src="../assets/proyectos/reyemar.jpg"
+        alt="Identidad visual Apartamentos Reyemar"
+        width="1920" height="1080"
+        fetchpriority="high"
+      >
+
+      <!--
+        Logo del cliente como marca de agua.
+        Usa mix-blend-mode:screen para que el color
+        del logo brille sobre el marino sin tapar el título.
+        Cambia src por el logo real de cada proyecto.
+      -->
+      <img
+        class="project-hero__brand-bg"
+        src="../assets/proyectos/reyemar-logo.svg"
+        alt="" aria-hidden="true"
+        width="700" height="420"
+      >
+
+      <div class="project-hero__overlay" aria-hidden="true"></div>
+
+      <div class="project-hero__content">
+        <div>
+          <span class="project-hero__eyebrow">Branding · Identidad Visual</span>
+          <h1 class="project-hero__title" id="project-title">
+            Apartamentos<br>Reyemar
+          </h1>
+        </div>
+        <div class="project-hero__scroll" aria-hidden="true">
+          <span>Scroll</span>
+          <span class="project-hero__scroll-line"></span>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════
+         2 · TEXTO INTRODUCTORIO
+         Lead grande + párrafos de contexto
+    ══════════════════════════════════════ -->
+    <div class="project-article">
+
+      <div class="prose block--loose reveal">
+
+        <div class="section-index" aria-hidden="true">
+          <span class="section-index__num">01</span>
+          <span class="section-index__line"></span>
+          <span class="section-index__label">El encargo</span>
+        </div>
 
         <!--
-          ╔═══════════════════════════════════════╗
-          ║  Cambia src por la imagen principal   ║
-          ║  del proyecto (misma que en el grid). ║
-          ║  width/height = dimensiones reales.   ║
-          ╚═══════════════════════════════════════╝
+          Lead: frase que resume la esencia del proyecto.
+          El <em> se muestra en acento azul.
         -->
-        <img
-          class="project-hero__img"
-          src="../assets/proyectos/reyemar.jpg"
-          alt="Real Deportivo Chicharrón — identidad visual"
-          width="1920" height="1080"
-          fetchpriority="high"
-        >
-
-        <div class="project-hero__overlay" aria-hidden="true"></div>
+        <p class="lead block--tight">
+          Una marca que transmitiera la <em>calidez y distinción</em>
+          de un alojamiento con raíces en el sur.
+        </p>
 
         <!--
-          ╔══════════════════════════════════════════╗
-          ║  LOGO DEL CLIENTE — fondo del hero      ║
-          ║                                          ║
-          ║  Formato recomendado: SVG o PNG          ║
-          ║  con fondo transparente.                 ║
-          ║                                          ║
-          ║  Ajusta la intensidad con:               ║
-          ║  <body style="--brand-opacity: 0.38">    ║
-          ╚══════════════════════════════════════════╝
+          Cuerpo: 2–3 párrafos explicando el contexto,
+          el reto y el punto de partida.
         -->
-        <img
-          class="project-hero__brand-bg"
-          src="../assets/proyectos/reyemar-logo.svg"
-          alt=""
-          aria-hidden="true"
-          width="720"
-          height="420"
-        >
+        <p class="body-text">
+          Apartamentos Reyemar necesitaba construir su identidad visual desde cero.
+          Sin marca previa, con un local de carácter y una oferta turística diferenciada
+          en la zona. El reto era trasladar la personalidad del espacio —materiales nobles,
+          atención al detalle, hospitalidad con raíces andaluzas— a un sistema gráfico
+          coherente y aplicable en todos los soportes.
+        </p>
+        <p class="body-text">
+          El punto de partida fue el propio entorno arquitectónico: la tosca,
+          el hierro forjado y la cerámica local dictaron la paleta cromática.
+          El carmín elegido (#801629) dialoga directamente con los materiales
+          del edificio. La tipografía serif refuerza la sensación de hospitalidad
+          con tradición.
+        </p>
 
-        <div class="project-hero__content">
-          <div class="project-hero__meta">
-            <p class="project-hero__eyebrow">Branding · Identidad Visual · R.R.S.S.</p>
-            <h1 class="project-hero__title" id="project-title">
-              Real deportivo<br>Chicharrón
-            </h1>
+      </div>
+
+
+      <!-- ══════════════════════════════════════
+           3 · PRIMERA IMAGEN EDITORIAL
+           Wide · ratio 16/9
+      ══════════════════════════════════════ -->
+      <div class="wide block reveal">
+        <div class="img-editorial">
+          <!--
+            Imagen panorámica del proyecto: mockup principal,
+            presentación del logo, o pieza más representativa.
+          -->
+          <img
+            src="../assets/proyectos/reyemar-01.jpg"
+            alt="Logotipo principal Apartamentos Reyemar sobre fondo oscuro"
+            width="1060" height="596"
+            loading="lazy"
+          >
+        </div>
+        <p class="img-caption prose">Logotipo principal — versión sobre fondo oscuro</p>
+      </div>
+
+
+      <!-- ══════════════════════════════════════
+           4 · BLOQUE OFFSET: imagen + texto
+           Imagen izquierda, texto descriptivo derecha
+      ══════════════════════════════════════ -->
+      <div class="wide block--loose reveal">
+        <div class="img-offset">
+
+          <div>
+            <div class="img-editorial img-editorial--tall">
+              <img
+                src="../assets/proyectos/reyemar-02.jpg"
+                alt="Aplicación del logotipo sobre fondo carmín"
+                width="600" height="750"
+                loading="lazy"
+              >
+            </div>
           </div>
 
-          <div class="project-hero__scroll" aria-hidden="true">
-            <span>Scroll</span>
-            <span class="project-hero__scroll-line"></span>
+          <div class="img-offset__text">
+            <!--
+              Aquí va el texto que explica esta fase del proyecto:
+              proceso de conceptualización, decisiones de diseño,
+              por qué se eligió este camino visual.
+            -->
+            <p class="body-text">
+              La dirección de diseño se centró en tres principios: legibilidad
+              a cualquier escala, versatilidad de aplicación y conexión emocional
+              con el lugar. Se exploraron cinco territorios visuales antes de
+              fijar el definitivo.
+            </p>
+            <p class="body-text">
+              El monograma RM parte de la arquitectura del edificio: sus proporciones
+              evocan el arco de la entrada principal. Cada trazo tiene un origen,
+              no es decoración: es narrativa visual.
+            </p>
+
+            <!--
+              Pull quote: frase clave del proceso o del cliente.
+              Puede venir del briefing, de una reunión o de
+              una decisión de diseño relevante.
+            -->
+            <blockquote class="pull-quote">
+              <p class="pull-quote__text">
+                "El logo tiene que parecer que siempre ha estado ahí."
+              </p>
+              <cite class="pull-quote__cite">Briefing inicial · Cliente</cite>
+            </blockquote>
           </div>
+
+        </div>
+      </div>
+
+
+      <!-- ══════════════════════════════════════
+           5 · DATOS CLAVE DEL PROYECTO
+           Año, cliente, disciplina, herramientas
+      ══════════════════════════════════════ -->
+      <div class="prose block reveal">
+        <div class="data-strip">
+          <!--
+            Cambia los valores según el proyecto.
+            Puedes añadir o quitar data-item.
+          -->
+          <div class="data-item">
+            <span class="data-item__key">Cliente</span>
+            <span class="data-item__val">Apartamentos<br>Reyemar</span>
+          </div>
+          <div class="data-item">
+            <span class="data-item__key">Año</span>
+            <span class="data-item__val">2024</span>
+          </div>
+          <div class="data-item">
+            <span class="data-item__key">Disciplina</span>
+            <span class="data-item__val">Branding<br>Identidad Visual</span>
+          </div>
+          <div class="data-item">
+            <span class="data-item__key">Herramientas</span>
+            <span class="data-item__val">Illustrator<br>Photoshop</span>
+          </div>
+          <div class="data-item">
+            <span class="data-item__key">Entregables</span>
+            <span class="data-item__val">Logo · Papelería<br>Signage · Guía</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ══════════════════════════════════════
+           6 · DÚO DE IMÁGENES
+           Dos imágenes en paralelo, formato vertical
+      ══════════════════════════════════════ -->
+      <div class="wide block reveal">
+        <div class="img-duo">
+
+          <div>
+            <div class="img-editorial">
+              <img
+                src="../assets/proyectos/reyemar-03.jpg"
+                alt="Tarjeta de visita corporativa"
+                width="530" height="530"
+                loading="lazy"
+              >
+            </div>
+            <p class="img-caption">Tarjeta de visita</p>
+          </div>
+
+          <div>
+            <div class="img-editorial">
+              <img
+                src="../assets/proyectos/reyemar-04.jpg"
+                alt="Taza con logotipo bordado"
+                width="530" height="530"
+                loading="lazy"
+              >
+            </div>
+            <p class="img-caption">Merchandising · Taza</p>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ══════════════════════════════════════
+           7 · BLOQUE OFFSET INVERTIDO
+           Texto izquierda, imagen derecha
+      ══════════════════════════════════════ -->
+      <div class="wide block--loose reveal">
+        <div class="img-offset img-offset--reverse">
+
+          <div>
+            <div class="img-editorial img-editorial--tall">
+              <img
+                src="../assets/proyectos/reyemar-05.jpg"
+                alt="Papelería corporativa completa"
+                width="600" height="750"
+                loading="lazy"
+              >
+            </div>
+          </div>
+
+          <div class="img-offset__text">
+            <p class="body-text">
+              El sistema de papelería se diseñó pensando en la impresión offset
+              y en la reproducción digital. Cada pieza mantiene los mismos márgenes,
+              la misma jerarquía tipográfica y la misma paleta, garantizando
+              coherencia independientemente del soporte.
+            </p>
+            <p class="body-text">
+              La guía de marca entregada al cliente incluye normas de uso del logo,
+              paleta de colores en HEX, CMYK, RGB y Pantone, especificaciones
+              tipográficas y ejemplos de aplicación correcta e incorrecta.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ══════════════════════════════════════
+           8 · IMAGEN A SANGRE — full width
+           Cierre visual antes de la galería
+      ══════════════════════════════════════ -->
+      <div class="full block reveal">
+        <div class="img-editorial img-editorial--short" style="border-radius:0;border-left:none;border-right:none;">
+          <img
+            src="../assets/proyectos/reyemar-06.jpg"
+            alt="Mockup completo de la identidad visual en contexto real"
+            width="1920" height="823"
+            loading="lazy"
+          >
+        </div>
+      </div>
+
+
+      <!-- ══════════════════════════════════════
+           9 · GALERÍA FINAL
+           Grid bento + lightbox con slider
+      ══════════════════════════════════════ -->
+      <section class="gallery-section" aria-labelledby="gallery-heading">
+
+        <div class="section-index wide reveal" aria-hidden="true">
+          <span class="section-index__num">02</span>
+          <span class="section-index__line"></span>
+          <span class="section-index__label" id="gallery-heading">Galería</span>
+        </div>
+
+        <!--
+          Clases de celda:
+            (sin clase)    → 1 columna, 1 fila
+            .img--wide     → 2 columnas
+            .img--tall     → 2 filas
+            .img--full     → 3 columnas
+        -->
+        <div class="gallery-grid reveal">
+
+          <figure class="gallery-item img--wide">
+            <img src="../assets/proyectos/reyemar-g1.jpg"
+                 alt="Sistema de identidad completo"
+                 width="900" height="300" loading="lazy">
+            <figcaption>Sistema de identidad</figcaption>
+          </figure>
+
+          <figure class="gallery-item img--tall">
+            <img src="../assets/proyectos/reyemar-g2.jpg"
+                 alt="Cartelería exterior"
+                 width="450" height="600" loading="lazy">
+            <figcaption>Cartelería</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="../assets/proyectos/reyemar-g3.jpg"
+                 alt="Toalla con logo bordado"
+                 width="450" height="300" loading="lazy">
+            <figcaption>Toalla</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="../assets/proyectos/reyemar-g4.jpg"
+                 alt="Placa de identificación"
+                 width="450" height="300" loading="lazy">
+            <figcaption>Placa identificación</figcaption>
+          </figure>
+
+          <figure class="gallery-item img--full">
+            <img src="../assets/proyectos/reyemar-g5.jpg"
+                 alt="Presentación general de la marca"
+                 width="1200" height="300" loading="lazy">
+            <figcaption>Presentación de marca</figcaption>
+          </figure>
+
         </div>
 
       </section>
 
 
-      <!-- ── DESCRIPCIÓN + PROCESO ── -->
-      <div class="project-body">
+      <!-- ══════════════════════════════════════
+           NAVEGACIÓN ANTERIOR · SIGUIENTE
+      ══════════════════════════════════════ -->
+      <nav class="project-nav" aria-label="Navegación entre proyectos">
 
-        <section class="project-intro reveal" aria-labelledby="desc-heading">
+        <a class="project-nav__item project-nav__item--prev"
+           href="al-alba-chill.html"
+           style="--thumb:url('../assets/proyectos/al-alba.jpg')">
+          <span class="project-nav__dir">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M13 8H3M7 12l-4-4 4-4"/>
+            </svg>
+            Anterior
+          </span>
+          <span class="project-nav__name">Al Alba Chill</span>
+          <span class="project-nav__category">Social Media</span>
+        </a>
 
-          <!-- Columna izquierda: descripción editorial -->
-          <div class="project-desc">
-            <span class="project-desc__label" id="desc-heading">"Una familia que se hizo equipo"</span>
+        <a class="project-nav__item project-nav__item--next"
+           href="de-paso.html"
+           style="--thumb:url('../assets/proyectos/de-paso.jpg')">
+          <span class="project-nav__dir">
+            Siguiente
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </span>
+          <span class="project-nav__name">De Paso</span>
+          <span class="project-nav__category">Branding</span>
+        </a>
 
-            <div class="project-desc__text">
-              <!--
-                ╔═══════════════════════════════════════╗
-                ║  Descripción del proyecto.            ║
-                ║  Uno o varios párrafos <p>.           ║
-                ╚═══════════════════════════════════════╝
-              -->
-              <p>Todo empezó como empiezan las grandes ideas: sin planearlas. Una noche entre cervezas y chicharrones, unos amigos que se habían conocido en la Escuela de Fútbol del Atco. Algabeño lanzaron la frase que lo cambiaría todo: "¿Y si montamos un equipo?". Buscaban un hueco en la Liga Chichos —más de veinte años disputándose en la localidad— y, sobre todo, una identidad: un escudo que representara su forma de vivir el fútbol. La tarde de partido y la cerveza de después, la que se levanta entre cánticos cuando se gana o ayuda a tragar la derrota cuando toca perder.</p>
-              <p>Tres años más tarde, el Chicharrón ya se ha hecho un nombre: Copa Blas Infante, UEFA Algaba League y un tercer puesto en liga. Pero si le preguntas a cualquiera de sus más de cincuenta integrantes, no te hablará de títulos, sino de los colores, de la pasión de niños que volvió a encenderse y de los compañeros que el campo les regaló. Una camiseta que ya ha viajado a Asturias, Madrid o Badajoz, y que cruzó fronteras hasta impresionar a unos amigos de Bélgica.</p>
-              <p>Porque el Real Deportivo Chicharrón no es solo un equipo de fútbol: es una familia que comparte pasión, tradición y espíritu allá donde va. La que le puso un color distinto a los viernes por la tarde y la que tiene claro lo único que de verdad importa: seguir disfrutando del fútbol en todo su esplendor.</p>
-            </div>
+      </nav>
 
-            <!--
-              Pull quote — frase que resume el proyecto.
-            -->
-            <blockquote class="project-quote">
-              <p class="project-quote__text">
-                "Una familia que se hizo equipo."
-              </p>
-              <cite class="project-quote__author">Guillermo Amieva · Real Deportivo Chicharrón</cite>
-            </blockquote>
-          </div>
+    </div><!-- /project-article -->
 
-          <!-- Columna derecha: ficha técnica + proceso -->
-          <div class="project-meta">
-
-            <span class="project-meta__label">Ficha técnica</span>
-            <ul class="project-specs" aria-label="Datos del proyecto">
-              <!--
-                ╔══════════════════════════════════════╗
-                ║  Cambia los valores según el         ║
-                ║  proyecto. Mantén pares de items.    ║
-                ╚══════════════════════════════════════╝
-              -->
-              <li class="project-specs__item">
-                <span class="project-specs__key">Cliente</span>
-                <span class="project-specs__val">Real Deportivo Chicharrón</span>
-              </li>
-              <li class="project-specs__item">
-                <span class="project-specs__key">Año</span>
-                <span class="project-specs__val">2024</span>
-              </li>
-              <li class="project-specs__item">
-                <span class="project-specs__key">Disciplina</span>
-                <span class="project-specs__val">Branding</span>
-              </li>
-              <li class="project-specs__item">
-                <span class="project-specs__key">Sector</span>
-                <span class="project-specs__val">Hostelería</span>
-              </li>
-              <li class="project-specs__item">
-                <span class="project-specs__key">Herramientas</span>
-                <span class="project-specs__val">Illustrator · Photoshop</span>
-              </li>
-              <li class="project-specs__item">
-                <span class="project-specs__key">Entregables</span>
-                <span class="project-specs__val">Logo · Papelería · Signage</span>
-              </li>
-            </ul>
-
-            <span class="project-meta__label">Proceso</span>
-            <ol class="process-steps" aria-label="Etapas del proceso creativo">
-              <!--
-                ╔══════════════════════════════════════╗
-                ║  Describe las fases reales de tu     ║
-                ║  proceso para este proyecto.         ║
-                ╚══════════════════════════════════════╝
-              -->
-              <li class="process-step">
-                <span class="process-step__num" aria-hidden="true">01</span>
-                <div>
-                  <h2 class="process-step__title">Briefing y análisis</h2>
-                  <p class="process-step__desc">Estudio del sector, competencia local y valores de marca que el cliente quería proyectar.</p>
-                </div>
-              </li>
-              <li class="process-step">
-                <span class="process-step__num" aria-hidden="true">02</span>
-                <div>
-                  <h2 class="process-step__title">Conceptualización</h2>
-                  <p class="process-step__desc">Exploración de territorios visuales. Bocetos a mano de tres direcciones de diseño distintas.</p>
-                </div>
-              </li>
-              <li class="process-step">
-                <span class="process-step__num" aria-hidden="true">03</span>
-                <div>
-                  <h2 class="process-step__title">Diseño y refinamiento</h2>
-                  <p class="process-step__desc">Desarrollo digital de la dirección elegida. Ajuste de proporciones, tipografía y paleta cromática.</p>
-                </div>
-              </li>
-              <li class="process-step">
-                <span class="process-step__num" aria-hidden="true">04</span>
-                <div>
-                  <h2 class="process-step__title">Aplicaciones y entrega</h2>
-                  <p class="process-step__desc">Maquetación de papelería corporativa, señalética y guía de marca en formato PDF.</p>
-                </div>
-              </li>
-            </ol>
-
-          </div>
-        </section>
-
-
-        <!-- ── GALERÍA ── -->
-        <section class="project-gallery reveal reveal--delay-1" aria-labelledby="gallery-heading">
-
-          <h2 class="gallery-label" id="gallery-heading">Galería</h2>
-
-          <!--
-            ╔═══════════════════════════════════════════╗
-            ║  ESTRUCTURA DE LA GALERÍA                ║
-            ║                                          ║
-            ║  Clases de tamaño:                       ║
-            ║    (sin clase)   → 1 columna, 1 fila     ║
-            ║    .img--wide    → 2 columnas            ║
-            ║    .img--tall    → 2 filas               ║
-            ║    .img--full    → 3 columnas            ║
-            ║                                          ║
-            ║  data-full: ruta a imagen alta res.      ║
-            ║  para el lightbox. Omite si es la misma.║
-            ╚═══════════════════════════════════════════╝
-          -->
-          <div class="gallery-grid">
-
-            <figure class="gallery-item img--wide">
-              <img src="../assets/proyectos/reyemar-01.jpg"
-                   alt="Logotipo Apartamentos Reyemar sobre fondo oscuro"
-                   width="900" height="320" loading="lazy">
-              <figcaption class="gallery-item__caption">Logotipo principal</figcaption>
-            </figure>
-
-            <figure class="gallery-item img--tall">
-              <img src="../assets/proyectos/reyemar-02.jpg"
-                   alt="Aplicación del logotipo sobre fondo carmín"
-                   width="450" height="640" loading="lazy">
-              <figcaption class="gallery-item__caption">Variante negativa</figcaption>
-            </figure>
-
-            <figure class="gallery-item">
-              <img src="../assets/proyectos/reyemar-03.jpg"
-                   alt="Tarjeta de visita corporativa"
-                   width="450" height="320" loading="lazy">
-              <figcaption class="gallery-item__caption">Tarjeta de visita</figcaption>
-            </figure>
-
-            <figure class="gallery-item">
-              <img src="../assets/proyectos/reyemar-04.jpg"
-                   alt="Taza con logotipo bordado"
-                   width="450" height="320" loading="lazy">
-              <figcaption class="gallery-item__caption">Merchandising</figcaption>
-            </figure>
-
-            <figure class="gallery-item img--full">
-              <img src="../assets/proyectos/reyemar-05.jpg"
-                   alt="Mockup completo de la identidad corporativa"
-                   width="1200" height="320" loading="lazy">
-              <figcaption class="gallery-item__caption">Sistema de identidad completo</figcaption>
-            </figure>
-
-          </div>
-        </section>
-
-      </div><!-- /project-body -->
-
-    </article>
-
-
-    <!-- ── NAVEGACIÓN ANTERIOR · SIGUIENTE ── -->
-    <!--
-      ╔═════════════════════════════════════════════╗
-      ║  Cambia href, data-thumb, nombre y          ║
-      ║  categoría según el orden real de proyectos ║
-      ╚═════════════════════════════════════════════╝
-    -->
-    <nav class="project-nav" aria-label="Navegación entre proyectos">
-
-      <a class="project-nav__item project-nav__item--prev"
-         href="al-alba-chill.html"
-         style="--thumb: url('../assets/proyectos/al-alba.jpg')">
-        <span class="project-nav__dir">
-          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M13 8H3M7 12l-4-4 4-4"/>
-          </svg>
-          Anterior
-        </span>
-        <span class="project-nav__name">Al Alba Chill</span>
-        <span class="project-nav__category">Social Media</span>
-      </a>
-
-      <a class="project-nav__item project-nav__item--next"
-         href="de-paso.html"
-         style="--thumb: url('../assets/proyectos/de-paso.jpg')">
-        <span class="project-nav__dir">
-          Siguiente
-          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M3 8h10M9 4l4 4-4 4"/>
-          </svg>
-        </span>
-        <span class="project-nav__name">De Paso</span>
-        <span class="project-nav__category">Branding</span>
-      </a>
-
-    </nav>
-
+  </article>
   </main>
 
 
   <!-- ── LIGHTBOX ── -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de imagen">
+  <div class="lightbox" id="lightbox"
+       role="dialog" aria-modal="true"
+       aria-label="Visualizador de imágenes">
+
     <button class="lightbox__close" id="lbClose" aria-label="Cerrar">
-      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M4 4l8 8M12 4l-8 8"/>
-      </svg>
+      <svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg>
     </button>
-    <button class="lightbox__nav lightbox__prev" id="lbPrev" aria-label="Imagen anterior">
-      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M10 3L5 8l5 5"/>
-      </svg>
-    </button>
-    <img class="lightbox__img" id="lbImg" src="" alt="">
-    <button class="lightbox__nav lightbox__next" id="lbNext" aria-label="Imagen siguiente">
-      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M6 3l5 5-5 5"/>
-      </svg>
-    </button>
+
+    <div class="lightbox__stage">
+      <button class="lightbox__nav lightbox__prev" id="lbPrev" aria-label="Imagen anterior">
+        <svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg>
+      </button>
+      <img class="lightbox__img" id="lbImg" src="" alt="">
+      <button class="lightbox__nav lightbox__next" id="lbNext" aria-label="Imagen siguiente">
+        <svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg>
+      </button>
+    </div>
+
+    <div class="lightbox__thumbs" id="lbThumbs" role="list" aria-label="Miniaturas"></div>
     <span class="lightbox__counter" id="lbCounter" aria-live="polite"></span>
+
   </div>
 
 
@@ -365,7 +1107,125 @@
   </footer>
 
 
-  <script src="proyecto.js" defer></script>
+  <script>
+    /* ══════════════════════════════════════
+       VIEW TRANSITION — conecta hero con tarjeta
+    ══════════════════════════════════════ */
+    const slug    = document.body.dataset.slug;
+    const heroImg = document.querySelector('.project-hero__img');
+    if (slug && heroImg) heroImg.style.viewTransitionName = `project-${slug}`;
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+
+    /* ══════════════════════════════════════
+       REVEAL AL SCROLL
+    ══════════════════════════════════════ */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.07 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+
+    /* ══════════════════════════════════════
+       LIGHTBOX + SLIDER
+    ══════════════════════════════════════ */
+    const lightbox   = document.getElementById('lightbox');
+    const lbImg      = document.getElementById('lbImg');
+    const lbCounter  = document.getElementById('lbCounter');
+    const lbThumbs   = document.getElementById('lbThumbs');
+    const galleryImgs = [...document.querySelectorAll('.gallery-item img')];
+    let current = 0;
+
+    /* Construye los thumbnails una sola vez */
+    galleryImgs.forEach((img, i) => {
+      const thumb = document.createElement('button');
+      thumb.className = 'lightbox__thumb' + (i === 0 ? ' active' : '');
+      thumb.setAttribute('role', 'listitem');
+      thumb.setAttribute('aria-label', img.alt || `Imagen ${i + 1}`);
+      thumb.innerHTML = `<img src="${img.src}" alt="" aria-hidden="true">`;
+      thumb.addEventListener('click', () => goTo(i));
+      lbThumbs.appendChild(thumb);
+    });
+
+    function updateLightbox() {
+      const img = galleryImgs[current];
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCounter.textContent = `${current + 1} / ${galleryImgs.length}`;
+
+      /* Actualiza thumbnail activo */
+      [...lbThumbs.children].forEach((t, i) => {
+        t.classList.toggle('active', i === current);
+      });
+
+      /* Scroll al thumb activo */
+      const activeThumb = lbThumbs.children[current];
+      if (activeThumb) {
+        activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
+    function goTo(idx, animate = true) {
+      current = (idx + galleryImgs.length) % galleryImgs.length;
+      if (animate) {
+        lbImg.classList.add('switching');
+        setTimeout(() => {
+          updateLightbox();
+          lbImg.classList.remove('switching');
+        }, 200);
+      } else {
+        updateLightbox();
+      }
+    }
+
+    function openLightbox(idx) {
+      goTo(idx, false);
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lbClose').focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* Abrir al clic en galería */
+    document.querySelectorAll('.gallery-item').forEach((item, i) => {
+      item.addEventListener('click', () => openLightbox(i));
+    });
+
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    document.getElementById('lbPrev').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('lbNext').addEventListener('click', () => goTo(current + 1));
+
+    /* Teclado y swipe */
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape')     closeLightbox();
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+    /* Swipe táctil */
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    });
+  </script>
 
 </body>
 </html>
