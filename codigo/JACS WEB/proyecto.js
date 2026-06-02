@@ -1,12 +1,9 @@
 /* ══════════════════════════════════════
-   VIEW TRANSITION — conecta la imagen hero
-   con la tarjeta del grid usando el slug
+   VIEW TRANSITION — conecta hero con tarjeta
 ══════════════════════════════════════ */
 const slug    = document.body.dataset.slug;
 const heroImg = document.querySelector('.project-hero__img');
-if (slug && heroImg) {
-  heroImg.style.viewTransitionName = `project-${slug}`;
-}
+if (slug && heroImg) heroImg.style.viewTransitionName = `project-${slug}`;
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -14,7 +11,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
 /* ══════════════════════════════════════
    REVEAL AL SCROLL
 ══════════════════════════════════════ */
-const revealEls = document.querySelectorAll('.reveal');
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -22,26 +18,65 @@ const revealObs = new IntersectionObserver((entries) => {
       revealObs.unobserve(e.target);
     }
   });
-}, { threshold: 0.08 });
+}, { threshold: 0.07 });
 
-revealEls.forEach(el => revealObs.observe(el));
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
 
 /* ══════════════════════════════════════
-   LIGHTBOX
+   LIGHTBOX + SLIDER
 ══════════════════════════════════════ */
 const lightbox    = document.getElementById('lightbox');
 const lbImg       = document.getElementById('lbImg');
 const lbCounter   = document.getElementById('lbCounter');
+const lbThumbs    = document.getElementById('lbThumbs');
 const galleryImgs = [...document.querySelectorAll('.gallery-item img')];
-let currentIdx    = 0;
+let current = 0;
+
+/* Construye los thumbnails una sola vez */
+galleryImgs.forEach((img, i) => {
+  const thumb = document.createElement('button');
+  thumb.className = 'lightbox__thumb' + (i === 0 ? ' active' : '');
+  thumb.setAttribute('role', 'listitem');
+  thumb.setAttribute('aria-label', img.alt || `Imagen ${i + 1}`);
+  thumb.innerHTML = `<img src="${img.src}" alt="" aria-hidden="true">`;
+  thumb.addEventListener('click', () => goTo(i));
+  lbThumbs.appendChild(thumb);
+});
+
+function updateLightbox() {
+  const img = galleryImgs[current];
+  lbImg.src = img.src;
+  lbImg.alt = img.alt;
+  lbCounter.textContent = `${current + 1} / ${galleryImgs.length}`;
+
+  /* Actualiza thumbnail activo */
+  [...lbThumbs.children].forEach((t, i) => {
+    t.classList.toggle('active', i === current);
+  });
+
+  /* Scroll al thumb activo */
+  const activeThumb = lbThumbs.children[current];
+  if (activeThumb) {
+    activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+}
+
+function goTo(idx, animate = true) {
+  current = (idx + galleryImgs.length) % galleryImgs.length;
+  if (animate) {
+    lbImg.classList.add('switching');
+    setTimeout(() => {
+      updateLightbox();
+      lbImg.classList.remove('switching');
+    }, 200);
+  } else {
+    updateLightbox();
+  }
+}
 
 function openLightbox(idx) {
-  currentIdx = idx;
-  const img  = galleryImgs[idx];
-  lbImg.src  = img.dataset.full || img.src;
-  lbImg.alt  = img.alt;
-  lbCounter.textContent = `${idx + 1} / ${galleryImgs.length}`;
+  goTo(idx, false);
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';
   document.getElementById('lbClose').focus();
@@ -52,26 +87,31 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 
-function navigate(dir) {
-  currentIdx = (currentIdx + dir + galleryImgs.length) % galleryImgs.length;
-  const img  = galleryImgs[currentIdx];
-  lbImg.src  = img.dataset.full || img.src;
-  lbImg.alt  = img.alt;
-  lbCounter.textContent = `${currentIdx + 1} / ${galleryImgs.length}`;
-}
-
+/* Abrir al clic en galería */
 document.querySelectorAll('.gallery-item').forEach((item, i) => {
   item.addEventListener('click', () => openLightbox(i));
 });
 
 document.getElementById('lbClose').addEventListener('click', closeLightbox);
-document.getElementById('lbPrev').addEventListener('click', () => navigate(-1));
-document.getElementById('lbNext').addEventListener('click', () => navigate(1));
+document.getElementById('lbPrev').addEventListener('click', () => goTo(current - 1));
+document.getElementById('lbNext').addEventListener('click', () => goTo(current + 1));
 
-lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+/* Teclado y swipe */
 document.addEventListener('keydown', e => {
   if (!lightbox.classList.contains('open')) return;
   if (e.key === 'Escape')     closeLightbox();
-  if (e.key === 'ArrowLeft')  navigate(-1);
-  if (e.key === 'ArrowRight') navigate(1);
+  if (e.key === 'ArrowLeft')  goTo(current - 1);
+  if (e.key === 'ArrowRight') goTo(current + 1);
+});
+
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+/* Swipe táctil */
+let touchStartX = 0;
+lightbox.addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+}, { passive: true });
+lightbox.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
 });
