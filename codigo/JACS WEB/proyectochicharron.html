@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,8 @@
     • data-slug en <body>
   -->
   <title>Apartamentos Reyemar — JACS Portfolio</title>
-  <meta name="description" content="Identidad visual completa para Apartamentos Reyemar: logotipo, paleta cromática, papelería y aplicaciones de marca.">
+  <meta name="description"
+    content="Identidad visual completa para Apartamentos Reyemar: logotipo, paleta cromática, papelería y aplicaciones de marca.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,11 +29,10 @@
 
   <header>
     <nav class="site-nav" aria-label="Navegación principal">
-      <a class="site-nav__logo" href="../index.html"
-         aria-label="Inicio — José Antonio Cruz Segura">JACS</a>
+      <a class="site-nav__logo" href="../index.html" aria-label="Inicio — José Antonio Cruz Segura">JACS</a>
       <a class="site-nav__back" href="../index.html#proyectos">
         <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M13 8H3M7 12l-4-4 4-4"/>
+          <path d="M13 8H3M7 12l-4-4 4-4" />
         </svg>
         <span>Proyectos</span>
       </a>
@@ -40,409 +41,376 @@
 
 
   <main id="main-content">
-  <article aria-labelledby="project-title">
+    <article aria-labelledby="project-title">
 
 
-    <!-- ══════════════════════════════════════
+      <!-- ══════════════════════════════════════
          1 · HERO — imagen a pantalla completa
     ══════════════════════════════════════ -->
-    <section class="project-hero" aria-label="Imagen principal del proyecto">
+      <section class="project-hero" aria-label="Imagen principal del proyecto">
 
-      <!--
+        <!--
         Imagen hero: misma que en la tarjeta del grid.
         fetchpriority="high" para mejorar el LCP.
       -->
-      <img
-        class="project-hero__img"
-        src="proyectos/portadachicharron1920x1080.jpg"
-        alt="Identidad visual Real Deportivo Chicharrón"
-        width="1920" height="1080"
-        fetchpriority="high"
-      >
+        <img class="project-hero__img" src="proyectos/portadachicharron1920x1080.jpg"
+          alt="Identidad visual Real Deportivo Chicharrón" width="1920" height="1080" fetchpriority="high">
 
-      <!--
+        <!--
         Logo del cliente como marca de agua.
         Usa mix-blend-mode:screen para que el color
         del logo brille sobre el marino sin tapar el título.
         Cambia src por el logo real de cada proyecto.
       -->
-      <img
-        class="project-hero__brand-bg"
-        src="proyectos/logochicharron.svg"
-        alt="" aria-hidden="true"
-        width="500" height="200"
-      >
+        <img class="project-hero__brand-bg" src="proyectos/logochicharron.svg" alt="" aria-hidden="true" width="500"
+          height="200">
 
-      <div class="project-hero__overlay" aria-hidden="true"></div>
+        <div class="project-hero__overlay" aria-hidden="true"></div>
 
-      <div class="project-hero__content">
-        <div>
-          <span class="project-hero__eyebrow">Branding · Identidad Visual</span>
-          <h1 class="project-hero__title" id="project-title">
-            Real Deportivo<br>Chicharrón
-          </h1>
-        </div>
-        <div class="project-hero__scroll" aria-hidden="true">
-          <span>Scroll</span>
-          <span class="project-hero__scroll-line"></span>
-        </div>
-      </div>
-
-    </section>
-
-
-    <!-- ══════════════════════════════════════
-         2 · TEXTO INTRODUCTORIO
-         Lead grande + párrafos de contexto
-    ══════════════════════════════════════ -->
-    <div class="project-article">
-
-      <div class="prose block--loose reveal">
-
-        <div class="section-index" aria-hidden="true">
-          <span class="section-index__num">01</span>
-          <span class="section-index__line"></span>
-          <span class="section-index__label">El encargo</span>
-        </div>
-
-        <!--
-          Lead: frase que resume la esencia del proyecto.
-          El <em> se muestra en acento azul.
-        -->
-        <p class="lead block--tight">
-          Una marca que transmitiera la <em>calidez y distinción</em>
-          de un alojamiento con raíces en el sur.
-        </p>
-
-        <!--
-          Cuerpo: 2–3 párrafos explicando el contexto,
-          el reto y el punto de partida.
-        -->
-        <p class="body-text">
-          Apartamentos Reyemar necesitaba construir su identidad visual desde cero.
-          Sin marca previa, con un local de carácter y una oferta turística diferenciada
-          en la zona. El reto era trasladar la personalidad del espacio —materiales nobles,
-          atención al detalle, hospitalidad con raíces andaluzas— a un sistema gráfico
-          coherente y aplicable en todos los soportes.
-        </p>
-        <p class="body-text">
-          El punto de partida fue el propio entorno arquitectónico: la tosca,
-          el hierro forjado y la cerámica local dictaron la paleta cromática.
-          El carmín elegido (#801629) dialoga directamente con los materiales
-          del edificio. La tipografía serif refuerza la sensación de hospitalidad
-          con tradición.
-        </p>
-
-      </div>
-
-
-      <!-- ══════════════════════════════════════
-           3 · PRIMERA IMAGEN EDITORIAL
-           Wide · ratio 16/9
-      ══════════════════════════════════════ -->
-      <div class="wide block reveal">
-        <div class="img-editorial">
-          <!--
-            Imagen panorámica del proyecto: mockup principal,
-            presentación del logo, o pieza más representativa.
-          -->
-          <img
-            src="proyectos\chicharron-01.jpg"
-            alt="Logotipo principal Real Deportivo Chicharrón sobre fondo oscuro"
-            width="1060" height="596"
-            loading="lazy"
-          >
-        </div>
-        <p class="img-caption prose">Logotipo principal — versión sobre fondo oscuro</p>
-      </div>
-
-
-      <!-- ══════════════════════════════════════
-           4 · BLOQUE OFFSET: imagen + texto
-           Imagen izquierda, texto descriptivo derecha
-      ══════════════════════════════════════ -->
-      <div class="wide block--loose reveal">
-        <div class="img-offset">
-
+        <div class="project-hero__content">
           <div>
-            <div class="img-editorial img-editorial--tall">
-              <img
-                src="../assets/proyectos/reyemar-02.jpg"
-                alt="Aplicación del logotipo sobre fondo carmín"
-                width="600" height="750"
-                loading="lazy"
-              >
-            </div>
+            <span class="project-hero__eyebrow">Branding · Identidad Visual</span>
+            <h1 class="project-hero__title" id="project-title">
+              Real Deportivo<br>Chicharrón
+            </h1>
           </div>
-
-          <div class="img-offset__text">
-            <!--
-              Aquí va el texto que explica esta fase del proyecto:
-              proceso de conceptualización, decisiones de diseño,
-              por qué se eligió este camino visual.
-            -->
-            <p class="body-text">
-              La dirección de diseño se centró en tres principios: legibilidad
-              a cualquier escala, versatilidad de aplicación y conexión emocional
-              con el lugar. Se exploraron cinco territorios visuales antes de
-              fijar el definitivo.
-            </p>
-            <p class="body-text">
-              El monograma RM parte de la arquitectura del edificio: sus proporciones
-              evocan el arco de la entrada principal. Cada trazo tiene un origen,
-              no es decoración: es narrativa visual.
-            </p>
-
-            <!--
-              Pull quote: frase clave del proceso o del cliente.
-              Puede venir del briefing, de una reunión o de
-              una decisión de diseño relevante.
-            -->
-            <blockquote class="pull-quote">
-              <p class="pull-quote__text">
-                "El logo tiene que parecer que siempre ha estado ahí."
-              </p>
-              <cite class="pull-quote__cite">Briefing inicial · Cliente</cite>
-            </blockquote>
+          <div class="project-hero__scroll" aria-hidden="true">
+            <span>Scroll</span>
+            <span class="project-hero__scroll-line"></span>
           </div>
-
-        </div>
-      </div>
-
-
-      <!-- ══════════════════════════════════════
-           5 · DATOS CLAVE DEL PROYECTO
-           Año, cliente, disciplina, herramientas
-      ══════════════════════════════════════ -->
-      <div class="prose block reveal">
-        <dl class="data-strip" aria-label="Ficha del proyecto">
-          <div class="data-item">
-            <dt class="data-item__key">Cliente</dt>
-            <dd class="data-item__val">Apartamentos Reyemar</dd>
-          </div>
-          <div class="data-item">
-            <dt class="data-item__key">Año</dt>
-            <dd class="data-item__val"><time datetime="2024">2024</time></dd>
-          </div>
-          <div class="data-item">
-            <dt class="data-item__key">Disciplina</dt>
-            <dd class="data-item__val">Branding · Identidad Visual</dd>
-          </div>
-          <div class="data-item">
-            <dt class="data-item__key">Herramientas</dt>
-            <dd class="data-item__val">Illustrator · Photoshop</dd>
-          </div>
-          <div class="data-item">
-            <dt class="data-item__key">Entregables</dt>
-            <dd class="data-item__val">Logo · Papelería · Signage · Guía</dd>
-          </div>
-        </dl>
-      </div>
-
-
-      <!-- ══════════════════════════════════════
-           6 · DÚO DE IMÁGENES
-           Dos imágenes en paralelo, formato vertical
-      ══════════════════════════════════════ -->
-      <div class="wide block reveal">
-        <div class="img-duo">
-
-          <div>
-            <div class="img-editorial">
-              <img
-                src="../assets/proyectos/reyemar-03.jpg"
-                alt="Tarjeta de visita corporativa"
-                width="530" height="530"
-                loading="lazy"
-              >
-            </div>
-            <p class="img-caption">Tarjeta de visita</p>
-          </div>
-
-          <div>
-            <div class="img-editorial">
-              <img
-                src="../assets/proyectos/reyemar-04.jpg"
-                alt="Taza con logotipo bordado"
-                width="530" height="530"
-                loading="lazy"
-              >
-            </div>
-            <p class="img-caption">Merchandising · Taza</p>
-          </div>
-
-        </div>
-      </div>
-
-
-      <!-- ══════════════════════════════════════
-           7 · BLOQUE OFFSET INVERTIDO
-           Texto izquierda, imagen derecha
-      ══════════════════════════════════════ -->
-      <div class="wide block--loose reveal">
-        <div class="img-offset img-offset--reverse">
-
-          <div>
-            <div class="img-editorial img-editorial--tall">
-              <img
-                src="../assets/proyectos/reyemar-05.jpg"
-                alt="Papelería corporativa completa"
-                width="600" height="750"
-                loading="lazy"
-              >
-            </div>
-          </div>
-
-          <div class="img-offset__text">
-            <p class="body-text">
-              El sistema de papelería se diseñó pensando en la impresión offset
-              y en la reproducción digital. Cada pieza mantiene los mismos márgenes,
-              la misma jerarquía tipográfica y la misma paleta, garantizando
-              coherencia independientemente del soporte.
-            </p>
-            <p class="body-text">
-              La guía de marca entregada al cliente incluye normas de uso del logo,
-              paleta de colores en HEX, CMYK, RGB y Pantone, especificaciones
-              tipográficas y ejemplos de aplicación correcta e incorrecta.
-            </p>
-          </div>
-
-        </div>
-      </div>
-
-
-      <!-- ══════════════════════════════════════
-           8 · IMAGEN A SANGRE — full width
-           Cierre visual antes de la galería
-      ══════════════════════════════════════ -->
-      <div class="full block reveal">
-        <div class="img-editorial img-editorial--short" style="border-radius:0;border-left:none;border-right:none;">
-          <img
-            src="../assets/proyectos/reyemar-06.jpg"
-            alt="Mockup completo de la identidad visual en contexto real"
-            width="1920" height="823"
-            loading="lazy"
-          >
-        </div>
-      </div>
-
-
-      <!-- ══════════════════════════════════════
-           9 · GALERÍA FINAL
-           Grid bento + lightbox con slider
-      ══════════════════════════════════════ -->
-      <section class="gallery-section" aria-labelledby="gallery-heading">
-
-        <div class="section-index wide reveal">
-          <span class="section-index__num" aria-hidden="true">02</span>
-          <span class="section-index__line" aria-hidden="true"></span>
-          <span class="section-index__label" id="gallery-heading">Galería</span>
-        </div>
-
-        <!--
-          Clases de celda:
-            (sin clase)    → 1 columna, 1 fila
-            .img--wide     → 2 columnas
-            .img--tall     → 2 filas
-            .img--full     → 3 columnas
-        -->
-        <div class="gallery-grid reveal">
-
-          <figure class="gallery-item img--wide" tabindex="0">
-            <img src="../assets/proyectos/reyemar-g1.jpg"
-                 alt="Sistema de identidad completo"
-                 width="900" height="300" loading="lazy">
-            <figcaption>Sistema de identidad</figcaption>
-          </figure>
-
-          <figure class="gallery-item img--tall" tabindex="0">
-            <img src="../assets/proyectos/reyemar-g2.jpg"
-                 alt="Cartelería exterior"
-                 width="450" height="600" loading="lazy">
-            <figcaption>Cartelería</figcaption>
-          </figure>
-
-          <figure class="gallery-item" tabindex="0">
-            <img src="../assets/proyectos/reyemar-g3.jpg"
-                 alt="Toalla con logo bordado"
-                 width="450" height="300" loading="lazy">
-            <figcaption>Toalla</figcaption>
-          </figure>
-
-          <figure class="gallery-item" tabindex="0">
-            <img src="../assets/proyectos/reyemar-g4.jpg"
-                 alt="Placa de identificación"
-                 width="450" height="300" loading="lazy">
-            <figcaption>Placa identificación</figcaption>
-          </figure>
-
-          <figure class="gallery-item img--full" tabindex="0">
-            <img src="../assets/proyectos/reyemar-g5.jpg"
-                 alt="Presentación general de la marca"
-                 width="1200" height="300" loading="lazy">
-            <figcaption>Presentación de marca</figcaption>
-          </figure>
-
         </div>
 
       </section>
 
 
       <!-- ══════════════════════════════════════
+         2 · TEXTO INTRODUCTORIO
+         Lead grande + párrafos de contexto
+    ══════════════════════════════════════ -->
+      <div class="project-article">
+
+        <div class="prose block--loose reveal">
+
+          <div class="section-index" aria-hidden="true">
+            <span class="section-index__num">01</span>
+            <span class="section-index__line"></span>
+            <span class="section-index__label">contexto</span>
+          </div>
+
+          <!--
+          Lead: frase que resume la esencia del proyecto.
+          El <em> se muestra en acento azul.
+        -->
+          <p class="lead block--tight">
+            Diseñar la <em>identidad de un equipo</em>
+            que empezó entre <em>cervezas</em> y <em>chicharrones</em>.
+          </p>
+
+          <!--
+          Cuerpo: 2–3 párrafos explicando el contexto,
+          el reto y el punto de partida.
+        -->
+          <p class="body-text">
+            El Real Deportivo Chicharrón nació una noche entre cervezas y chicharrones, cuando unos amigos que se habían
+            conocido en la Escuela de Fútbol del Atco. Algabeño decidieron buscar su hueco en la Liga Chichos, una
+            competición que lleva más de veinte años disputándose en la localidad. No buscaban gloria: buscaban un sitio
+            donde revivir la pasión que los unía de chicos y un motivo más para reunirse cada viernes.
+          </p>
+          <p class="body-text">
+            El reto era traducir todo eso a una identidad visual. No querían un escudo que hablara de trofeos, sino uno
+            que representara su manera de vivir el fútbol: la tarde de partido y la cerveza de después, la que se
+            levanta entre cánticos cuando se gana o ayuda a tragar la derrota cuando toca perder. Necesitaban una imagen
+            familiar, cercana y con personalidad, capaz de funcionar tanto en una camiseta como en una celebración.
+          </p>
+          <p class="body-text">
+            El punto de partida fue un homenaje cariñoso al fútbol de siempre. Tomé el lenguaje clásico de un club
+            histórico —la corona, el círculo y la flecha— y lo reescribí por completo con el ADN del equipo: la flecha
+            se viste de marrón chicharrón, los propios chicharrones se integran como emblema y un sello "Desde 2023"
+            sella el origen de todo. Un escudo que cuenta su historia con solo mirarlo.
+          </p>
+
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           3 · PRIMERA IMAGEN EDITORIAL
+           Wide · ratio 16/9
+      ══════════════════════════════════════ -->
+        <div class="wide block reveal">
+          <div class="img-editorial">
+            <!--
+            Imagen panorámica del proyecto: mockup principal,
+            presentación del logo, o pieza más representativa.
+          -->
+            <img src="proyectos\chicharron-01.jpg" alt="Logotipo principal Real Deportivo Chicharrón sobre fondo oscuro"
+              width="1060" height="596" loading="lazy">
+          </div>
+          <p class="img-caption prose">Logotipo principal — versión sobre fondo oscuro</p>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           4 · BLOQUE OFFSET: imagen + texto
+           Imagen izquierda, texto descriptivo derecha
+      ══════════════════════════════════════ -->
+        <div class="wide block--loose reveal">
+          <div class="img-offset">
+
+            <div>
+              <div class="img-editorial img-editorial--tall">
+                <img src="../assets/proyectos/reyemar-02.jpg" alt="Bocetos de diseño del logotipo, mostrando el proceso de conceptualización"
+                  width="600" height="750" loading="lazy">
+              </div>
+            </div>
+
+            <div class="img-offset__text">
+              <!--
+              Aquí va el texto que explica esta fase del proyecto:
+              proceso de conceptualización, decisiones de diseño,
+              por qué se eligió este camino visual.
+            -->
+              <p class="body-text">
+                Para la elaboración del escudo, se ha tenido en cuenta algunos elementos visuales: La corona
+                (representando la Torre de los Guzmanes, un monumento emblemático de la ciudad), el círculo
+                (simbolizando la unidad y la comunidad del equipo), chapa de botellín (cerveza post-partido) y la flecha
+                (que representa un cono de chicharrones).
+              </p>
+              <p class="body-text">
+                Estos elementos se han reinterpretado para crear una identidad
+                visual única que refleje la esencia del Real Deportivo Chicharrón.
+              </p>
+
+              <!--
+              Pull quote: frase clave del proceso o del cliente.
+              Puede venir del briefing, de una reunión o de
+              una decisión de diseño relevante.
+            -->
+              <blockquote class="pull-quote">
+                <p class="pull-quote__text">
+                  "Todos los días sale el sol, Chicharrón"
+                </p>
+                <cite class="pull-quote__cite">Guillermo Amieva · Presidente del Equipo</cite>
+              </blockquote>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           5 · DATOS CLAVE DEL PROYECTO
+           Año, cliente, disciplina, herramientas
+      ══════════════════════════════════════ -->
+        <div class="prose block reveal">
+          <dl class="data-strip" aria-label="Ficha del proyecto">
+            <div class="data-item">
+              <dt class="data-item__key">Cliente</dt>
+              <dd class="data-item__val">Apartamentos Reyemar</dd>
+            </div>
+            <div class="data-item">
+              <dt class="data-item__key">Año</dt>
+              <dd class="data-item__val"><time datetime="2023">2023</time></dd>
+            </div>
+            <div class="data-item">
+              <dt class="data-item__key">Disciplina</dt>
+              <dd class="data-item__val">Branding · Identidad Visual · RRSS</dd>
+            </div>
+            <div class="data-item">
+              <dt class="data-item__key">Herramientas</dt>
+              <dd class="data-item__val">Illustrator · Photoshop</dd>
+            </div>
+            <div class="data-item">
+              <dt class="data-item__key">Entregables</dt>
+              <dd class="data-item__val">Guía de marca · Equipaciones · Cartelería · Fotografías</dd>
+            </div>
+          </dl>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           6 · DÚO DE IMÁGENES
+           Dos imágenes en paralelo, formato vertical
+      ══════════════════════════════════════ -->
+        <div class="wide block reveal">
+          <div class="img-duo">
+
+            <div>
+              <div class="img-editorial">
+                <img src="../assets/proyectos/reyemar-03.jpg" alt="Tarjeta de visita corporativa" width="530"
+                  height="530" loading="lazy">
+              </div>
+              <p class="img-caption">Tarjeta de visita</p>
+            </div>
+
+            <div>
+              <div class="img-editorial">
+                <img src="../assets/proyectos/reyemar-04.jpg" alt="Taza con logotipo bordado" width="530" height="530"
+                  loading="lazy">
+              </div>
+              <p class="img-caption">Merchandising · Taza</p>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           7 · BLOQUE OFFSET INVERTIDO
+           Texto izquierda, imagen derecha
+      ══════════════════════════════════════ -->
+        <div class="wide block--loose reveal">
+          <div class="img-offset img-offset--reverse">
+
+            <div>
+              <div class="img-editorial img-editorial--tall">
+                <img src="../assets/proyectos/reyemar-05.jpg" alt="Equipaciones" width="600"
+                  height="750" loading="lazy">
+              </div>
+            </div>
+
+            <div class="img-offset__text">
+              <p class="body-text">
+                El sistema de papelería se diseñó pensando en la impresión offset
+                y en la reproducción digital. Cada pieza mantiene los mismos márgenes,
+                la misma jerarquía tipográfica y la misma paleta, garantizando
+                coherencia independientemente del soporte.
+              </p>
+              <p class="body-text">
+                La guía de marca entregada al cliente incluye normas de uso del logo,
+                paleta de colores en HEX, CMYK, RGB y Pantone, especificaciones
+                tipográficas y ejemplos de aplicación correcta e incorrecta.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           8 · IMAGEN A SANGRE — full width
+           Cierre visual antes de la galería
+      ══════════════════════════════════════ -->
+        <div class="full block reveal">
+          <div class="img-editorial img-editorial--short" style="border-radius:0;border-left:none;border-right:none;">
+            <img src="../assets/proyectos/reyemar-06.jpg" alt="Mockup completo de la identidad visual en contexto real"
+              width="1920" height="823" loading="lazy">
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           9 · GALERÍA FINAL
+           Grid bento + lightbox con slider
+      ══════════════════════════════════════ -->
+        <section class="gallery-section" aria-labelledby="gallery-heading">
+
+          <div class="section-index wide reveal">
+            <span class="section-index__num" aria-hidden="true">02</span>
+            <span class="section-index__line" aria-hidden="true"></span>
+            <span class="section-index__label" id="gallery-heading">Galería</span>
+          </div>
+
+          <!--
+          Clases de celda:
+            (sin clase)    → 1 columna, 1 fila
+            .img--wide     → 2 columnas
+            .img--tall     → 2 filas
+            .img--full     → 3 columnas
+        -->
+          <div class="gallery-grid reveal">
+
+            <figure class="gallery-item img--wide" tabindex="0">
+              <img src="../assets/proyectos/reyemar-g1.jpg" alt="Sistema de identidad completo" width="900" height="300"
+                loading="lazy">
+              <figcaption>Sistema de identidad</figcaption>
+            </figure>
+
+            <figure class="gallery-item img--tall" tabindex="0">
+              <img src="../assets/proyectos/reyemar-g2.jpg" alt="Cartelería exterior" width="450" height="600"
+                loading="lazy">
+              <figcaption>Cartelería</figcaption>
+            </figure>
+
+            <figure class="gallery-item" tabindex="0">
+              <img src="../assets/proyectos/reyemar-g3.jpg" alt="Toalla con logo bordado" width="450" height="300"
+                loading="lazy">
+              <figcaption>Toalla</figcaption>
+            </figure>
+
+            <figure class="gallery-item" tabindex="0">
+              <img src="../assets/proyectos/reyemar-g4.jpg" alt="Placa de identificación" width="450" height="300"
+                loading="lazy">
+              <figcaption>Placa identificación</figcaption>
+            </figure>
+
+            <figure class="gallery-item img--full" tabindex="0">
+              <img src="../assets/proyectos/reyemar-g5.jpg" alt="Presentación general de la marca" width="1200"
+                height="300" loading="lazy">
+              <figcaption>Presentación de marca</figcaption>
+            </figure>
+
+          </div>
+
+        </section>
+
+
+        <!-- ══════════════════════════════════════
            NAVEGACIÓN ANTERIOR · SIGUIENTE
       ══════════════════════════════════════ -->
-      <nav class="project-nav" aria-label="Navegación entre proyectos">
+        <nav class="project-nav" aria-label="Navegación entre proyectos">
 
-        <a class="project-nav__item project-nav__item--prev"
-           href="al-alba-chill.html"
-           style="--thumb:url('../assets/proyectos/al-alba.jpg')">
-          <span class="project-nav__dir">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M13 8H3M7 12l-4-4 4-4"/>
-            </svg>
-            Anterior
-          </span>
-          <span class="project-nav__name">Al Alba Chill</span>
-          <span class="project-nav__category">Social Media</span>
-        </a>
+          <a class="project-nav__item project-nav__item--prev" href="al-alba-chill.html"
+            style="--thumb:url('../assets/proyectos/al-alba.jpg')">
+            <span class="project-nav__dir">
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M13 8H3M7 12l-4-4 4-4" />
+              </svg>
+              Anterior
+            </span>
+            <span class="project-nav__name">Al Alba Chill</span>
+            <span class="project-nav__category">Social Media</span>
+          </a>
 
-        <a class="project-nav__item project-nav__item--next"
-           href="de-paso.html"
-           style="--thumb:url('../assets/proyectos/de-paso.jpg')">
-          <span class="project-nav__dir">
-            Siguiente
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
-          </span>
-          <span class="project-nav__name">De Paso</span>
-          <span class="project-nav__category">Branding</span>
-        </a>
+          <a class="project-nav__item project-nav__item--next" href="de-paso.html"
+            style="--thumb:url('../assets/proyectos/de-paso.jpg')">
+            <span class="project-nav__dir">
+              Siguiente
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </span>
+            <span class="project-nav__name">De Paso</span>
+            <span class="project-nav__category">Branding</span>
+          </a>
 
-      </nav>
+        </nav>
 
-    </div><!-- /project-article -->
+      </div><!-- /project-article -->
 
-  </article>
+    </article>
   </main>
 
 
   <!-- ── LIGHTBOX ── -->
-  <div class="lightbox" id="lightbox"
-       role="dialog" aria-modal="true"
-       aria-label="Visualizador de imágenes">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de imágenes">
 
     <button class="lightbox__close" id="lbClose" aria-label="Cerrar">
-      <svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+      <svg viewBox="0 0 16 16">
+        <path d="M4 4l8 8M12 4l-8 8" />
+      </svg>
     </button>
 
     <div class="lightbox__stage">
       <button class="lightbox__nav lightbox__prev" id="lbPrev" aria-label="Imagen anterior">
-        <svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg>
+        <svg viewBox="0 0 16 16">
+          <path d="M10 3L5 8l5 5" />
+        </svg>
       </button>
       <img class="lightbox__img" id="lbImg" src="" alt="">
       <button class="lightbox__nav lightbox__next" id="lbNext" aria-label="Imagen siguiente">
-        <svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg>
+        <svg viewBox="0 0 16 16">
+          <path d="M6 3l5 5-5 5" />
+        </svg>
       </button>
     </div>
 
@@ -457,12 +425,13 @@
     <p class="site-footer__name">José Antonio Cruz Segura</p>
     <ul class="site-footer__links" aria-label="Perfiles profesionales">
       <li><a href="https://linkedin.com/in/TUUSUARIO" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
-      <li><a href="https://github.com/TUUSUARIO"      rel="noopener noreferrer" target="_blank">GitHub</a></li>
-      <li><a href="https://behance.net/TUUSUARIO"     rel="noopener noreferrer" target="_blank">Behance</a></li>
+      <li><a href="https://github.com/TUUSUARIO" rel="noopener noreferrer" target="_blank">GitHub</a></li>
+      <li><a href="https://behance.net/TUUSUARIO" rel="noopener noreferrer" target="_blank">Behance</a></li>
     </ul>
     <p class="site-footer__copy">
       <small>&copy; <time id="year" datetime=""></time> José Antonio Cruz Segura</small>
     </p>
   </footer>
 </body>
+
 </html>
