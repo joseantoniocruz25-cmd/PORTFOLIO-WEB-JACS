@@ -16,7 +16,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="proyecto.css">
+  <link rel="stylesheet" href="../proyecto.css">
+  <script src="../proyecto.js" defer></script>
+
 </head>
 
 <body data-slug="reyemar">
@@ -213,32 +215,28 @@
            Año, cliente, disciplina, herramientas
       ══════════════════════════════════════ -->
       <div class="prose block reveal">
-        <div class="data-strip">
-          <!--
-            Cambia los valores según el proyecto.
-            Puedes añadir o quitar data-item.
-          -->
+        <dl class="data-strip" aria-label="Ficha del proyecto">
           <div class="data-item">
-            <span class="data-item__key">Cliente</span>
-            <span class="data-item__val">Apartamentos<br>Reyemar</span>
+            <dt class="data-item__key">Cliente</dt>
+            <dd class="data-item__val">Apartamentos Reyemar</dd>
           </div>
           <div class="data-item">
-            <span class="data-item__key">Año</span>
-            <span class="data-item__val">2024</span>
+            <dt class="data-item__key">Año</dt>
+            <dd class="data-item__val"><time datetime="2024">2024</time></dd>
           </div>
           <div class="data-item">
-            <span class="data-item__key">Disciplina</span>
-            <span class="data-item__val">Branding<br>Identidad Visual</span>
+            <dt class="data-item__key">Disciplina</dt>
+            <dd class="data-item__val">Branding · Identidad Visual</dd>
           </div>
           <div class="data-item">
-            <span class="data-item__key">Herramientas</span>
-            <span class="data-item__val">Illustrator<br>Photoshop</span>
+            <dt class="data-item__key">Herramientas</dt>
+            <dd class="data-item__val">Illustrator · Photoshop</dd>
           </div>
           <div class="data-item">
-            <span class="data-item__key">Entregables</span>
-            <span class="data-item__val">Logo · Papelería<br>Signage · Guía</span>
+            <dt class="data-item__key">Entregables</dt>
+            <dd class="data-item__val">Logo · Papelería · Signage · Guía</dd>
           </div>
-        </div>
+        </dl>
       </div>
 
 
@@ -335,9 +333,9 @@
       ══════════════════════════════════════ -->
       <section class="gallery-section" aria-labelledby="gallery-heading">
 
-        <div class="section-index wide reveal" aria-hidden="true">
-          <span class="section-index__num">02</span>
-          <span class="section-index__line"></span>
+        <div class="section-index wide reveal">
+          <span class="section-index__num" aria-hidden="true">02</span>
+          <span class="section-index__line" aria-hidden="true"></span>
           <span class="section-index__label" id="gallery-heading">Galería</span>
         </div>
 
@@ -350,35 +348,35 @@
         -->
         <div class="gallery-grid reveal">
 
-          <figure class="gallery-item img--wide">
+          <figure class="gallery-item img--wide" tabindex="0">
             <img src="../assets/proyectos/reyemar-g1.jpg"
                  alt="Sistema de identidad completo"
                  width="900" height="300" loading="lazy">
             <figcaption>Sistema de identidad</figcaption>
           </figure>
 
-          <figure class="gallery-item img--tall">
+          <figure class="gallery-item img--tall" tabindex="0">
             <img src="../assets/proyectos/reyemar-g2.jpg"
                  alt="Cartelería exterior"
                  width="450" height="600" loading="lazy">
             <figcaption>Cartelería</figcaption>
           </figure>
 
-          <figure class="gallery-item">
+          <figure class="gallery-item" tabindex="0">
             <img src="../assets/proyectos/reyemar-g3.jpg"
                  alt="Toalla con logo bordado"
                  width="450" height="300" loading="lazy">
             <figcaption>Toalla</figcaption>
           </figure>
 
-          <figure class="gallery-item">
+          <figure class="gallery-item" tabindex="0">
             <img src="../assets/proyectos/reyemar-g4.jpg"
                  alt="Placa de identificación"
                  width="450" height="300" loading="lazy">
             <figcaption>Placa identificación</figcaption>
           </figure>
 
-          <figure class="gallery-item img--full">
+          <figure class="gallery-item img--full" tabindex="0">
             <img src="../assets/proyectos/reyemar-g5.jpg"
                  alt="Presentación general de la marca"
                  width="1200" height="300" loading="lazy">
@@ -448,7 +446,7 @@
       </button>
     </div>
 
-    <div class="lightbox__thumbs" id="lbThumbs" role="list" aria-label="Miniaturas"></div>
+    <ul class="lightbox__thumbs" id="lbThumbs" aria-label="Miniaturas"></ul>
     <span class="lightbox__counter" id="lbCounter" aria-live="polite"></span>
 
   </div>
@@ -463,12 +461,8 @@
       <li><a href="https://behance.net/TUUSUARIO"     rel="noopener noreferrer" target="_blank">Behance</a></li>
     </ul>
     <p class="site-footer__copy">
-      <small>&copy; <span id="year"></span> José Antonio Cruz Segura</small>
+      <small>&copy; <time id="year" datetime=""></time> José Antonio Cruz Segura</small>
     </p>
   </footer>
-
-
-  <script src="proyecto.js" defer></script>
-
 </body>
 </html>
