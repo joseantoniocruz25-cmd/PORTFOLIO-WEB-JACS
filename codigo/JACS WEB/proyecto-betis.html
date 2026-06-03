@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--
+    Cambia por proyecto:
+    • <title>
+    • <meta name="description">
+    • data-slug en <body>
+  -->
+    <title>Peña Bética Cultural Algabeña — JACS Portfolio</title>
+    <meta name="description"
+        content="Identidad visual completa de Real Deportivo Chicharrón: logotipo, paleta cromática, personalización y aplicaciones de marca.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../proyecto-betis.css">
+    <script src="../proyecto-betis.js" defer></script>
+
+</head>
+
+<body data-slug="betis">
+
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+    <header>
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="site-nav__logo" href="../index.html" aria-label="Inicio — José Antonio Cruz Segura">JACS</a>
+            <a class="site-nav__back" href="../index.html#proyectos">
+                <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M13 8H3M7 12l-4-4 4-4" />
+                </svg>
+                <span>Proyectos</span>
+            </a>
+        </nav>
+    </header>
+
+
+    <main id="main-content">
+        <article aria-labelledby="project-title">
+
+
+            <!-- ══════════════════════════════════════
+         1 · HERO — imagen a pantalla completa
+    ══════════════════════════════════════ -->
+            <section class="project-hero" aria-label="Imagen principal del proyecto">
+
+                <!--
+        Imagen hero: misma que en la tarjeta del grid.
+        fetchpriority="high" para mejorar el LCP.
+      -->
+                <img class="project-hero__img" src="proyectos\portadabetis1920x1080.jpg"
+                    alt="Identidad visual Peña Bética Cultural Algabeña" width="1920" height="1080"
+                    fetchpriority="high">
+
+                <!--
+        Logo del cliente como marca de agua.
+        Usa mix-blend-mode:screen para que el color
+        del logo brille sobre el marino sin tapar el título.
+        Cambia src por el logo real de cada proyecto.
+      -->
+                <img class="project-hero__brand-bg" src="proyectos/logobetis.svg" alt="" aria-hidden="true" width="500"
+                    height="200">
+
+                <div class="project-hero__overlay" aria-hidden="true"></div>
+
+                <div class="project-hero__content">
+                    <div>
+                        <span class="project-hero__eyebrow">Branding · Identidad Visual</span>
+                        <h1 class="project-hero__title" id="project-title">
+                            Peña Bética<br>Cultural Algabeña
+                        </h1>
+                    </div>
+                    <div class="project-hero__scroll" aria-hidden="true">
+                        <span>Scroll</span>
+                        <span class="project-hero__scroll-line"></span>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- ══════════════════════════════════════
+         2 · TEXTO INTRODUCTORIO
+         Lead grande + párrafos de contexto
+    ══════════════════════════════════════ -->
+            <div class="project-article">
+
+                <div class="prose block--loose reveal">
+
+                    <div class="section-index" aria-hidden="true">
+                        <span class="section-index__num">01</span>
+                        <span class="section-index__line"></span>
+                        <span class="section-index__label">Contexto</span>
+                    </div>
+
+                    <!--
+          Lead: frase que resume la esencia del proyecto.
+          El <em> se muestra en acento azul.
+        -->
+                    <p class="lead block--tight">
+                        "<em>Historia verdiblanca</em> de padres a hijos. La evolución <em>visual y digital</em> de la
+                        Peña Bética Cultural Algabeña".
+                    </p>
+
+                    <!--
+          Cuerpo: 2–3 párrafos explicando el contexto,
+          el reto y el punto de partida.
+        -->
+                    <p class="body-text">
+                        Peña Cultural Bética Algabeña Faruk Hadzibegic lleva perteneciendo a la localidad de La Algaba
+                        desde 1960. Su nombre rinde homenaje al jugador que su propio nombre lleva. La identidad Visual
+                        desde entonces no se ha modificado.
+                    </p>
+                    <p class="body-text">
+                        El reto era claro: actualizar la imagen del club sin perder su esencia, creando una identidad
+                        visual que reflejara su historia y su pasión por el fútbol, pero con un enfoque moderno y
+                        atractivo para las nuevas generaciones de aficionados algabeños.
+                    </p>
+                    <p class="body-text">
+                        Para empezar con su construcción, se realizó un análisis de la historia de la Peña Cultural y
+                        todo lo que conlleva desde su fundación hasta la actualidad. Se presentaron dos propuestas muy
+                        variadas, una arriesgada y otra más conservadora, para que el cliente pudiera elegir la
+                        dirección que más le convenciera. Finalmente, se decantó por la segunda propuesta, ya que no
+                        quería perder la esencia de la Peña, sino actualizarla y darle un nuevo aire manteniendo su
+                        identidad:
+                    </p>
+
+                </div>
+
+
+                <!-- ══════════════════════════════════════
+           3 · PRIMERA IMAGEN EDITORIAL
+           Wide · ratio 16/9
+      ══════════════════════════════════════ -->
+                <div class="wide block reveal">
+                    <div class="img-editorial">
+                        <!--
+            Imagen panorámica del proyecto: mockup principal,
+            presentación del logo, o pieza más representativa.
+          -->
+                        <img src="proyectos\logobetisfondooscuro.jpg"
+                            alt="Logotipo principal Real Deportivo Chicharrón sobre fondo oscuro" width="1060"
+                            height="596" loading="lazy">
+                    </div>
+                    <p class="img-caption prose">Versión Principal — Versión Actual</p>
+                </div>
+
+
+                <!-- ══════════════════════════════════════
+           4 · BLOQUE OFFSET: imagen + texto
+           Imagen izquierda, texto descriptivo derecha
+      ══════════════════════════════════════ -->
+                <div class="wide block--loose reveal">
+                    <div class="img-offset">
+
+                        <div>
+                            <div class="img-editorial img-editorial--tall">
+                                <img src="proyectos\betisbocetoconceptos1060x596.jpg"
+                                    alt="Bocetos de diseño del logotipo, mostrando el proceso de conceptualización"
+                                    width="600" height="750" loading="lazy">
+                            </div>
+                        </div>
+
+                        <div class="img-offset__text">
+
+                            <p class="body-text">
+                                Para la elaboración del escudo, se ha tenido en cuenta algunos elementos visuales:
+                                Fachada de la peña, Torre de los Guzmanes (monumento hostórico de La Algaba), Puente de
+                                la Borbolla (monumento histórico de La Algaba), el color verde característico del equipo, Mural Conmemorativo presente en el local por el primer trofeo Centenrio del Real Betis y el Campanario de la Iglesia Ntra. Señora de las Nieves.
+                            </p>
+                            <p class="body-text">
+                                Estos elementos se han reinterpretado para crear una identidad
+                                visual única que refleje la esencia del Real Deportivo Chicharrón.
+                            </p>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- ══════════════════════════════════════
+           5 · DATOS CLAVE DEL PROYECTO
+           Año, cliente, disciplina, herramientas
+      ══════════════════════════════════════ -->
+                <div class="prose block reveal">
+                    <dl class="data-strip" aria-label="Ficha del proyecto">
+                        <div class="data-item">
+                            <dt class="data-item__key">Identidad</dt>
+                            <dd class="data-item__val">Peña Bética Faruk Hadzibegic</dd>
+                        </div>
+                        <div class="data-item">
+                            <dt class="data-item__key">Año</dt>
+                            <dd class="data-item__val"><time datetime="2023">2024</time></dd>
+                        </div>
+                        <div class="data-item">
+                            <dt class="data-item__key">Disciplina</dt>
+                            <dd class="data-item__val">Branding · Identidad Visual</dd>
+                        </div>
+                        <div class="data-item">
+                            <dt class="data-item__key">Herramientas</dt>
+                            <dd class="data-item__val">Illustrator · Photoshop</dd>
+                        </div>
+                        <div class="data-item">
+                            <dt class="data-item__key">Entregables</dt>
+                            <dd class="data-item__val">Guía de marca · Logos · Presentación · Mockups</dd>
+                        </div>
+                    </dl>
+                </div>
+
+
+                <!-- ══════════════════════════════════════
+           6 · DÚO DE IMÁGENES
+           Dos imágenes en paralelo, formato vertical
+      ══════════════════════════════════════ -->
+                <div class="wide block reveal">
+                    <div class="img-duo">
+
+                        <div>
+                            <div class="img-editorial">
+                                <img src="proyectos\betisescudo530x530.jpg"
+                                    alt="Escudo del Real Betis" width="530" height="530" loading="lazy">
+                            </div>
+                            <p class="img-caption">Escudo a Color</p>
+                        </div>
+
+                        <div>
+                            <div class="img-editorial">
+                                <img src="proyectos\betisescalagrises530x530.jpg" alt="Fotografía de la Liga Chichos"
+                                    width="530" height="530" loading="lazy">
+                            </div>
+                            <p class="img-caption">Escala de Grises</p>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+                <!-- ══════════════════════════════════════
+           9 · GALERÍA FINAL
+           Grid bento + lightbox con slider
+      ══════════════════════════════════════ -->
+                <section class="gallery-section" aria-labelledby="gallery-heading">
+
+                    <div class="section-index wide reveal">
+                        <span class="section-index__num" aria-hidden="true">02</span>
+                        <span class="section-index__line" aria-hidden="true"></span>
+                        <span class="section-index__label" id="gallery-heading">Galería</span>
+                    </div>
+
+                    <!--
+          Clases de celda:
+            (sin clase)    → 1 columna, 1 fila
+            .img--wide     → 2 columnas
+            .img--tall     → 2 filas
+            .img--full     → 3 columnas
+        -->
+                    <div class="gallery-grid reveal">
+
+                        <figure class="gallery-item img--wide" tabindex="0">
+                            <img src="proyectos\betisgaleria01.jpg" alt="Mural Centenario" width="900"
+                                height="300" loading="lazy">
+                            <figcaption>Mural Centenario</figcaption>
+                        </figure>
+
+                        <figure class="gallery-item img--tall" tabindex="0">
+                            <img src="proyectos\betisgaleria02.jpg" alt="Polo Mangas Cortas" width="450"
+                                height="600" loading="lazy">
+                            <figcaption>Polo Mangas Cortas</figcaption>
+                        </figure>
+
+                        <figure class="gallery-item" tabindex="0">
+                            <img src="proyectos\betisgaleria03.jpg" alt="Pegatinas Vinilo Adhesivo" width="450" height="300"
+                                loading="lazy">
+                            <figcaption>Pegatinas Vinilo Adhesivo</figcaption>
+                        </figure>
+
+                        <figure class="gallery-item" tabindex="0">
+                            <img src="proyectos\betisgaleria04.jpg" alt="Bolsas Regalo Socios" width="450" height="300"
+                                loading="lazy">
+                            <figcaption>Bolsas Regalo Socios</figcaption>
+                        </figure>
+
+                        <figure class="gallery-item img--tall" tabindex="0">
+                            <img src="proyectos\betisgaleria05.jpg" alt="Sudadera" width="450"
+                                height="600" loading="lazy">
+                            <figcaption>Sudadera</figcaption>
+                        </figure>
+
+                        <figure class="gallery-item img--wide" tabindex="0">
+                            <img src="proyectos\betisgaleria06.JPG" alt="Lanyard" width="900" height="300"
+                                loading="lazy">
+                            <figcaption>Lanyard</figcaption>
+                        </figure>
+
+                        <figure class="gallery-item img--wide" tabindex="0">
+                            <img src="proyectos\betisgaleria07.JPG" alt="Patrones Geométricos" width="900" height="300"
+                                loading="lazy">
+                            <figcaption>Patrones Geométricos</figcaption>
+                        </figure>
+
+                        <figure class="gallery-item img--tall" tabindex="0">
+                            <img src="proyectos\betisgaleria08.jpg" alt="Instagram" width="450"
+                                height="600" loading="lazy">
+                            <figcaption>Instagram</figcaption>
+                        </figure>
+
+                        <figure class="gallery-item img--tall" tabindex="0">
+                            <img src="proyectos\betisgaleria09.jpg" alt="Facebook" width="450" height="600"
+                                loading="lazy">
+                            <figcaption>Facebook</figcaption>
+                        </figure>
+
+                        <figure class="gallery-item img--tall" tabindex="0">
+                            <img src="proyectos\betisgaleria10.jpg" alt="Tarjeta Visita" width="450" height="600"
+                                loading="lazy">
+                            <figcaption>Tarjeta Visita</figcaption>
+                        </figure>
+
+
+                    </div>
+
+                </section>
+
+
+                <!-- ══════════════════════════════════════
+           NAVEGACIÓN ANTERIOR · SIGUIENTE
+      ══════════════════════════════════════ -->
+                <nav class="project-nav" aria-label="Navegación entre proyectos">
+
+                    <a class="project-nav__item project-nav__item--prev" href="al-alba-chill.html"
+                        style="--thumb:url('../assets/proyectos/al-alba.jpg')">
+                        <span class="project-nav__dir">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M13 8H3M7 12l-4-4 4-4" />
+                            </svg>
+                            Anterior
+                        </span>
+                        <span class="project-nav__name">Al Alba Chill</span>
+                        <span class="project-nav__category">Social Media</span>
+                    </a>
+
+                    <a class="project-nav__item project-nav__item--next" href="de-paso.html"
+                        style="--thumb:url('../assets/proyectos/de-paso.jpg')">
+                        <span class="project-nav__dir">
+                            Siguiente
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M3 8h10M9 4l4 4-4 4" />
+                            </svg>
+                        </span>
+                        <span class="project-nav__name">De Paso</span>
+                        <span class="project-nav__category">Branding</span>
+                    </a>
+
+                </nav>
+
+            </div><!-- /project-article -->
+
+        </article>
+    </main>
+
+
+    <!-- ── LIGHTBOX ── -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de imágenes">
+
+        <button class="lightbox__close" id="lbClose" aria-label="Cerrar">
+            <svg viewBox="0 0 16 16">
+                <path d="M4 4l8 8M12 4l-8 8" />
+            </svg>
+        </button>
+
+        <div class="lightbox__stage">
+            <button class="lightbox__nav lightbox__prev" id="lbPrev" aria-label="Imagen anterior">
+                <svg viewBox="0 0 16 16">
+                    <path d="M10 3L5 8l5 5" />
+                </svg>
+            </button>
+            <img class="lightbox__img" id="lbImg" src="" alt="">
+            <button class="lightbox__nav lightbox__next" id="lbNext" aria-label="Imagen siguiente">
+                <svg viewBox="0 0 16 16">
+                    <path d="M6 3l5 5-5 5" />
+                </svg>
+            </button>
+        </div>
+
+        <ul class="lightbox__thumbs" id="lbThumbs" aria-label="Miniaturas"></ul>
+        <span class="lightbox__counter" id="lbCounter" aria-live="polite"></span>
+
+    </div>
+
+
+    <!-- ── FOOTER ── -->
+    <footer class="site-footer" role="contentinfo">
+        <p class="site-footer__name">José Antonio Cruz Segura</p>
+        <ul class="site-footer__links" aria-label="Perfiles profesionales">
+            <li><a href="https://linkedin.com/in/TUUSUARIO" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
+            <li><a href="https://github.com/TUUSUARIO" rel="noopener noreferrer" target="_blank">GitHub</a></li>
+            <li><a href="https://instagram.com/TUUSUARIO" rel="noopener noreferrer" target="_blank">Instagram</a></li>
+        </ul>
+        <p class="site-footer__copy">
+            <small>&copy; <time id="year" datetime=""></time> José Antonio Cruz Segura</small>
+        </p>
+    </footer>
+</body>
+
+</html>
