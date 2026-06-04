@@ -264,7 +264,7 @@
       flex: 1; height: 1px; background: var(--clr-border);
     }
     .section-index__label {
-      font-size: 3rem; font-weight: 900; letter-spacing: .5em;
+      font-size: 0.9rem; font-weight: 900; letter-spacing: .5em;
       text-transform: uppercase; color: var(--clr-accent);
     }
 
