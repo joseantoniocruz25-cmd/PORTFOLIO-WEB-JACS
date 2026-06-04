@@ -7,10 +7,12 @@
       --clr-bg-2:    #162F4F;
       --clr-surface: #1C3A5C;
       --clr-text:    #E4DDD0;
-      --clr-accent:  #FFCC00;
+      --clr-accent:  #F83A27;
       --clr-muted:   rgba(228,221,208,0.45);
       --clr-border:  rgba(243, 243, 243, 0.562);
-      --font:        'Raleway', sans-serif;
+      --font-family: 'Satoshi', sans-serif;
+      --font:        'Satoshi', sans-serif;
+      --font-logo:   "aBidDeal", sans-serif;
       --card-radius: 10px;
 
       /* Ancho máximo del cuerpo editorial */
