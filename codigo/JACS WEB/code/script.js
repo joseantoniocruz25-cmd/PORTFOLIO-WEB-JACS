@@ -60,19 +60,104 @@ function update() {
 
 window.addEventListener('scroll', update, { passive: true });
 update();
- /* ══════════════════════════════════════
+  /* ══════════════════════════════════════
        PROYECTOS — filtro con slide animado
+       Cartelería: muestra galería de imágenes
+       en lugar de filtrar el bento grid.
     ══════════════════════════════════════ */
     const filterBtns = document.querySelectorAll('.filter-btn');
     const cards      = document.querySelectorAll('.bento-card');
-    const HIDE_MS    = 400;  /* duración fade-out — coincide con transition CSS */
-    const SLIDE_MS   = 480;  /* duración slide-in por tarjeta               */
-    const STAGGER_MS = 75;   /* retardo escalonado entre tarjetas            */
+    const bentoGrid  = document.getElementById('bentoGrid');
+    const ctGallery  = document.getElementById('ctGallery');
+    const HIDE_MS    = 380;
+    const SLIDE_MS   = 480;
+    const STAGGER_MS = 75;
 
+    /* ── Estado de la galería cartelería ── */
+    let ctVisible = false;
+
+    /* ── Aplicar filtro normal al bento grid ── */
+    function applyBentoFilter(filter) {
+      let visibleIdx = 0;
+
+      cards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+
+        if (match) {
+          const idx = visibleIdx++;
+          card.style.display = '';
+          card.classList.remove('hidden');
+          card.classList.add('in-view');
+          card.style.animation = 'none';
+
+          requestAnimationFrame(() => {
+            card.style.animation =
+              `filterSlideIn ${SLIDE_MS}ms cubic-bezier(0.16,1,0.3,1) ${idx * STAGGER_MS}ms both`;
+            card.addEventListener('animationend', () => {
+              card.style.animation         = '';
+              card.style.animationDelay    = '';
+              card.style.animationDuration = '';
+            }, { once: true });
+          });
+
+        } else {
+          card.style.animation = '';
+          card.classList.add('hidden');
+          setTimeout(() => {
+            if (card.classList.contains('hidden')) card.style.display = 'none';
+          }, HIDE_MS);
+        }
+      });
+    }
+
+    /* ── Mostrar galería cartelería ── */
+    function showCtGallery() {
+      if (ctVisible) return;
+      ctVisible = true;
+
+      /* 1. Fade out bento grid */
+      bentoGrid.classList.add('ct-hiding');
+
+      setTimeout(() => {
+        bentoGrid.style.display = 'none';
+
+        /* 2. Mostrar galería y animar entrada */
+        ctGallery.style.display = 'grid';
+        ctGallery.querySelectorAll('.ct-cell').forEach((cell, i) => {
+          cell.style.animationDelay = `${Math.min(i * 0.04, 0.9)}s`;
+        });
+
+        requestAnimationFrame(() => ctGallery.classList.add('ct-visible'));
+      }, HIDE_MS);
+    }
+
+    /* ── Ocultar galería cartelería, restaurar bento ── */
+    function hideCtGallery(filter) {
+      if (!ctVisible) {
+        applyBentoFilter(filter);
+        return;
+      }
+      ctVisible = false;
+
+      /* 1. Fade out galería */
+      ctGallery.classList.remove('ct-visible');
+
+      setTimeout(() => {
+        ctGallery.style.display = 'none';
+
+        /* 2. Restaurar bento grid */
+        bentoGrid.style.display = '';
+        bentoGrid.classList.remove('ct-hiding');
+
+        applyBentoFilter(filter);
+      }, HIDE_MS);
+    }
+
+    /* ── Listener de filtros ── */
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
 
-        /* Actualiza botones activos */
+        /* Actualiza estado de botones */
         filterBtns.forEach(b => {
           b.classList.remove('active');
           b.setAttribute('aria-pressed', 'false');
@@ -81,48 +166,107 @@ update();
         btn.setAttribute('aria-pressed', 'true');
 
         const filter = btn.dataset.filter;
-        let visibleIdx = 0;
 
-        cards.forEach(card => {
-          const match = filter === 'all' || card.dataset.category === filter;
-
-          if (match) {
-            const idx = visibleIdx++;
-
-            /* Restaura el espacio en el grid y garantiza estado base visible */
-            card.style.display = '';
-            card.classList.remove('hidden');
-            card.classList.add('in-view');
-
-            /* Fuerza reset de animación antes de reasignarla */
-            card.style.animation = 'none';
-
-            requestAnimationFrame(() => {
-              card.style.animationDelay    = `${idx * STAGGER_MS}ms`;
-              card.style.animationDuration = `${SLIDE_MS}ms`;
-              card.style.animation =
-                `filterSlideIn ${SLIDE_MS}ms cubic-bezier(0.16,1,0.3,1) ${idx * STAGGER_MS}ms both`;
-
-              /* Tras la animación, devuelve el control a las clases CSS */
-              card.addEventListener('animationend', () => {
-                card.style.animation         = '';
-                card.style.animationDelay    = '';
-                card.style.animationDuration = '';
-              }, { once: true });
-            });
-
-          } else {
-            /* Cancela cualquier animación en curso y oculta */
-            card.style.animation = '';
-            card.classList.add('hidden');
-
-            setTimeout(() => {
-              if (card.classList.contains('hidden')) card.style.display = 'none';
-            }, HIDE_MS);
-          }
-        });
+        if (filter === 'Cartelería') {
+          showCtGallery();
+        } else {
+          hideCtGallery(filter);
+        }
       });
     });
+
+
+    /* ══════════════════════════════════════
+       LIGHTBOX CARTELERÍA
+    ══════════════════════════════════════ */
+    (function initCtLightbox() {
+      const lb      = document.getElementById('ctLightbox');
+      if (!lb) return;
+
+      const lbImg   = document.getElementById('ctLbImg');
+      const lbCtr   = document.getElementById('ctLbCounter');
+      const cells   = () => [...document.querySelectorAll('#ctGallery .ct-cell')];
+      let cur = 0, trigger = null;
+
+      function imgs() { return cells().map(c => c.querySelector('img')); }
+
+      function update() {
+        const img = imgs()[cur];
+        lbImg.src = img.src; lbImg.alt = img.alt;
+        lbCtr.textContent = `${cur + 1} / ${imgs().length}`;
+      }
+
+      function goTo(idx, anim = true) {
+        cur = (idx + imgs().length) % imgs().length;
+        if (anim) {
+          lbImg.classList.add('switching');
+          setTimeout(() => { update(); lbImg.classList.remove('switching'); }, 200);
+        } else update();
+      }
+
+      function openLb(idx) {
+        goTo(idx, false);
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('ctLbClose').focus();
+      }
+
+      function closeLb() {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+        if (trigger) { trigger.focus(); trigger = null; }
+      }
+
+      /* Delegación de eventos en el grid (funciona con celdas dinámicas) */
+      const grid = document.getElementById('ctGallery');
+      if (grid) {
+        grid.addEventListener('click', e => {
+          const cell = e.target.closest('.ct-cell');
+          if (!cell) return;
+          trigger = cell;
+          openLb(cells().indexOf(cell));
+        });
+        grid.addEventListener('keydown', e => {
+          const cell = e.target.closest('.ct-cell');
+          if (!cell) return;
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            trigger = cell;
+            openLb(cells().indexOf(cell));
+          }
+        });
+      }
+
+      document.getElementById('ctLbClose').addEventListener('click', closeLb);
+      document.getElementById('ctLbPrev').addEventListener('click', () => goTo(cur - 1));
+      document.getElementById('ctLbNext').addEventListener('click', () => goTo(cur + 1));
+
+      lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+
+      document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape')     closeLb();
+        if (e.key === 'ArrowLeft')  goTo(cur - 1);
+        if (e.key === 'ArrowRight') goTo(cur + 1);
+      });
+
+      /* Swipe táctil */
+      let tX = 0;
+      lb.addEventListener('touchstart', e => { tX = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', e => {
+        const d = tX - e.changedTouches[0].clientX;
+        if (Math.abs(d) > 50) goTo(d > 0 ? cur + 1 : cur - 1);
+      });
+
+      /* Focus trap */
+      lb.addEventListener('keydown', e => {
+        if (e.key !== 'Tab') return;
+        const fs = [...lb.querySelectorAll('button')];
+        const first = fs[0], last = fs[fs.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    })();
  
  
     /* ══════════════════════════════════════

@@ -604,3 +604,146 @@ body {
   .card__category { opacity: 1; transform: translateY(0); }
   .card__arrow    { opacity: 1; transform: translate(0, 0); }
 }
+
+
+/* ════════════════════════════════════════
+   GALERÍA CARTELERÍA
+   Se muestra al pulsar el botón "Cartelería"
+   sustituyendo al bento grid.
+   Sin texto, sin etiquetas: solo imágenes.
+════════════════════════════════════════ */
+
+/* ── Transición de salida del bento grid ── */
+#bentoGrid {
+  transition: opacity .35s ease, transform .35s ease;
+}
+#bentoGrid.ct-hiding {
+  opacity: 0;
+  transform: scale(.98);
+  pointer-events: none;
+}
+
+/* ── Galería cartelería ── */
+#ctGallery {
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(150px, 18vw, 255px);
+  gap: clamp(3px, 0.4vw, 5px);
+  opacity: 0;
+  transform: scale(.98);
+  transition: opacity .38s ease, transform .38s cubic-bezier(.16,1,.3,1);
+}
+#ctGallery.ct-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Tipos de celda */
+.ct-w2 { grid-column: span 2; }
+.ct-w3 { grid-column: span 3; }
+.ct-h2 { grid-row:    span 2; }
+
+/* Celda individual */
+.ct-cell {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--card-radius);
+  background: var(--clr-surface);
+  cursor: zoom-in;
+  /* Reveal escalonado — delay asignado por JS */
+  opacity: 0;
+  animation: ctReveal .45s ease forwards;
+}
+.ct-cell:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 2px;
+}
+.ct-cell img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  filter: brightness(.92);
+  transition: transform .55s cubic-bezier(.16,1,.3,1), filter .4s ease;
+}
+.ct-cell:hover img,
+.ct-cell:focus-visible img {
+  transform: scale(1.05);
+  filter: brightness(1);
+}
+
+/* ── Lightbox cartelería ── */
+#ctLightbox {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(5,12,24,.97);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+#ctLightbox.open { opacity: 1; pointer-events: all; }
+
+.ct-lb__img {
+  max-width: 92vw; max-height: 92vh;
+  object-fit: contain; border-radius: 6px;
+  display: block;
+  transform: scale(.96);
+  transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .22s ease;
+}
+#ctLightbox.open .ct-lb__img { transform: scale(1); }
+.ct-lb__img.switching { opacity: 0; transform: scale(.95); }
+
+.ct-lb__nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(228,221,208,.07); border: 1px solid var(--clr-border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--clr-text); transition: background .2s ease;
+}
+.ct-lb__nav:hover { background: rgba(64,117,156,.3); }
+.ct-lb__nav svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.ct-lb__prev { left: 1.2rem; }
+.ct-lb__next { right: 1.2rem; }
+
+.ct-lb__close {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(228,221,208,.08); border: 1px solid var(--clr-border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--clr-text); transition: background .2s ease;
+}
+.ct-lb__close:hover { background: rgba(228,221,208,.2); }
+.ct-lb__close svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+.ct-lb__counter {
+  position: absolute; bottom: 1.2rem; left: 50%;
+  transform: translateX(-50%);
+  font-size: .48rem; font-weight: 400;
+  letter-spacing: .4em; text-transform: uppercase;
+  color: rgba(228,221,208,.3);
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  #ctGallery {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: clamp(130px, 22vw, 210px);
+  }
+  .ct-w3 { grid-column: span 3; }
+}
+@media (max-width: 540px) {
+  #ctGallery {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: clamp(120px, 35vw, 185px);
+  }
+  .ct-w2, .ct-w3 { grid-column: span 2; }
+  .ct-lb__prev { left: .5rem; }
+  .ct-lb__next { right: .5rem; }
+}
+@media (max-width: 380px) {
+  #ctGallery { grid-auto-rows: clamp(100px, 38vw, 150px); }
+}
+
+@keyframes ctReveal {
+  from { opacity: 0; transform: scale(.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
