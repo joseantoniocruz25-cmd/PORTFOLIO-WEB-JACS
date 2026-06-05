@@ -26,6 +26,22 @@
 
 
    /* ══════════════════════════════════════
+      NAV SCROLL + FADE SCROLL CUE
+   ══════════════════════════════════════ */
+   const siteNav  = document.querySelector('.site-nav');
+   const heroScroll = document.querySelector('.project-hero__scroll');
+
+   function updateScroll() {
+     const y = window.scrollY;
+     if (siteNav) siteNav.classList.toggle('scrolled', y > 60);
+     if (heroScroll) heroScroll.style.opacity = String(Math.max(0, 1 - y / 180));
+   }
+
+   window.addEventListener('scroll', updateScroll, { passive: true });
+   updateScroll();
+
+
+   /* ══════════════════════════════════════
       LIGHTBOX + SLIDER
    ══════════════════════════════════════ */
    const lightbox    = document.getElementById('lightbox');
