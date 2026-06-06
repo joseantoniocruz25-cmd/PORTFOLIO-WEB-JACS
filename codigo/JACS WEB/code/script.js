@@ -74,8 +74,9 @@ update();
 
     /* ── Galerías especiales (clave = valor de data-filter) ── */
     const specialGalleries = {
-      'Cartelería':    { el: document.getElementById('ctGallery'),  visible: false },
-      'Ilustraciones': { el: document.getElementById('ilGallery'),  visible: false },
+      'Cartelería':    { el: document.getElementById('ctGallery'),   visible: false },
+      'Ilustraciones': { el: document.getElementById('ilGallery'),   visible: false },
+      'Fotografía':    { el: document.getElementById('fotGallery'),  visible: false },
     };
 
     /* ── Aplicar filtro normal al bento grid ── */
@@ -360,6 +361,96 @@ update();
       document.getElementById('ilLbClose').addEventListener('click', closeLb);
       document.getElementById('ilLbPrev').addEventListener('click', () => goTo(cur - 1));
       document.getElementById('ilLbNext').addEventListener('click', () => goTo(cur + 1));
+
+      lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+
+      document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape')     closeLb();
+        if (e.key === 'ArrowLeft')  goTo(cur - 1);
+        if (e.key === 'ArrowRight') goTo(cur + 1);
+      });
+
+      let tX = 0;
+      lb.addEventListener('touchstart', e => { tX = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', e => {
+        const d = tX - e.changedTouches[0].clientX;
+        if (Math.abs(d) > 50) goTo(d > 0 ? cur + 1 : cur - 1);
+      });
+
+      lb.addEventListener('keydown', e => {
+        if (e.key !== 'Tab') return;
+        const fs = [...lb.querySelectorAll('button')];
+        const first = fs[0], last = fs[fs.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    })();
+
+
+    /* ══════════════════════════════════════
+       LIGHTBOX FOTOGRAFÍA
+    ══════════════════════════════════════ */
+    (function initFotLightbox() {
+      const lb    = document.getElementById('fotLightbox');
+      if (!lb) return;
+
+      const lbImg = document.getElementById('fotLbImg');
+      const lbCtr = document.getElementById('fotLbCounter');
+      const cells = () => [...document.querySelectorAll('#fotGallery .ct-cell')];
+      let cur = 0, trigger = null;
+
+      function imgs() { return cells().map(c => c.querySelector('img')); }
+
+      function update() {
+        const img = imgs()[cur];
+        lbImg.src = img.src; lbImg.alt = img.alt;
+        lbCtr.textContent = `${cur + 1} / ${imgs().length}`;
+      }
+
+      function goTo(idx, anim = true) {
+        cur = (idx + imgs().length) % imgs().length;
+        if (anim) {
+          lbImg.classList.add('switching');
+          setTimeout(() => { update(); lbImg.classList.remove('switching'); }, 200);
+        } else update();
+      }
+
+      function openLb(idx) {
+        goTo(idx, false);
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('fotLbClose').focus();
+      }
+
+      function closeLb() {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+        if (trigger) { trigger.focus(); trigger = null; }
+      }
+
+      const grid = document.getElementById('fotGallery');
+      if (grid) {
+        grid.addEventListener('click', e => {
+          const cell = e.target.closest('.ct-cell');
+          if (!cell) return;
+          trigger = cell;
+          openLb(cells().indexOf(cell));
+        });
+        grid.addEventListener('keydown', e => {
+          const cell = e.target.closest('.ct-cell');
+          if (!cell) return;
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            trigger = cell;
+            openLb(cells().indexOf(cell));
+          }
+        });
+      }
+
+      document.getElementById('fotLbClose').addEventListener('click', closeLb);
+      document.getElementById('fotLbPrev').addEventListener('click', () => goTo(cur - 1));
+      document.getElementById('fotLbNext').addEventListener('click', () => goTo(cur + 1));
 
       lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
 
