@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+    Cambia por proyecto:
+    • <title>
+    • <meta name="description">
+    • data-slug en <body>
+  -->
+  <title>Mea Culpa — JACS Portfolio</title>
+  <meta name="description"
+    content="Identidad visual completa de Mea Culpa: logotipo, paleta cromática, cartelería y aplicaciones de marca.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="proyectomeaculpa.css">
+  <script src="proyectomeaculpa.js" defer></script>
+
+</head>
+
+<body data-slug="meaculpa">
+
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+  <header>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a class="site-nav__logo" href="index.html" aria-label="Inicio — José Antonio Cruz Segura">JACS</a>
+      <a class="site-nav__back" href="index.html#proyectos">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M13 8H3M7 12l-4-4 4-4" />
+        </svg>
+        <span>Proyectos</span>
+      </a>
+    </nav>
+  </header>
+
+
+  <main id="main-content">
+    <article aria-labelledby="project-title">
+
+
+      <!-- ══════════════════════════════════════
+         1 · HERO — imagen a pantalla completa
+    ══════════════════════════════════════ -->
+      <section class="project-hero" aria-label="Imagen principal del proyecto">
+
+        <!--
+        Imagen hero: misma que en la tarjeta del grid.
+        fetchpriority="high" para mejorar el LCP.
+      -->
+        <img class="project-hero__img" src="../proyectos/portadameaculpa1920x1080.jpg" alt="Identidad visual Mea Culpa"
+          width="1920" height="1080" fetchpriority="high">
+
+        <!--
+        Logo del cliente como marca de agua.
+        Usa mix-blend-mode:screen para que el color
+        del logo brille sobre el marino sin tapar el título.
+        Cambia src por el logo real de cada proyecto.
+      -->
+        <img class="project-hero__brand-bg" src="../proyectos/logomeaculpa.svg" alt="" aria-hidden="true" width="500"
+          height="200">
+
+        <div class="project-hero__overlay" aria-hidden="true"></div>
+
+        <div class="project-hero__content">
+          <div>
+            <span class="project-hero__eyebrow">Branding · Evento</span>
+            <h1 class="project-hero__title" id="project-title">
+              Mea<br>Culpa
+            </h1>
+          </div>
+          <div class="project-hero__scroll" aria-hidden="true">
+            <span>Scroll</span>
+            <span class="project-hero__scroll-line"></span>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ══════════════════════════════════════
+         2 · TEXTO INTRODUCTORIO
+         Lead grande + párrafos de contexto
+    ══════════════════════════════════════ -->
+      <div class="project-article">
+
+        <div class="prose block--loose reveal">
+
+          <div class="section-index" aria-hidden="true">
+            <span class="section-index__num">01</span>
+            <span class="section-index__line"></span>
+            <span class="section-index__label">contexto</span>
+          </div>
+
+          <!--
+          Lead: frase que resume la esencia del proyecto.
+          El <em> se muestra en acento azul.
+        -->
+          <p class="lead block--tight">
+            "<em>Identidad Visual</em> para un evento con <em>SÍ</em> al <em>pecado</em>".
+          </p>
+
+          <!--
+          Cuerpo: 2–3 párrafos explicando el contexto,
+          el reto y el punto de partida.
+        -->
+          <p class="body-text">
+            Mea Culpa nace para esas noches donde el pecado se sirve en botellas de alcohol, DJ en cabina, una fiesta
+            donde no hay reglas y donde
+            el desenfreno es el protagonista.
+          </p>
+          <p class="body-text">
+            Queríamos un logo para el evento, donde transmitiera la persuasión, el pecado carnal y las noches donde lo
+            que pasó, pasó. Aquí comienza mi reto: ¿Cómo plasmar el pecado carnal en un logo para una fiesta urbana?
+          </p>
+          <p class="body-text">
+            El punto de partida fue la búsqueda en el origen de la creación: Eva mordió la manzana, sucumbida por la
+            serpiente como símbolo del pecado. De ahí surgió la idea de crear un logo que representara esa manzana, pero
+            con un giro moderno y atrevido, reflejando la esencia de Mea Culpa. A continuación, se muestra los primeros
+            bocetos:
+          </p>
+
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           3 · PRIMERA IMAGEN EDITORIAL
+           Wide · ratio 16/9
+      ══════════════════════════════════════ -->
+        <div class="wide block reveal">
+          <div class="img-editorial">
+            <!--
+            Imagen panorámica del proyecto: mockup principal,
+            presentación del logo, o pieza más representativa.
+          -->
+            <img src="../proyectos\meaculpamanoramica.jpg" alt="Bocetos Principales" width="1060" height="596"
+              loading="lazy">
+          </div>
+          <p class="img-caption prose">Bocetos Principales — Mano Alzada</p>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           4 · BLOQUE OFFSET: imagen + texto
+           Imagen izquierda, texto descriptivo derecha
+      ══════════════════════════════════════ -->
+        <div class="wide block--loose reveal">
+          <div class="img-offset">
+
+            <div>
+              <div class="img-editorial img-editorial--tall">
+                <img src="../proyectos/meaculpagaleria00.jpg"
+                  alt="Vectorización y Alternativas" width="600"
+                  height="750" loading="lazy">
+              </div>
+            </div>
+
+            <div class="img-offset__text">
+              <!--
+              Aquí va el texto que explica esta fase del proyecto:
+              proceso de conceptualización, decisiones de diseño,
+              por qué se eligió este camino visual.
+            -->
+              <p class="body-text">
+                Para añadir ese aspecto urbano, en tendencias de moda volvió el estilo "vintage", quería que al realizar
+                el mechardising del logo para tatuajes temporales y sudaderas, no solo fuese un recuerdo, sino una
+                vestimenta para el día a día o para combinarlo con un outfit "del rollo".
+              </p>
+              <p class="body-text">
+                Finalmente, se realizó una vectorización del logo a mano alzada, se añadió un rojo granate y alternación positivo y negativo.
+              </p>
+
+              <!--
+              Pull quote: frase clave del proceso o del cliente.
+              Puede venir del briefing, de una reunión o de
+              una decisión de diseño relevante.
+            -->
+              <blockquote class="pull-quote">
+                <p class="pull-quote__text">
+                  "Fruto del pecado original, la noche llama al desenfreno"
+                </p>
+                <cite class="pull-quote__cite">Juan Antonio · <br> Propietario CopaCabana La Algaba</cite>
+              </blockquote>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           5 · DATOS CLAVE DEL PROYECTO
+           Año, cliente, disciplina, herramientas
+      ══════════════════════════════════════ -->
+        <div class="prose block reveal">
+          <dl class="data-strip" aria-label="Ficha del proyecto">
+            <div class="data-item">
+              <dt class="data-item__key">Identidad</dt>
+              <dd class="data-item__val">Mea Culpa</dd>
+            </div>
+            <div class="data-item">
+              <dt class="data-item__key">Año</dt>
+              <dd class="data-item__val"><time datetime="2024">2024</time></dd>
+            </div>
+            <div class="data-item">
+              <dt class="data-item__key">Disciplina</dt>
+              <dd class="data-item__val">Branding · Mechardising </dd>
+            </div>
+            <div class="data-item">
+              <dt class="data-item__key">Herramientas</dt>
+              <dd class="data-item__val">Illustrator · Mano Alzada</dd>
+            </div>
+            <div class="data-item">
+              <dt class="data-item__key">Entregables</dt>
+              <dd class="data-item__val">Guía de marca · Mockups · Sudaderas · Tatuajes Temporales</dd>
+            </div>
+          </dl>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           6 · DÚO DE IMÁGENES
+           Dos imágenes en paralelo, formato vertical
+      ══════════════════════════════════════ -->
+        <div class="wide block reveal">
+          <div class="img-duo">
+
+            <div>
+              <div class="img-editorial">
+                <img src="../proyectos/meaculpagaleria04.jpg" alt="Aplicación de marca Mea Culpa" width="530"
+                  height="530" loading="lazy">
+              </div>
+              <p class="img-caption">Aplicación de marca</p>
+            </div>
+
+            <div>
+              <div class="img-editorial">
+                <img src="../proyectos/meaculpagaleria03.jpg" alt="Aplicación de marca Mea Culpa 1" width="530" height="530"
+                  loading="lazy">
+              </div>
+              <p class="img-caption">Aplicación de marca 01</p>
+            </div>
+            <div>
+              <div class="img-editorial">
+                <img src="../proyectos/meaculpagaleria02.jpg" alt="Aplicación de marca Mea Culpa 2" width="530" height="530"
+                  loading="lazy">
+              </div>
+              <p class="img-caption">Aplicación de marca 02</p>
+            </div>
+             <div>
+              <div class="img-editorial">
+                <img src="../proyectos/meaculpagaleria01.jpg" alt="Aplicación de marca Mea Culpa 3" width="530" height="530"
+                  loading="lazy">
+              </div>
+              <p class="img-caption">Aplicación de marca 03</p>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           7 · BLOQUE OFFSET INVERTIDO
+           Texto izquierda, imagen derecha
+      ══════════════════════════════════════ -->
+        <div class="wide block--loose reveal">
+          <div class="img-offset img-offset--reverse">
+
+            <div>
+              <div class="img-editorial img-editorial--tall">
+                <img src="../proyectos/meaculpagaleria05.jpg" alt="Flyer by Lingarto98" width="600"
+                  height="750" loading="lazy">
+              </div>
+            </div>
+
+            <div class="img-offset__text">
+              <p class="body-text">
+                Las aplicaciones de marca se desarrollaron con la misma coherencia y cuidado que el proceso de
+                conceptualización. Cada pieza forma parte de un sistema visual sólido que garantiza la consistencia
+                en todos los soportes físicos y digitales cuales fuesen llegar a aplicarse.
+              </p>
+              <p class="body-text">
+                Desde la cartelería hasta los formatos digitales para redes sociales, cada aplicación mantiene
+                la identidad visual intacta, adaptando el lenguaje gráfico a las necesidades específicas de
+                cada canal.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+           8 · IMAGEN A SANGRE — full width
+           Cierre visual antes de la galería
+      ══════════════════════════════════════ -->
+        <div class="full block reveal">
+          <div class="img-editorial img-editorial--short" style="border-radius:0;border-left:none;border-right:none;">
+            <img src="../proyectos/meaculpagaleria06.jpg"
+              alt="Tatuajes Temporales Mea Culpa en contexto real" width="1920" height="823"
+              loading="lazy">
+          </div>
+        </div>
+
+
+       
+        <!-- ══════════════════════════════════════
+           NAVEGACIÓN ANTERIOR · SIGUIENTE
+      ══════════════════════════════════════ -->
+        <nav class="project-nav" aria-label="Navegación entre proyectos">
+
+          <a class="project-nav__item project-nav__item--prev" href="proyectohdadjesus.html"
+            style="--thumb:url('../proyectos/portadahdadjesus.svg')">
+            <span class="project-nav__dir">
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M13 8H3M7 12l-4-4 4-4" />
+              </svg>
+              Anterior
+            </span>
+            <span class="project-nav__name">Hdad. Jesús Padre Nazareno</span>
+            <span class="project-nav__category">Branding</span>
+          </a>
+
+          <a class="project-nav__item project-nav__item--next" href="proyectochicharron.html"
+            style="--thumb:url('../proyectos/portadachicharron.jpg')">
+            <span class="project-nav__dir">
+              Siguiente
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </span>
+            <span class="project-nav__name">Real Deportivo Chicharrón</span>
+            <span class="project-nav__category">Branding</span>
+          </a>
+
+        </nav>
+
+      </div>
+
+    </article>
+  </main>
+
+
+  <!-- ── LIGHTBOX ── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de imágenes">
+
+    <button class="lightbox__close" id="lbClose" aria-label="Cerrar">
+      <svg viewBox="0 0 16 16">
+        <path d="M4 4l8 8M12 4l-8 8" />
+      </svg>
+    </button>
+
+    <div class="lightbox__stage">
+      <button class="lightbox__nav lightbox__prev" id="lbPrev" aria-label="Imagen anterior">
+        <svg viewBox="0 0 16 16">
+          <path d="M10 3L5 8l5 5" />
+        </svg>
+      </button>
+      <img class="lightbox__img" id="lbImg" src="" alt="">
+      <button class="lightbox__nav lightbox__next" id="lbNext" aria-label="Imagen siguiente">
+        <svg viewBox="0 0 16 16">
+          <path d="M6 3l5 5-5 5" />
+        </svg>
+      </button>
+    </div>
+
+    <ul class="lightbox__thumbs" id="lbThumbs" aria-label="Miniaturas"></ul>
+    <span class="lightbox__counter" id="lbCounter" aria-live="polite"></span>
+
+  </div>
+
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__name">José Antonio Cruz Segura</p>
+    <ul class="site-footer__links" aria-label="Perfiles profesionales">
+      <li><a href="https://linkedin.com/in/TUUSUARIO" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
+      <li><a href="https://github.com/TUUSUARIO" rel="noopener noreferrer" target="_blank">GitHub</a></li>
+      <li><a href="https://instagram.com/TUUSUARIO" rel="noopener noreferrer" target="_blank">Instagram</a></li>
+    </ul>
+    <p class="site-footer__copy">
+      <small>&copy; <time id="year" datetime=""></time> José Antonio Cruz Segura</small>
+    </p>
+  </footer>
+</body>
+
+</html>

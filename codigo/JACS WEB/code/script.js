@@ -62,19 +62,21 @@ window.addEventListener('scroll', update, { passive: true });
 update();
   /* ══════════════════════════════════════
        PROYECTOS — filtro con slide animado
-       Cartelería: muestra galería de imágenes
-       en lugar de filtrar el bento grid.
+       Cartelería / Ilustraciones: muestran galería
+       de imágenes en lugar de filtrar el bento grid.
     ══════════════════════════════════════ */
     const filterBtns = document.querySelectorAll('.filter-btn');
     const cards      = document.querySelectorAll('.bento-card');
     const bentoGrid  = document.getElementById('bentoGrid');
-    const ctGallery  = document.getElementById('ctGallery');
     const HIDE_MS    = 380;
     const SLIDE_MS   = 480;
     const STAGGER_MS = 75;
 
-    /* ── Estado de la galería cartelería ── */
-    let ctVisible = false;
+    /* ── Galerías especiales (clave = valor de data-filter) ── */
+    const specialGalleries = {
+      'Cartelería':    { el: document.getElementById('ctGallery'),  visible: false },
+      'Ilustraciones': { el: document.getElementById('ilGallery'),  visible: false },
+    };
 
     /* ── Aplicar filtro normal al bento grid ── */
     function applyBentoFilter(filter) {
@@ -110,45 +112,56 @@ update();
       });
     }
 
-    /* ── Mostrar galería cartelería ── */
-    function showCtGallery() {
-      if (ctVisible) return;
-      ctVisible = true;
-
-      /* 1. Fade out bento grid */
-      bentoGrid.classList.add('ct-hiding');
-
-      setTimeout(() => {
-        bentoGrid.style.display = 'none';
-
-        /* 2. Mostrar galería y animar entrada */
-        ctGallery.style.display = 'grid';
-        ctGallery.querySelectorAll('.ct-cell').forEach((cell, i) => {
-          cell.style.animationDelay = `${Math.min(i * 0.04, 0.9)}s`;
-        });
-
-        requestAnimationFrame(() => ctGallery.classList.add('ct-visible'));
-      }, HIDE_MS);
+    /* ── Animar entrada de una galería especial ── */
+    function _revealGallery(g) {
+      g.el.style.display = 'grid';
+      g.el.querySelectorAll('.ct-cell').forEach((cell, i) => {
+        cell.style.animationDelay = `${Math.min(i * 0.04, 0.9)}s`;
+      });
+      requestAnimationFrame(() => g.el.classList.add('ct-visible'));
+      g.visible = true;
     }
 
-    /* ── Ocultar galería cartelería, restaurar bento ── */
-    function hideCtGallery(filter) {
-      if (!ctVisible) {
+    /* ── Mostrar una galería especial (oculta las otras) ── */
+    function showSpecialGallery(key) {
+      const target = specialGalleries[key];
+      if (target.visible) return;
+
+      /* Galerías especiales actualmente visibles (distintas al target) */
+      const othersVisible = Object.values(specialGalleries).filter(g => g !== target && g.visible);
+
+      if (othersVisible.length) {
+        /* Otro panel especial está abierto: cerrar primero, luego abrir target */
+        othersVisible.forEach(g => { g.el.classList.remove('ct-visible'); g.visible = false; });
+        setTimeout(() => {
+          othersVisible.forEach(g => { g.el.style.display = 'none'; });
+          _revealGallery(target);
+        }, HIDE_MS);
+      } else {
+        /* Solo el bento está visible: ocultarlo y abrir target */
+        bentoGrid.classList.add('ct-hiding');
+        setTimeout(() => {
+          bentoGrid.style.display = 'none';
+          _revealGallery(target);
+        }, HIDE_MS);
+      }
+    }
+
+    /* ── Ocultar todas las galerías especiales, restaurar bento ── */
+    function hideAllSpecialGalleries(filter) {
+      const visibles = Object.values(specialGalleries).filter(g => g.visible);
+
+      if (!visibles.length) {
         applyBentoFilter(filter);
         return;
       }
-      ctVisible = false;
 
-      /* 1. Fade out galería */
-      ctGallery.classList.remove('ct-visible');
+      visibles.forEach(g => { g.el.classList.remove('ct-visible'); g.visible = false; });
 
       setTimeout(() => {
-        ctGallery.style.display = 'none';
-
-        /* 2. Restaurar bento grid */
+        visibles.forEach(g => { g.el.style.display = 'none'; });
         bentoGrid.style.display = '';
         bentoGrid.classList.remove('ct-hiding');
-
         applyBentoFilter(filter);
       }, HIDE_MS);
     }
@@ -167,11 +180,26 @@ update();
 
         const filter = btn.dataset.filter;
 
-        if (filter === 'Cartelería') {
-          showCtGallery();
+        if (filter in specialGalleries) {
+          showSpecialGallery(filter);
         } else {
-          hideCtGallery(filter);
+          hideAllSpecialGalleries(filter);
         }
+      });
+    });
+
+    /* ── Tarjetas que abren un filtro en lugar de navegar ── */
+    cards.forEach(card => {
+      const href = card.getAttribute('href') || '';
+      if (!href.startsWith('#')) return;
+      const target = href.slice(1); // e.g. "Cartelería"
+      const matchBtn = [...filterBtns].find(b => b.dataset.filter === target);
+      if (!matchBtn) return;
+
+      card.addEventListener('click', e => {
+        e.preventDefault();
+        matchBtn.click();
+        document.getElementById('proyectos').scrollIntoView({ behavior: 'smooth' });
       });
     });
 
@@ -267,8 +295,98 @@ update();
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       });
     })();
- 
- 
+
+
+    /* ══════════════════════════════════════
+       LIGHTBOX ILUSTRACIONES
+    ══════════════════════════════════════ */
+    (function initIlLightbox() {
+      const lb    = document.getElementById('ilLightbox');
+      if (!lb) return;
+
+      const lbImg = document.getElementById('ilLbImg');
+      const lbCtr = document.getElementById('ilLbCounter');
+      const cells = () => [...document.querySelectorAll('#ilGallery .ct-cell')];
+      let cur = 0, trigger = null;
+
+      function imgs() { return cells().map(c => c.querySelector('img')); }
+
+      function update() {
+        const img = imgs()[cur];
+        lbImg.src = img.src; lbImg.alt = img.alt;
+        lbCtr.textContent = `${cur + 1} / ${imgs().length}`;
+      }
+
+      function goTo(idx, anim = true) {
+        cur = (idx + imgs().length) % imgs().length;
+        if (anim) {
+          lbImg.classList.add('switching');
+          setTimeout(() => { update(); lbImg.classList.remove('switching'); }, 200);
+        } else update();
+      }
+
+      function openLb(idx) {
+        goTo(idx, false);
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('ilLbClose').focus();
+      }
+
+      function closeLb() {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+        if (trigger) { trigger.focus(); trigger = null; }
+      }
+
+      const grid = document.getElementById('ilGallery');
+      if (grid) {
+        grid.addEventListener('click', e => {
+          const cell = e.target.closest('.ct-cell');
+          if (!cell) return;
+          trigger = cell;
+          openLb(cells().indexOf(cell));
+        });
+        grid.addEventListener('keydown', e => {
+          const cell = e.target.closest('.ct-cell');
+          if (!cell) return;
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            trigger = cell;
+            openLb(cells().indexOf(cell));
+          }
+        });
+      }
+
+      document.getElementById('ilLbClose').addEventListener('click', closeLb);
+      document.getElementById('ilLbPrev').addEventListener('click', () => goTo(cur - 1));
+      document.getElementById('ilLbNext').addEventListener('click', () => goTo(cur + 1));
+
+      lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+
+      document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape')     closeLb();
+        if (e.key === 'ArrowLeft')  goTo(cur - 1);
+        if (e.key === 'ArrowRight') goTo(cur + 1);
+      });
+
+      let tX = 0;
+      lb.addEventListener('touchstart', e => { tX = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', e => {
+        const d = tX - e.changedTouches[0].clientX;
+        if (Math.abs(d) > 50) goTo(d > 0 ? cur + 1 : cur - 1);
+      });
+
+      lb.addEventListener('keydown', e => {
+        if (e.key !== 'Tab') return;
+        const fs = [...lb.querySelectorAll('button')];
+        const first = fs[0], last = fs[fs.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    })();
+
+
     /* ══════════════════════════════════════
        PROYECTOS — reveal al scroll (IntersectionObserver)
        Las tarjetas entran con stagger escalonado
