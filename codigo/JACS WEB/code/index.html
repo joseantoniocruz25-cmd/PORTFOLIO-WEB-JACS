@@ -12,7 +12,7 @@
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="animations.css">
   <link rel="stylesheet" href="styles.css">
-  <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"></script>
   <script src="script.js" defer></script>
 </head>
 
@@ -1104,56 +1104,34 @@
 
       </div>
 
-      <!-- ══════════════════════════════════════
-           HERRAMIENTAS — iconos 3D (.glb / .gltf)
-           Cada tarjeta usa <model-viewer> para renderizar
-           un modelo 3D del logo de la herramienta.
-           Para añadir una herramienta: duplica un .tool-card,
-           cambia el src del modelo (.glb), el alt y el nombre.
-      ══════════════════════════════════════ -->
-      <div class="about-tools">
-        <span class="about-tools__eyebrow">Lo que uso</span>
-        <h3 class="about-tools__title">Herramientas de Diseño &amp; 3D</h3>
-        <!-- ../proyectos/iconos3d/iconoai.glb -->
-
-        <ul class="tools-grid" role="list">
-
-
-
-          <li class="tool-card reveal-up">
-            <model-viewer class="tool-card__model" src="assets/iconos/photoshop.glb" alt="Icono 3D de Adobe Photoshop"
-              camera-controls disable-zoom auto-rotate interaction-prompt="none" loading="lazy"></model-viewer>
-            <span class="tool-card__name">Photoshop</span>
-          </li>
-
-          <li class="tool-card reveal-up">
-            <model-viewer class="tool-card__model" src="assets/iconos/indesign.glb" alt="Icono 3D de Adobe InDesign"
-              camera-controls disable-zoom auto-rotate interaction-prompt="none" loading="lazy"></model-viewer>
-            <span class="tool-card__name">InDesign</span>
-          </li>
-
-          <li class="tool-card reveal-up">
-            <model-viewer class="tool-card__model" src="assets/iconos/premiere.glb" alt="Icono 3D de Adobe Premiere Pro"
-              camera-controls disable-zoom auto-rotate interaction-prompt="none" loading="lazy"></model-viewer>
-            <span class="tool-card__name">Premiere Pro</span>
-          </li>
-
-          <li class="tool-card reveal-up">
-            <model-viewer class="tool-card__model" src="assets/iconos/blender.glb" alt="Icono 3D de Blender"
-              camera-controls disable-zoom auto-rotate interaction-prompt="none" loading="lazy"></model-viewer>
-            <span class="tool-card__name">Blender</span>
-          </li>
-
-          <li class="tool-card reveal-up">
-            <model-viewer class="tool-card__model" src="assets/iconos/zbrush.glb" alt="Icono 3D de ZBrush"
-              camera-controls disable-zoom auto-rotate interaction-prompt="none" loading="lazy"></model-viewer>
-            <span class="tool-card__name">ZBrush</span>
-          </li>
-
-        </ul>
-      </div>
-
     </section>
+
+    <div class="models-grid">
+
+      <model-viewer class="model-card" src="../proyectos/iconos3d/iconopsd.glb" ar
+        ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral"
+        poster="../proyectos/iconos3d/poster.webp" shadow-intensity="1">
+        <div class="progress-bar hide" slot="progress-bar">
+          <div class="update-bar"></div>
+        </div>
+        <div id="ar-prompt">
+          <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
+        </div>
+      </model-viewer>
+
+      <model-viewer class="model-card" src="../proyectos/iconos3d/iconoai.glb" ar
+        ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral"
+        poster="../proyectos/iconos3d/poster.webp" shadow-intensity="1">
+        <div class="progress-bar hide" slot="progress-bar">
+          <div class="update-bar"></div>
+        </div>
+        <div id="ar-prompt">
+          <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
+        </div>
+      </model-viewer>
+
+    </div>
+
 
     <!-- ── SECCIÓN CONTACTO ── -->
     <section class="contact-section" id="contacto" aria-labelledby="contacto-heading">

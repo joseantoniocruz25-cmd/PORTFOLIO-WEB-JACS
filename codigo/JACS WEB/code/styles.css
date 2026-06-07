@@ -580,53 +580,26 @@ body {
   color: var(--clr-muted);
 }
 
-/* ── Herramientas (iconos 3D .glb vía <model-viewer>) ── */
-.about-tools__eyebrow {
-  display: inline-block;
-  font-size: .55rem; font-weight: 900; letter-spacing: .4em;
-  text-transform: uppercase; color: var(--clr-accent);
-  margin-bottom: .7rem;
-}
 
-.about-tools__title {
-  font-family: var(--font); font-weight: 900;
-  font-size: clamp(1.4rem, 3.4vw, 2.2rem);
-  letter-spacing: -.02em; text-transform: uppercase;
-  color: var(--clr-text); line-height: 1;
-  margin-bottom: clamp(1.5rem, 3vw, 2.4rem);
-}
-
-.tools-grid {
-  list-style: none;
+/* ════════════════════════════════════════
+   VISORES 3D (model-viewer) — grid bento
+════════════════════════════════════════ */
+.models-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--grid-gap);
+  padding: clamp(1.2rem, 4vw, 4rem);
 }
 
-.tool-card {
-  display: flex; flex-direction: column; align-items: center; gap: .7rem;
-  padding: clamp(1rem, 2vw, 1.6rem) 1rem;
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--card-radius);
-  transition: border-color .3s ease;
-}
-.tool-card:hover { border-color: var(--clr-accent); }
-
-.tool-card__model {
+.model-card {
+  display: block;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  --poster-color: transparent;
-  background-color: transparent;
+  height: clamp(220px, 32vw, 420px);
+  border-radius: var(--card-radius);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-bg-2);
+  overflow: hidden;
 }
-
-.tool-card__name {
-  font-size: .6rem; font-weight: 900; letter-spacing: .25em;
-  text-transform: uppercase; color: var(--clr-muted);
-  transition: color .25s ease;
-}
-.tool-card:hover .tool-card__name { color: var(--clr-text); }
-
 
 /* ════════════════════════════════════════
    SECCIÓN CONTACTO
@@ -792,9 +765,7 @@ body {
   }
 
   /* Herramientas: bloque centrado sobre la rejilla */
-  .about-tools {
-    text-align: center;
-  }
+  /* Se eliminó la sección de iconos 3D, este estilo ya no es necesario. */
 }
 
 /* ── Mobile (≤ 640px) ── */
@@ -847,6 +818,15 @@ body {
   /* Herramientas: dos columnas, más cómodas en pantallas estrechas */
   .tools-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Visores 3D: se mantienen en 2 columnas con margen lateral */
+  .models-grid {
+    gap: clamp(.6rem, 2.5vw, 1rem);
+    padding: clamp(1rem, 6vw, 2rem);
+  }
+  .model-card {
+    height: clamp(140px, 38vw, 220px);
   }
 
   /* Contacto: texto del botón más compacto para no forzar el ancho */
