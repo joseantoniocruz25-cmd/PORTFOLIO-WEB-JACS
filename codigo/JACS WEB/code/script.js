@@ -169,6 +169,26 @@ update();
       }, HIDE_MS);
     }
 
+    /* ── "Sobre mí" y "Herramientas": solo visibles con el filtro "Todos" ── */
+    const aboutSections = [
+      document.querySelector('.about-section'),
+      document.querySelector('.models-section'),
+    ].filter(Boolean);
+
+    function toggleAboutSections(show) {
+      aboutSections.forEach(sec => {
+        if (show) {
+          sec.style.display = '';
+          requestAnimationFrame(() => sec.classList.remove('filter-hidden'));
+        } else {
+          sec.classList.add('filter-hidden');
+          setTimeout(() => {
+            if (sec.classList.contains('filter-hidden')) sec.style.display = 'none';
+          }, HIDE_MS);
+        }
+      });
+    }
+
     /* ── Listener de filtros ── */
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -182,6 +202,8 @@ update();
         btn.setAttribute('aria-pressed', 'true');
 
         const filter = btn.dataset.filter;
+
+        toggleAboutSections(filter === 'all');
 
         if (filter in specialGalleries) {
           showSpecialGallery(filter);
