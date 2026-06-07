@@ -485,6 +485,239 @@ body {
 
 
 /* ════════════════════════════════════════
+   SECCIÓN SOBRE MÍ
+════════════════════════════════════════ */
+.about-section {
+  background: var(--clr-bg);
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.2rem, 4vw, 4rem);
+}
+
+/* ── Intro: foto + texto integrados en una sola composición ── */
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(300px, 1.15fr);
+  align-items: center;
+  margin-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+
+.about-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+}
+.about-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Degradado para que la insignia destaque sobre la foto */
+.about-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(15,32,56,.75) 0%, rgba(15,32,56,0) 38%);
+  pointer-events: none;
+}
+
+.about-photo__badge {
+  position: absolute;
+  left: clamp(1rem, 2.4vw, 1.6rem);
+  right: clamp(1rem, 2.4vw, 1.6rem);
+  bottom: clamp(1rem, 2.4vw, 1.6rem);
+  z-index: 1;
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  background: rgba(15, 32, 56, .55);
+  border: 1px solid var(--clr-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 100px;
+  padding: .55rem 1.1rem;
+  font-size: .5rem; font-weight: 900; letter-spacing: .3em;
+  text-transform: uppercase; color: var(--clr-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tarjeta de texto que se solapa con el borde de la foto,
+   integrando ambos elementos en una sola composición */
+.about-copy {
+  position: relative;
+  z-index: 2;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--card-radius);
+  padding: clamp(1.8rem, 4.5vw, 3.4rem);
+  margin-left: clamp(-3rem, -6vw, -1.6rem);
+  box-shadow: 0 40px 80px -32px rgba(5, 12, 24, .55);
+}
+
+.about-eyebrow {
+  display: inline-block;
+  font-size: .58rem; font-weight: 400; letter-spacing: .55em;
+  text-transform: uppercase; color: var(--clr-accent);
+  margin-bottom: .8rem;
+}
+
+.about-title {
+  font-family: var(--font); font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.6rem); letter-spacing: -.02em;
+  text-transform: uppercase; color: var(--clr-text); line-height: .95;
+  margin-bottom: 1.2rem;
+  scroll-margin-top: 6rem;
+}
+
+.about-text {
+  max-width: 60ch;
+  font-family: var(--font); font-weight: 400;
+  font-size: clamp(.9rem, 1.4vw, 1.05rem);
+  line-height: 1.7;
+  color: var(--clr-muted);
+}
+
+/* ── Herramientas (iconos 3D .glb vía <model-viewer>) ── */
+.about-tools__eyebrow {
+  display: inline-block;
+  font-size: .55rem; font-weight: 900; letter-spacing: .4em;
+  text-transform: uppercase; color: var(--clr-accent);
+  margin-bottom: .7rem;
+}
+
+.about-tools__title {
+  font-family: var(--font); font-weight: 900;
+  font-size: clamp(1.4rem, 3.4vw, 2.2rem);
+  letter-spacing: -.02em; text-transform: uppercase;
+  color: var(--clr-text); line-height: 1;
+  margin-bottom: clamp(1.5rem, 3vw, 2.4rem);
+}
+
+.tools-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--grid-gap);
+}
+
+.tool-card {
+  display: flex; flex-direction: column; align-items: center; gap: .7rem;
+  padding: clamp(1rem, 2vw, 1.6rem) 1rem;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--card-radius);
+  transition: border-color .3s ease;
+}
+.tool-card:hover { border-color: var(--clr-accent); }
+
+.tool-card__model {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  --poster-color: transparent;
+  background-color: transparent;
+}
+
+.tool-card__name {
+  font-size: .6rem; font-weight: 900; letter-spacing: .25em;
+  text-transform: uppercase; color: var(--clr-muted);
+  transition: color .25s ease;
+}
+.tool-card:hover .tool-card__name { color: var(--clr-text); }
+
+
+/* ════════════════════════════════════════
+   SECCIÓN CONTACTO
+════════════════════════════════════════ */
+.contact-section {
+  background: var(--clr-bg-2);
+  padding: clamp(4.5rem, 10vw, 8rem) clamp(1.2rem, 4vw, 4rem);
+}
+
+.contact-inner {
+  max-width: 56rem;
+  margin: 0 auto;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+.contact-eyebrow {
+  display: inline-block;
+  font-size: .58rem; font-weight: 400; letter-spacing: .55em;
+  text-transform: uppercase; color: var(--clr-accent);
+  margin-bottom: .9rem;
+}
+
+.contact-title {
+  font-family: var(--font); font-weight: 900;
+  font-size: clamp(2.2rem, 7vw, 4.6rem); letter-spacing: -.02em;
+  text-transform: uppercase; color: var(--clr-text); line-height: .95;
+  margin-bottom: 1.4rem;
+  scroll-margin-top: 6rem;
+}
+
+.contact-text {
+  max-width: 52ch;
+  font-size: clamp(.9rem, 1.4vw, 1.05rem);
+  line-height: 1.7;
+  color: var(--clr-muted);
+  margin-bottom: clamp(2rem, 4vw, 2.8rem);
+}
+
+.contact-cta {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: .6rem .9rem;
+  max-width: 100%;
+  padding: 1rem 1.8rem;
+  border: 1px solid var(--clr-accent);
+  border-radius: 100px;
+  font-family: var(--font); font-size: .62rem; font-weight: 900;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--clr-text); text-decoration: none;
+  text-align: center;
+  overflow-wrap: anywhere;
+  overflow: hidden;
+}
+
+.contact-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--clr-accent);
+  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+  z-index: 0;
+}
+.contact-cta:hover::before,
+.contact-cta:focus-visible::before { transform: scaleX(1); }
+.contact-cta:hover,
+.contact-cta:focus-visible { color: var(--clr-bg); }
+
+.contact-cta span,
+.contact-cta__arrow { position: relative; z-index: 1; }
+
+.contact-cta__arrow {
+  display: flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px;
+  transition: transform .3s ease;
+}
+.contact-cta__arrow svg { width: 14px; height: 14px; }
+.contact-cta:hover .contact-cta__arrow { transform: translateX(4px); }
+
+
+/* ── Reveal genérico al hacer scroll ── */
+.reveal-up {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+}
+.reveal-up.in-view { opacity: 1; transform: translateY(0); }
+
+
+/* ════════════════════════════════════════
    FOOTER
 ════════════════════════════════════════ */
 .site-footer {
@@ -542,6 +775,26 @@ body {
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: clamp(160px, 28vw, 280px);
   }
+
+  /* Sobre mí: foto y texto se apilan, la tarjeta de texto
+     se solapa por arriba para mantener la composición integrada */
+  .about-intro {
+    grid-template-columns: 1fr;
+  }
+  .about-photo {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .about-copy {
+    max-width: 460px;
+    margin: -2.4rem auto 0;
+    text-align: center;
+  }
+
+  /* Herramientas: bloque centrado sobre la rejilla */
+  .about-tools {
+    text-align: center;
+  }
 }
 
 /* ── Mobile (≤ 640px) ── */
@@ -562,14 +815,19 @@ body {
     letter-spacing: 0.3em;
   }
 
-  /* Cabecera de proyectos: apila título y filtros */
+  /* Cabecera de proyectos: apila título y filtros, centrados */
   .projects-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     gap: 1.5rem;
   }
+  .projects-title-group {
+    align-items: center;
+  }
   .filters {
-    align-self: flex-start;
+    align-self: center;
+    justify-content: center;
   }
 
   /* Bento: 1 columna, todas las tarjetas se convierten en 1×1 */
@@ -585,6 +843,24 @@ body {
   .card__info     { transform: translateY(0); }
   .card__category { opacity: 1; transform: translateY(0); }
   .card__arrow    { opacity: 1; transform: translate(0, 0); }
+
+  /* Herramientas: dos columnas, más cómodas en pantallas estrechas */
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Contacto: texto del botón más compacto para no forzar el ancho */
+  .contact-cta {
+    letter-spacing: .18em;
+    padding: .9rem 1.4rem;
+  }
+
+  /* Insignia de la foto: más compacta en pantallas estrechas */
+  .about-photo__badge {
+    font-size: .46rem;
+    letter-spacing: .22em;
+    padding: .5rem .9rem;
+  }
 }
 
 /* ── Mobile pequeño (≤ 400px) ── */
@@ -807,4 +1083,95 @@ body {
 @keyframes ctReveal {
   from { opacity: 0; transform: scale(.97); }
   to   { opacity: 1; transform: scale(1); }
+}
+
+
+/* ════════════════════════════════════════
+   GALERÍA OTROS
+   Se muestra al pulsar el botón "Otros".
+   Estructura en bloques: cada uno con título,
+   breve texto y su propia rejilla de fotos.
+════════════════════════════════════════ */
+#otrosGallery {
+  display: none;            /* JS lo cambia a block al abrir */
+  opacity: 0;
+  transform: scale(.98);
+  transition: opacity .38s ease, transform .38s cubic-bezier(.16,1,.3,1);
+}
+#otrosGallery.ct-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Bloque individual ── */
+.otros-block {
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+.otros-block:last-child { margin-bottom: 0; }
+
+/* Cabecera del bloque (título + texto) */
+.otros-block__head {
+  max-width: 60ch;
+  margin-bottom: clamp(1.2rem, 2.5vw, 2rem);
+}
+
+.otros-block__eyebrow {
+  display: inline-block;
+  font-size: .55rem; font-weight: 900; letter-spacing: .4em;
+  text-transform: uppercase; color: var(--clr-accent);
+  margin-bottom: .7rem;
+}
+
+.otros-block__title {
+  font-family: var(--font); font-weight: 900;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  letter-spacing: -.02em; text-transform: uppercase;
+  color: var(--clr-text); line-height: .95;
+  margin-bottom: .9rem;
+  scroll-margin-top: 6rem;   /* deja aire bajo la nav fija al hacer scroll */
+}
+
+.otros-block__text {
+  font-family: var(--font); font-weight: 400;
+  font-size: clamp(.85rem, 1.4vw, 1rem);
+  line-height: 1.6;
+  color: var(--clr-muted);
+}
+
+/* Rejilla de fotos del bloque — mismo sistema que las otras galerías */
+.otros-block__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(150px, 18vw, 255px);
+  grid-auto-flow: dense;
+  gap: clamp(3px, 0.4vw, 5px);
+}
+
+/* ── Lightbox otros ── */
+#otrosLightbox {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(5,12,24,.97);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+#otrosLightbox.open { opacity: 1; pointer-events: all; }
+
+/* ── Responsive galería otros ── */
+@media (max-width: 860px) {
+  .otros-block__grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: clamp(130px, 22vw, 210px);
+  }
+}
+@media (max-width: 540px) {
+  .otros-block__grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: clamp(120px, 35vw, 185px);
+  }
+}
+@media (max-width: 380px) {
+  .otros-block__grid { grid-auto-rows: clamp(100px, 38vw, 150px); }
 }

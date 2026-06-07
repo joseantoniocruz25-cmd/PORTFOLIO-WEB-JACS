@@ -74,9 +74,11 @@ update();
 
     /* ── Galerías especiales (clave = valor de data-filter) ── */
     const specialGalleries = {
-      'Cartelería':    { el: document.getElementById('ctGallery'),   visible: false },
-      'Ilustraciones': { el: document.getElementById('ilGallery'),   visible: false },
-      'Fotografía':    { el: document.getElementById('fotGallery'),  visible: false },
+      'Cartelería':    { el: document.getElementById('ctGallery'),    visible: false },
+      'Ilustraciones': { el: document.getElementById('ilGallery'),    visible: false },
+      'Fotografía':    { el: document.getElementById('fotGallery'),   visible: false },
+      /* "Otros" se organiza en bloques (article), por eso usa display:block */
+      'Otros':         { el: document.getElementById('otrosGallery'), visible: false, display: 'block' },
     };
 
     /* ── Aplicar filtro normal al bento grid ── */
@@ -115,7 +117,7 @@ update();
 
     /* ── Animar entrada de una galería especial ── */
     function _revealGallery(g) {
-      g.el.style.display = 'grid';
+      g.el.style.display = g.display || 'grid';
       g.el.querySelectorAll('.ct-cell').forEach((cell, i) => {
         cell.style.animationDelay = `${Math.min(i * 0.04, 0.9)}s`;
       });
@@ -200,7 +202,18 @@ update();
       card.addEventListener('click', e => {
         e.preventDefault();
         matchBtn.click();
-        document.getElementById('proyectos').scrollIntoView({ behavior: 'smooth' });
+
+        /* Si la tarjeta apunta a un bloque concreto (data-goto),
+           esperamos a que la galería se revele y hacemos scroll a él. */
+        const goto = card.dataset.goto;
+        if (goto) {
+          setTimeout(() => {
+            const block = document.getElementById(goto);
+            if (block) block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, HIDE_MS + 140);
+        } else {
+          document.getElementById('proyectos').scrollIntoView({ behavior: 'smooth' });
+        }
       });
     });
 
@@ -479,6 +492,98 @@ update();
 
 
     /* ══════════════════════════════════════
+       LIGHTBOX OTROS
+       Recorre todas las fotos de #otrosGallery,
+       sin importar el bloque al que pertenezcan.
+    ══════════════════════════════════════ */
+    (function initOtrosLightbox() {
+      const lb    = document.getElementById('otrosLightbox');
+      if (!lb) return;
+
+      const lbImg = document.getElementById('otrosLbImg');
+      const lbCtr = document.getElementById('otrosLbCounter');
+      const cells = () => [...document.querySelectorAll('#otrosGallery .ct-cell')];
+      let cur = 0, trigger = null;
+
+      function imgs() { return cells().map(c => c.querySelector('img')); }
+
+      function update() {
+        const img = imgs()[cur];
+        lbImg.src = img.src; lbImg.alt = img.alt;
+        lbCtr.textContent = `${cur + 1} / ${imgs().length}`;
+      }
+
+      function goTo(idx, anim = true) {
+        cur = (idx + imgs().length) % imgs().length;
+        if (anim) {
+          lbImg.classList.add('switching');
+          setTimeout(() => { update(); lbImg.classList.remove('switching'); }, 200);
+        } else update();
+      }
+
+      function openLb(idx) {
+        goTo(idx, false);
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('otrosLbClose').focus();
+      }
+
+      function closeLb() {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+        if (trigger) { trigger.focus(); trigger = null; }
+      }
+
+      const grid = document.getElementById('otrosGallery');
+      if (grid) {
+        grid.addEventListener('click', e => {
+          const cell = e.target.closest('.ct-cell');
+          if (!cell) return;
+          trigger = cell;
+          openLb(cells().indexOf(cell));
+        });
+        grid.addEventListener('keydown', e => {
+          const cell = e.target.closest('.ct-cell');
+          if (!cell) return;
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            trigger = cell;
+            openLb(cells().indexOf(cell));
+          }
+        });
+      }
+
+      document.getElementById('otrosLbClose').addEventListener('click', closeLb);
+      document.getElementById('otrosLbPrev').addEventListener('click', () => goTo(cur - 1));
+      document.getElementById('otrosLbNext').addEventListener('click', () => goTo(cur + 1));
+
+      lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+
+      document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape')     closeLb();
+        if (e.key === 'ArrowLeft')  goTo(cur - 1);
+        if (e.key === 'ArrowRight') goTo(cur + 1);
+      });
+
+      let tX = 0;
+      lb.addEventListener('touchstart', e => { tX = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', e => {
+        const d = tX - e.changedTouches[0].clientX;
+        if (Math.abs(d) > 50) goTo(d > 0 ? cur + 1 : cur - 1);
+      });
+
+      lb.addEventListener('keydown', e => {
+        if (e.key !== 'Tab') return;
+        const fs = [...lb.querySelectorAll('button')];
+        const first = fs[0], last = fs[fs.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    })();
+
+
+    /* ══════════════════════════════════════
        PROYECTOS — reveal al scroll (IntersectionObserver)
        Las tarjetas entran con stagger escalonado
     ══════════════════════════════════════ */
@@ -495,3 +600,20 @@ update();
     }, { threshold: 0.08 });
  
     cards.forEach(card => revealObserver.observe(card));
+
+
+    /* ══════════════════════════════════════
+       SOBRE MÍ / CONTACTO — reveal genérico al scroll
+       Anima cualquier elemento .reveal-up al entrar en viewport
+    ══════════════════════════════════════ */
+    const revealUpEls = document.querySelectorAll('.reveal-up');
+    const revealUpObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealUpObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealUpEls.forEach(el => revealUpObserver.observe(el));

@@ -2,103 +2,104 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JACS WEB</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JACS WEB</title>
 
-    <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="animations.css">
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+  <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="animations.css">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+  <script src="script.js" defer></script>
 </head>
 
 <body>
 
-    <header>
+  <header>
 
-        <nav class="site-nav" id="siteNav" aria-label="Navegación principal">
-            <a class="site-nav__logo" href="#" aria-label="Inicio — José Antonio Cruz Segura">JACS</a>
-            <ul class="site-nav__links" role="list">
-                <li><a href="#proyectos">Proyectos</a></li>
-                <li><a href="#sobre-mi">Sobre mí</a></li>
-                <li><a href="#enlaceapdf">CV</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
+    <nav class="site-nav" id="siteNav" aria-label="Navegación principal">
+      <a class="site-nav__logo" href="#" aria-label="Inicio — José Antonio Cruz Segura">JACS</a>
+      <ul class="site-nav__links" role="list">
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#enlaceapdf">CV</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
 
-        <div class="hero-section" aria-labelledby="hero-heading">
-            <div class="hero-sticky">
+    <div class="hero-section" aria-labelledby="hero-heading">
+      <div class="hero-sticky">
 
-                <video class="hero-video" autoplay muted loop playsinline preload="metadata"
-                    poster="assets/hero-poster.jpg" aria-hidden="true">
-                    <source src="assets/hero-bg.mp4" type="video/mp4">
-                    <source src="assets/hero-bg.webm" type="video/webm">
-                </video>
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg"
+          aria-hidden="true">
+          <source src="assets/hero-bg.mp4" type="video/mp4">
+          <source src="assets/hero-bg.webm" type="video/webm">
+        </video>
 
-                <div class="hero-bg" aria-hidden="true"></div>
-                <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
 
-                <div class="hero-text">
-                    <h1 id="hero-heading" class="sr-only">José Antonio Cruz Segura</h1>
-                    <p class="full-name" id="fullName" aria-hidden="true">Jose Antonio<br>Cruz Segura</p>
-                    <p class="logo-mark" id="logoMark" aria-hidden="true">JACS</p>
-                    <p class="slogan" id="slogan" aria-hidden="true">Píxeles, polígonos y actitud</p>
-                </div>
-
-                <div class="scroll-cue" id="scrollCue" aria-hidden="true">
-                    <span class="scroll-cue__label">Scroll</span>
-                    <span class="scroll-cue__track"></span>
-                </div>
-
-            </div>
+        <div class="hero-text">
+          <h1 id="hero-heading" class="sr-only">José Antonio Cruz Segura</h1>
+          <p class="full-name" id="fullName" aria-hidden="true">Jose Antonio<br>Cruz Segura</p>
+          <p class="logo-mark" id="logoMark" aria-hidden="true">JACS</p>
+          <p class="slogan" id="slogan" aria-hidden="true">Píxeles, polígonos y actitud</p>
         </div>
 
-    </header>
+        <div class="scroll-cue" id="scrollCue" aria-hidden="true">
+          <span class="scroll-cue__label">Scroll</span>
+          <span class="scroll-cue__track"></span>
+        </div>
+
+      </div>
+    </div>
+
+  </header>
 
 
-<main id="main-content">
- 
+  <main id="main-content">
+
     <!-- ── SECCIÓN PROYECTOS ── -->
     <section class="projects-section" id="proyectos" aria-labelledby="proyectos-heading">
- 
+
       <div class="projects-header">
- 
+
         <div class="projects-title-group">
           <span class="projects-eyebrow">Selección de trabajos</span>
           <h2 class="projects-title" id="proyectos-heading">Proyectos</h2>
         </div>
- 
+
         <!-- Filtros de categoría -->
         <div class="filters" role="group" aria-label="Filtrar proyectos por categoría">
-          <button class="filter-btn active" data-filter="all"          aria-pressed="true">
+          <button class="filter-btn active" data-filter="all" aria-pressed="true">
             <span>Todos</span>
           </button>
-          <button class="filter-btn" data-filter="branding"            aria-pressed="false">
+          <button class="filter-btn" data-filter="branding" aria-pressed="false">
             <span>Branding</span>
           </button>
-          <button class="filter-btn" data-filter="Cartelería"              aria-pressed="false">
+          <button class="filter-btn" data-filter="Cartelería" aria-pressed="false">
             <span>Cartelería</span>
           </button>
-          <button class="filter-btn" data-filter="3d"                  aria-pressed="false">
+          <button class="filter-btn" data-filter="3d" aria-pressed="false">
             <span>3D</span>
           </button>
-          <button class="filter-btn" data-filter="Fotografía"                  aria-pressed="false">
+          <button class="filter-btn" data-filter="Fotografía" aria-pressed="false">
             <span>Fotografía</span>
           </button>
-          <button class="filter-btn" data-filter="Ilustraciones"            aria-pressed="false">
+          <button class="filter-btn" data-filter="Ilustraciones" aria-pressed="false">
             <span>Ilustraciones</span>
           </button>
-          <button class="filter-btn" data-filter="Otros"            aria-pressed="false">
+          <button class="filter-btn" data-filter="Otros" aria-pressed="false">
             <span>Otros</span>
           </button>
-          
+
         </div>
- 
+
       </div>
- 
+
       <!-- ══════════════════════════════════════
            BENTO GRID
            Estructura 4 columnas:
@@ -107,511 +108,458 @@
            Fila 4:   [Silvio 1×1] [3D 2×1            ] [WibraNet 1×1]
       ══════════════════════════════════════ -->
       <div class="bento-grid" id="bentoGrid">
- 
- 
+
+
         <!-- 1 · Real Deportivo Chicharrón — Branding · 2×2 · DESTACADO -->
-        <a class="bento-card card--2x2"
-           href="proyectochicharron.html"
-           data-category="branding"
-           aria-label="Ver proyecto Real Deportivo Chicharrón">
-          <img class="card__img" src="../proyectos/portadachicharron.jpg"
-               alt="Branding Real Deportivo Chicharrón"
-               width="900" height="700" loading="lazy">
+        <a class="bento-card card--2x2" href="proyectochicharron.html" data-category="branding"
+          aria-label="Ver proyecto Real Deportivo Chicharrón">
+          <img class="card__img" src="../proyectos/portadachicharron.jpg" alt="Branding Real Deportivo Chicharrón"
+            width="900" height="700" loading="lazy">
           <div class="card__overlay"></div>
           <div class="card__info">
             <span class="card__category">Branding</span>
             <p class="card__name">Real Deportivo<br>Chicharrón</p>
           </div>
           <div class="card__arrow" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
             </svg>
           </div>
         </a>
 
-        <a class="bento-card card--1x2"
-           href="proyecto-betis.html"
-           data-category="branding"
-           aria-label="Ver proyecto Peña Bética Cultural Algabeña">
-          <img class="card__img" src="../proyectos/portadabetis.jpg"
-               alt="Branding Peña Bética Cultural Algabeña"
-               width="450" height="380" loading="lazy">
+        <a class="bento-card card--1x2" href="proyecto-betis.html" data-category="branding"
+          aria-label="Ver proyecto Peña Bética Cultural Algabeña">
+          <img class="card__img" src="../proyectos/portadabetis.jpg" alt="Branding Peña Bética Cultural Algabeña"
+            width="450" height="380" loading="lazy">
           <div class="card__overlay"></div>
           <div class="card__info">
             <span class="card__category">Branding</span>
             <p class="card__name">Peña Bética</p>
           </div>
           <div class="card__arrow" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
             </svg>
           </div>
         </a>
- 
- <!-- 8 · Hdad Jesús Padre Nazareno La Algaba  — Branding · 1×1 -->
-        <a class="bento-card card--1x2"
-           href="proyectohdadjesus.html"
-           data-category="branding"
-           aria-label="Ver proyecto Hdad Jesús Padre Nazareno La Algaba">
+
+        <!-- 8 · Hdad Jesús Padre Nazareno La Algaba  — Branding · 1×1 -->
+        <a class="bento-card card--1x2" href="proyectohdadjesus.html" data-category="branding"
+          aria-label="Ver proyecto Hdad Jesús Padre Nazareno La Algaba">
           <img class="card__img" src="../proyectos/portadahdadjesus.svg"
-               alt="Visual Branding Hdad Jesús Padre Nazareno La Algaba"
-               width="450" height="380" loading="lazy">
+            alt="Visual Branding Hdad Jesús Padre Nazareno La Algaba" width="450" height="380" loading="lazy">
           <div class="card__overlay"></div>
           <div class="card__info">
             <span class="card__category">Branding</span>
             <p class="card__name">Hdad. Ntro. Jesús Padre Nazareno La Algaba</p>
           </div>
           <div class="card__arrow" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
             </svg>
           </div>
         </a>
 
 
 
-         <!-- 3 · Mea Culpa — Branding · 1×2 -->
-        <a class="bento-card card--1x2"
-           href="proyectomeaculpa.html"
-           data-category="branding"
-           aria-label="Ver proyecto Mea Culpa">
-          <img class="card__img" src="../proyectos/portadameaculpa.svg"
-               alt="Visual Branding Mea Culpa"
-               width="450" height="380" loading="lazy">
+        <!-- 3 · Mea Culpa — Branding · 1×2 -->
+        <a class="bento-card card--1x2" href="proyectomeaculpa.html" data-category="branding"
+          aria-label="Ver proyecto Mea Culpa">
+          <img class="card__img" src="../proyectos/portadameaculpa.svg" alt="Visual Branding Mea Culpa" width="450"
+            height="380" loading="lazy">
           <div class="card__overlay"></div>
           <div class="card__info">
             <span class="card__category">Branding</span>
             <p class="card__name">Mea Culpa</p>
           </div>
           <div class="card__arrow" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
             </svg>
           </div>
         </a>
-          <!-- 5 · Luckys Burguer — Ilustraciones · 2×1 -->
-        <a class="bento-card card--2x1"
-           href="proyectoluckys.html"
-           data-category="branding"
-           aria-label="Ver proyecto Luckys Burguer">
-          <img class="card__img" src="../proyectos/portadaluckys.svg"
-               alt="Branding Luckys Burguer"
-               width="450" height="380" loading="lazy">
+        <!-- 5 · Luckys Burguer — Ilustraciones · 2×1 -->
+        <a class="bento-card card--2x1" href="proyectoluckys.html" data-category="branding"
+          aria-label="Ver proyecto Luckys Burguer">
+          <img class="card__img" src="../proyectos/portadaluckys.svg" alt="Branding Luckys Burguer" width="450"
+            height="380" loading="lazy">
           <div class="card__overlay"></div>
           <div class="card__info">
             <span class="card__category">Branding</span>
             <p class="card__name">Luckys Burguer</p>
           </div>
           <div class="card__arrow" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
             </svg>
           </div>
         </a>
         <!-- 6 · Silvio — Social Media · 1×1 -->
-        <a class="bento-card card--1x1"
-           href="#Cartelería"
-           data-category="Cartelería"
-           aria-label="Ver proyecto Silvio Café y Copas">
-          <img class="card__img" src="../proyectos/logosilvio.png"
-               alt="Cartelería Silvio Café y Copas"
-               width="450" height="380" loading="lazy">
+        <a class="bento-card card--1x1" href="#Cartelería" data-category="Cartelería"
+          aria-label="Ver proyecto Silvio Café y Copas">
+          <img class="card__img" src="../proyectos/logosilvio.png" alt="Cartelería Silvio Café y Copas" width="450"
+            height="380" loading="lazy">
           <div class="card__overlay"></div>
           <div class="card__info">
             <span class="card__category">Cartelería</span>
             <p class="card__name">Silvio cAFÉ & COPAS</p>
           </div>
           <div class="card__arrow" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
             </svg>
           </div>
         </a>
 
         <!--Hoyo10 — Social Media · 1×1 -->
-        <a class="bento-card card--1x1"
-           href="#Cartelería"
-           data-category="Cartelería"
-           aria-label="Ver proyecto HOYO10 Café y Copas">
-          <img class="card__img" src="../proyectos/logohoyo10cabecera.jpg"
-               alt="Cartelería HOYO10 Café y Copas"
-               width="450" height="380" loading="lazy">
+        <a class="bento-card card--1x1" href="#Cartelería" data-category="Cartelería"
+          aria-label="Ver proyecto HOYO10 Café y Copas">
+          <img class="card__img" src="../proyectos/logohoyo10cabecera.jpg" alt="Cartelería HOYO10 Café y Copas"
+            width="450" height="380" loading="lazy">
           <div class="card__overlay"></div>
           <div class="card__info">
             <span class="card__category">Cartelería</span>
             <p class="card__name">HOYO10 cAFÉ & COPAS</p>
           </div>
           <div class="card__arrow" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
             </svg>
           </div>
         </a>
- 
-       
-         <!-- 7 · Proyectos 3D — 3D · 2×1 -->
-        <a class="bento-card card--1x1"
-           href="proyectos/3d"
-           data-category="3d"
-           aria-label="Ver proyectos 3D">
-          <img class="card__img" src="assets/proyectos/3d.jpg"
-               alt="Proyectos de modelado e impresión 3D"
-               width="900" height="380" loading="lazy">
+
+
+        <!-- 7 · Proyectos 3D — 3D · 2×1 -->
+        <a class="bento-card card--1x1" href="proyectos/3d" data-category="3d" aria-label="Ver proyectos 3D">
+          <img class="card__img" src="assets/proyectos/3d.jpg" alt="Proyectos de modelado e impresión 3D" width="900"
+            height="380" loading="lazy">
           <div class="card__overlay"></div>
           <div class="card__info">
             <span class="card__category">3D</span>
             <p class="card__name">Modelado &amp;<br>Impresión 3D</p>
           </div>
           <div class="card__arrow" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 8h10"/><path d="M9 4l4 4-4 4"/>
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
             </svg>
           </div>
         </a>
- 
-       
-        
- 
+
+
+        <!-- ══════════════════════════════════════
+             TARJETAS DE ENLACE A "OTROS"  · 1×1
+             Cada tarjeta abre la galería "Otros" y hace
+             scroll hasta su bloque (data-goto = id del bloque).
+             Para añadir otra: duplica el bloque <a> y cambia
+             href se queda en #Otros, data-goto al id del bloque
+             y el contenido (imagen, nombre).
+        ══════════════════════════════════════ -->
+
+        <!-- Enlace · Bloque 1 de Otros -->
+        <a class="bento-card card--1x1" href="#Otros" data-category="Otros" data-goto="otros-bloque-1"
+          aria-label="Ver proyecto Cofre Decorativo en Otros">
+          <img class="card__img" src="../proyectos/cofre01.webp" alt="Cofre Decorativo" width="450" height="380"
+            loading="lazy">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <span class="card__category">Personalización</span>
+            <p class="card__name">Cofre Decorativo</p>
+          </div>
+          <div class="card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
+            </svg>
+          </div>
+        </a>
+
+        <!-- Enlace · Bloque 2 de Otros -->
+        <a class="bento-card card--1x1" href="#Otros" data-category="Otros" data-goto="otros-bloque-2"
+          aria-label="Ver proyecto Cartas Contra la Humanidad en Otros">
+          <img class="card__img" src="../proyectos/cartashumanidad12.webp" alt="Cartas Contra la Humanidad" width="450"
+            height="380" loading="lazy">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <span class="card__category">Personalización</span>
+            <p class="card__name">Cartas Contra la Humanidad</p>
+          </div>
+          <div class="card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
+            </svg>
+          </div>
+        </a>
+
+        <!-- Enlace · Bloque 3 de Otros -->
+        <a class="bento-card card--1x1" href="#Otros" data-category="Otros" data-goto="otros-bloque-3"
+          aria-label="Ver proyecto Equipación Algabeño en Otros">
+          <img class="card__img" src="../proyectos/atcoalgabeno02.webp" alt="Equipación Algabeño" width="450"
+            height="380" loading="lazy">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <span class="card__category">Personalización</span>
+            <p class="card__name">Equipación Atco. Algabeño</p>
+          </div>
+          <div class="card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
+            </svg>
+          </div>
+        </a>
+        <!-- Enlace · Bloque 4 de Otros -->
+        <a class="bento-card card--1x1" href="#Otros" data-category="Otros" data-goto="otros-bloque-4"
+          aria-label="Ver proyecto Camiseta Diego Tristán">
+          <img class="card__img" src="../proyectos/diegotristan01.webp" alt="Camiseta Diego Tristan" width="450"
+            height="380" loading="lazy">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <span class="card__category">Personalización</span>
+            <p class="card__name">Camiseta Diego Tristán</p>
+          </div>
+          <div class="card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
+            </svg>
+          </div>
+        </a>
+
       </div><!-- /bento-grid -->
 
-      <!-- ══════════════════════════════════════
-           GALERÍA CARTELERÍA
-           Visible solo al pulsar el botón "Cartelería".
-           Sin texto, sin categorías: pura imagen.
 
-           Clases de celda:
-             (sin clase)      → 1×1 cuadrado / post feed
-             .ct-h2           → 1×2 story vertical
-             .ct-w2           → 2×1 banner apaisado
-             .ct-w3           → 3×1 banner muy ancho
-             .ct-w2.ct-h2    → 2×2 pieza grande
-
-           Para añadir más piezas copia el bloque
-           del tipo que necesites al final del grid.
-      ══════════════════════════════════════ -->
 
       <!-- SILVIO CAFE COPAS -->
 
       <div id="ctGallery" role="region" aria-label="Galería de cartelería">
-<div class="ct-cell ct-w2 ct-h2" tabindex="0"
-             aria-label="Silvio — Carteleria">
-          <img src="../proyectos/logosilvio.png"
-               alt="Carteleria Silvio Café y Copas"
-               width="900" height="900" loading="lazy">
+        <div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="Silvio — Carteleria">
+          <img src="../proyectos/logosilvio.png" alt="Carteleria Silvio Café y Copas" width="900" height="900"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell ct-w2 ct-h2" tabindex="0"
-             aria-label="Silvio — Carteleria">
-          <img src="../proyectos/silvio01.jpg"
-               alt="Carteleria Silvio Café y Copas"
-               width="900" height="900" loading="lazy">
+        <div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="Silvio — Carteleria">
+          <img src="../proyectos/silvio01.jpg" alt="Carteleria Silvio Café y Copas" width="900" height="900"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell ct-h2" tabindex="0"
-             aria-label="Silvio — Carteleria">
-          <img src="../proyectos/silvio02.jpg"
-               alt="Story 2x1 cachimbas Hoy010"
-               width="450" height="900" loading="lazy">
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="Silvio — Carteleria">
+          <img src="../proyectos/silvio02.jpg" alt="Story 2x1 cachimbas Hoy010" width="450" height="900" loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Silvio — Carteleria">
-          <img src="../proyectos/silvio03.jpg"
-               alt="Post feed Gran Derbi Silvio"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Silvio — Carteleria">
+          <img src="../proyectos/silvio03.jpg" alt="Post feed Gran Derbi Silvio" width="450" height="450"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Silvio — Carteleria">
-          <img src="../proyectos/silvio04.jpg"
-               alt="Post verano Silvio"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Silvio — Carteleria">
+          <img src="../proyectos/silvio04.jpg" alt="Post verano Silvio" width="450" height="450" loading="lazy">
         </div>
 
 
-        <div class="ct-cell ct-w3" tabindex="0"
-             aria-label="Silvio — Carteleria">
-          <img src="../proyectos/silvio05.jpg"
-               alt="Post feed Silvio"
-               width="1350" height="450" loading="lazy">
+        <div class="ct-cell ct-w3" tabindex="0" aria-label="Silvio — Carteleria">
+          <img src="../proyectos/silvio05.jpg" alt="Post feed Silvio" width="1350" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Silvio — Carteleria">
-          <img src="../proyectos/silvio06.jpg"
-               alt="Post feed evento Hoyo10 Copa del Rey"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Silvio — Carteleria">
+          <img src="../proyectos/silvio06.jpg" alt="Post feed evento Hoyo10 Copa del Rey" width="450" height="450"
+            loading="lazy">
         </div>
 
         <!-- HOYO10 -->
 
 
-<div class="ct-cell ct-w2 ct-h2" tabindex="0"
-             aria-label="Hoyo10 — Carteleria">
-          <img src="../proyectos/logohoyo10cabecera.jpg"
-               alt="Carteleria HOYO10 Café y Copas"
-               width="900" height="900" loading="lazy">
+        <div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="Hoyo10 — Carteleria">
+          <img src="../proyectos/logohoyo10cabecera.jpg" alt="Carteleria HOYO10 Café y Copas" width="900" height="900"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell ct-h2" tabindex="0"
-             aria-label="Hoyo10 — story">
-          <img src="../proyectos/hoyo10glaeria01.jpg"
-               alt="Hoyo10 Carteleria"
-               width="450" height="900" loading="lazy">
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="Hoyo10 — story">
+          <img src="../proyectos/hoyo10glaeria01.jpg" alt="Hoyo10 Carteleria" width="450" height="900" loading="lazy">
         </div>
 
-        <div class="ct-cell ct-w2" tabindex="0"
-             aria-label="Hoyo10 — cartel Champions">
-          <img src="../proyectos/hoyo10glaeria02.jpg"
-               alt="Hoyo10 Carteleria"
-               width="900" height="450" loading="lazy">
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="Hoyo10 — cartel Champions">
+          <img src="../proyectos/hoyo10glaeria02.jpg" alt="Hoyo10 Carteleria" width="900" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Hoyo10 — post feed">
-          <img src="../proyectos/hoyo10glaeria03.jpg"
-               alt="Hoyo10 Carteleria"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Hoyo10 — post feed">
+          <img src="../proyectos/hoyo10glaeria03.jpg" alt="Hoyo10 Carteleria" width="450" height="450" loading="lazy">
         </div>
 
         <!-- SILVIO CAFÉ Y COPAS -->
-        <div class="ct-cell ct-w2 ct-h2" tabindex="0"
-             aria-label="Hoyo10 — post feed">
-          <img src="../proyectos/hoyo10glaeria04.jpg"
-               alt="Hoyo10 Carteleria"
-               width="900" height="900" loading="lazy">
+        <div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="Hoyo10 — post feed">
+          <img src="../proyectos/hoyo10glaeria04.jpg" alt="Hoyo10 Carteleria" width="900" height="900" loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Hoyo10 — post feed">
-          <img src="../proyectos/hoyo10glaeria05.webp"
-               alt="Hoyo10 Carteleria"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Hoyo10 — post feed">
+          <img src="../proyectos/hoyo10glaeria05.webp" alt="Hoyo10 Carteleria" width="450" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell ct-h2" tabindex="0"
-             aria-label="Hoyo10 — story">
-          <img src="../proyectos/hoyo10glaeria06.jpg"
-               alt="Hoyo10 Carteleria"
-               width="450" height="900" loading="lazy">
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="Hoyo10 — story">
+          <img src="../proyectos/hoyo10glaeria06.jpg" alt="Hoyo10 Carteleria" width="450" height="900" loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Hoyo10 — post feed">
-          <img src="../proyectos/hoyo10glaeria07.jpg"
-               alt="Hoyo10 Carteleria"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Hoyo10 — post feed">
+          <img src="../proyectos/hoyo10glaeria07.jpg" alt="Hoyo10 Carteleria" width="450" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell ct-w2" tabindex="0"
-             aria-label="Hoyo10 — banner Eurocopa">
-          <img src="../proyectos/hoyo10glaeria08.jpg"
-               alt="Banner Eurocopa 2024 Hoyo10"
-               width="900" height="450" loading="lazy">
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="Hoyo10 — banner Eurocopa">
+          <img src="../proyectos/hoyo10glaeria08.jpg" alt="Banner Eurocopa 2024 Hoyo10" width="900" height="450"
+            loading="lazy">
         </div>
 
- 
-        <div class="ct-cell ct-h2" tabindex="0"
-             aria-label="Hoyo10 — render3D">
-          <img src="../proyectos/hoyo10glaeria09.webp"
-               alt="Hoyo10 Carteleria"
-               width="450" height="900" loading="lazy">
+
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="Hoyo10 — render3D">
+          <img src="../proyectos/hoyo10glaeria09.webp" alt="Hoyo10 Carteleria" width="450" height="900" loading="lazy">
         </div>
 
-        <div class="ct-cell ct-w2" tabindex="0"
-             aria-label="Hoyo10 — campeones">
-          <img src="../proyectos/hoyo10glaeria10.jpg"
-               alt="Hoyo10 Carteleria"
-               width="900" height="450" loading="lazy">
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="Hoyo10 — campeones">
+          <img src="../proyectos/hoyo10glaeria10.jpg" alt="Hoyo10 Carteleria" width="900" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Hoyo10 — post feed">
-          <img src="../proyectos/hoyo10glaeria11.jpg"
-               alt="Hoyo10 Carteleria"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Hoyo10 — post feed">
+          <img src="../proyectos/hoyo10glaeria11.jpg" alt="Hoyo10 Carteleria" width="450" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Hoyo10 — post feed">
-          <img src="../proyectos/hoyo10glaeria12.webp"
-               alt="Hoyo10 Carteleria"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Hoyo10 — post feed">
+          <img src="../proyectos/hoyo10glaeria12.webp" alt="Hoyo10 Carteleria" width="450" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell ct-w3" tabindex="0"
-             aria-label="Hoyo10 — banner UEFA">
-          <img src="../proyectos/hoyo10glaeria13.webp"
-               alt="Hoyo10 Carteleria"
-               width="1350" height="450" loading="lazy">
+        <div class="ct-cell ct-w3" tabindex="0" aria-label="Hoyo10 — banner UEFA">
+          <img src="../proyectos/hoyo10glaeria13.webp" alt="Hoyo10 Carteleria" width="1350" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Hoyo10 — post feed">
-          <img src="../proyectos/hoyo10glaeria14.webp"
-               alt="Hoyo10 Carteleria"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Hoyo10 — post feed">
+          <img src="../proyectos/hoyo10glaeria14.webp" alt="Hoyo10 Carteleria" width="450" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Hoyo10 — post feed">
-          <img src="../proyectos/hoyo10glaeria15.webp"
-               alt="Hoyo10 Carteleria"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Hoyo10 — post feed">
+          <img src="../proyectos/hoyo10glaeria15.webp" alt="Hoyo10 Carteleria" width="450" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Hoyo10 — post feed">
-          <img src="../proyectos/hoyo10glaeria16.webp"
-               alt="Hoyo10 Carteleria"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Hoyo10 — post feed">
+          <img src="../proyectos/hoyo10glaeria16.webp" alt="Hoyo10 Carteleria" width="450" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Hoyo10 — post feed">
-          <img src="../proyectos/hoyo10glaeria17.jpg"
-               alt="Hoyo10 Carteleria"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Hoyo10 — post feed">
+          <img src="../proyectos/hoyo10glaeria17.jpg" alt="Hoyo10 Carteleria" width="450" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell ct-h2" tabindex="0"
-             aria-label="Hoyo10 — render3D">
-          <img src="../proyectos/hoyo10glaeria18.jpg"
-               alt="Hoyo10 Carteleria"
-               width="450" height="900" loading="lazy">
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="Hoyo10 — render3D">
+          <img src="../proyectos/hoyo10glaeria18.jpg" alt="Hoyo10 Carteleria" width="450" height="900" loading="lazy">
         </div>
 
-        <div class="ct-cell ct-h2" tabindex="0"
-             aria-label="Hoyo10 — render3D">
-          <img src="../proyectos/hoyo10glaeria19.jpg"
-               alt="Hoyo10 Carteleria"
-               width="450" height="900" loading="lazy">
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="Hoyo10 — render3D">
+          <img src="../proyectos/hoyo10glaeria19.jpg" alt="Hoyo10 Carteleria" width="450" height="900" loading="lazy">
         </div>
 
         <!-- SOLO FALTAS TU -->
 
-        <div class="ct-cell ct-w2 ct-h2" tabindex="0"
-             aria-label="Solo Faltas Tu — Carteleria">
-          <img src="../proyectos/solofaltastugaleria01.webp"
-               alt="Solo Faltas Tu"
-               width="900" height="900" loading="lazy">
+        <div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="Solo Faltas Tu — Carteleria">
+          <img src="../proyectos/solofaltastugaleria01.webp" alt="Solo Faltas Tu" width="900" height="900"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell ct-h2" tabindex="0"
-             aria-label="Solo Faltas Tu — Carteleria">
-          <img src="../proyectos/solofaltastugaleria02.webp"
-               alt="Solo Faltas Tu"
-               width="450" height="900" loading="lazy">
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="Solo Faltas Tu — Carteleria">
+          <img src="../proyectos/solofaltastugaleria02.webp" alt="Solo Faltas Tu" width="450" height="900"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Solo Faltas Tu — Carteleria">
-          <img src="../proyectos/solofaltastugaleria03.webp"
-               alt="Solo Faltas Tu"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Solo Faltas Tu — Carteleria">
+          <img src="../proyectos/solofaltastugaleria03.webp" alt="Solo Faltas Tu" width="450" height="450"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Solo Faltas Tu — Carteleria">
-          <img src="../proyectos/solofaltastugaleria04.webp"
-               alt="Solo Faltas Tu"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Solo Faltas Tu — Carteleria">
+          <img src="../proyectos/solofaltastugaleria04.webp" alt="Solo Faltas Tu" width="450" height="450"
+            loading="lazy">
         </div>
 
 
-        <div class="ct-cell ct-w3" tabindex="0"
-             aria-label="Solo Faltas Tu — Carteleria">
-          <img src="../proyectos/solofaltastugaleria05.webp"
-               alt="Solo Faltas Tu"
-               width="1350" height="450" loading="lazy">
+        <div class="ct-cell ct-w3" tabindex="0" aria-label="Solo Faltas Tu — Carteleria">
+          <img src="../proyectos/solofaltastugaleria05.webp" alt="Solo Faltas Tu" width="1350" height="450"
+            loading="lazy">
         </div>
 
         <!-- AL ALBA CHILL -->
 
-         <div class="ct-cell" tabindex="0"
-             aria-label="Al Alba Chill — story">
-          <img src="../proyectos/alalbachillgaleria01.webp"
-               alt="Al Alba Chill"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Al Alba Chill — story">
+          <img src="../proyectos/alalbachillgaleria01.webp" alt="Al Alba Chill" width="450" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell ct-h2" tabindex="0"
-             aria-label="Al Alba Chill — story">
-          <img src="../proyectos/alalbachillgaleria02.webp"
-               alt="Al Alba Chill Carteleria"
-               width="450" height="900" loading="lazy">
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="Al Alba Chill — story">
+          <img src="../proyectos/alalbachillgaleria02.webp" alt="Al Alba Chill Carteleria" width="450" height="900"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell ct-w2" tabindex="0"
-             aria-label="Al Alba Chill — story">
-          <img src="../proyectos/alalbachillgaleria03.webp"
-               alt="Al Alba Chill Carteleria"
-               width="900" height="450" loading="lazy">
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="Al Alba Chill — story">
+          <img src="../proyectos/alalbachillgaleria03.webp" alt="Al Alba Chill Carteleria" width="900" height="450"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Al Alba Chill — story">
-          <img src="../proyectos/alalbachillgaleria04.webp"
-               alt="Al Alba Chill Carteleria"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Al Alba Chill — story">
+          <img src="../proyectos/alalbachillgaleria04.webp" alt="Al Alba Chill Carteleria" width="450" height="450"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Al Alba Chill — story">
-          <img src="../proyectos/alalbachillgaleria05.webp"
-               alt="Al Alba Chill Carteleria"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Al Alba Chill — story">
+          <img src="../proyectos/alalbachillgaleria05.webp" alt="Al Alba Chill Carteleria" width="450" height="450"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Al Alba Chill — story">
-          <img src="../proyectos/alalbachillgaleria06.webp"
-               alt="Al Alba Chill Carteleria"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Al Alba Chill — story">
+          <img src="../proyectos/alalbachillgaleria06.webp" alt="Al Alba Chill Carteleria" width="450" height="450"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Al Alba Chill — story">
-          <img src="../proyectos/alalbachillgaleria07.webp"
-               alt="Al Alba Chill"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Al Alba Chill — story">
+          <img src="../proyectos/alalbachillgaleria07.webp" alt="Al Alba Chill" width="450" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell ct-h2" tabindex="0"
-             aria-label="Al Alba Chill — story">
-          <img src="../proyectos/alalbachillgaleria08.webp"
-               alt="Al Alba Chill Carteleria"
-               width="450" height="900" loading="lazy">
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="Al Alba Chill — story">
+          <img src="../proyectos/alalbachillgaleria08.webp" alt="Al Alba Chill Carteleria" width="450" height="900"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell ct-w2" tabindex="0"
-             aria-label="Al Alba Chill — story">
-          <img src="../proyectos/alalbachillgaleria09.webp"
-               alt="Al Alba Chill Carteleria"
-               width="900" height="450" loading="lazy">
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="Al Alba Chill — story">
+          <img src="../proyectos/alalbachillgaleria09.webp" alt="Al Alba Chill Carteleria" width="900" height="450"
+            loading="lazy">
         </div>
 
-        <div class="ct-cell" tabindex="0"
-             aria-label="Al Alba Chill — story">
-          <img src="../proyectos/alalbachillgaleria10.webp"
-               alt="Al Alba Chill"
-               width="450" height="450" loading="lazy">
+        <div class="ct-cell" tabindex="0" aria-label="Al Alba Chill — story">
+          <img src="../proyectos/alalbachillgaleria10.webp" alt="Al Alba Chill" width="450" height="450" loading="lazy">
         </div>
 
-        <div class="ct-cell ct-h2" tabindex="0"
-             aria-label="Al Alba Chill — story">
-          <img src="../proyectos/alalbachillgaleria11.webp"
-               alt="Al Alba Chill Carteleria"
-               width="450" height="900" loading="lazy">
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="Al Alba Chill — story">
+          <img src="../proyectos/alalbachillgaleria11.webp" alt="Al Alba Chill Carteleria" width="450" height="900"
+            loading="lazy">
         </div>
 
 
 
-        <div class="ct-cell ct-h2" tabindex="0"
-             aria-label="Al Alba Chill — story">
-          <img src="../proyectos/alalbachillgaleria13.webp"
-               alt="Al Alba Chill Carteleria"
-               width="450" height="900" loading="lazy">
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="Al Alba Chill — story">
+          <img src="../proyectos/alalbachillgaleria13.webp" alt="Al Alba Chill Carteleria" width="450" height="900"
+            loading="lazy">
         </div>
 
 
@@ -640,17 +588,22 @@
       </div><!-- /ctGallery -->
 
       <!-- Lightbox cartelería -->
-      <div id="ctLightbox" role="dialog" aria-modal="true"
-           aria-label="Visualizador de cartelería">
+      <div id="ctLightbox" role="dialog" aria-modal="true" aria-label="Visualizador de cartelería">
         <button class="ct-lb__close" id="ctLbClose" aria-label="Cerrar">
-          <svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+          <svg viewBox="0 0 16 16">
+            <path d="M4 4l8 8M12 4l-8 8" />
+          </svg>
         </button>
         <button class="ct-lb__nav ct-lb__prev" id="ctLbPrev" aria-label="Imagen anterior">
-          <svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg>
+          <svg viewBox="0 0 16 16">
+            <path d="M10 3L5 8l5 5" />
+          </svg>
         </button>
         <img class="ct-lb__img" id="ctLbImg" src="" alt="">
         <button class="ct-lb__nav ct-lb__next" id="ctLbNext" aria-label="Imagen siguiente">
-          <svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg>
+          <svg viewBox="0 0 16 16">
+            <path d="M6 3l5 5-5 5" />
+          </svg>
         </button>
         <span class="ct-lb__counter" id="ctLbCounter" aria-live="polite"></span>
       </div>
@@ -695,60 +648,76 @@
         -->
 
         <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/ilustracionesgaleria00.jpg" alt="Ilustración Alfonso Aguilera" width="450" height="450" loading="lazy">
-          </div>
+          <img src="../proyectos/ilustracionesgaleria00.jpg" alt="Ilustración Alfonso Aguilera" width="450" height="450"
+            loading="lazy">
+        </div>
 
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/ilustracionesgaleria01.jpg" alt="Ilustración Natycruz" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/ilustracionesgaleria02.jpg" alt="Ilustración Stitch" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/ilustracionesgaleria03.jpg" alt="Ilustración rshishas" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/ilustracionesgaleria04.jpg" alt="Ilustración Vela en llamas" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/ilustracionesgaleria06.jpg" alt="Ilustración Fran Romero" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
-            <img src="../proyectos/ilustracionesgaleria05.jpg" alt="Ilustración Ethereum trading" width="900" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/ilustracionesgaleria07.jpg" alt="Ilustración Lego Alfonso" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/ilustracionesgaleria10.jpg" alt="Pintura Bart Simpson" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/ilustracionesgaleria08.jpg" alt="Sketching" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/ilustracionesgaleria09.jpg" alt="Sketching" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/luckysgaleria09.jpg" alt="Ilustración Micko Boss" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/luckysgaleria08.jpg" alt="Ilustración Beiconneitor" width="450" height="900" loading="lazy">
-          </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/ilustracionesgaleria01.jpg" alt="Ilustración Natycruz" width="450" height="450"
+            loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/ilustracionesgaleria02.jpg" alt="Ilustración Stitch" width="450" height="450"
+            loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/ilustracionesgaleria03.jpg" alt="Ilustración rshishas" width="450" height="450"
+            loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/ilustracionesgaleria04.jpg" alt="Ilustración Vela en llamas" width="450" height="900"
+            loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/ilustracionesgaleria06.jpg" alt="Ilustración Fran Romero" width="450" height="900"
+            loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
+          <img src="../proyectos/ilustracionesgaleria05.jpg" alt="Ilustración Ethereum trading" width="900" height="450"
+            loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/ilustracionesgaleria07.jpg" alt="Ilustración Lego Alfonso" width="450" height="450"
+            loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/ilustracionesgaleria10.jpg" alt="Pintura Bart Simpson" width="450" height="900"
+            loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/ilustracionesgaleria08.jpg" alt="Sketching" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/ilustracionesgaleria09.jpg" alt="Sketching" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/luckysgaleria09.jpg" alt="Ilustración Micko Boss" width="450" height="900"
+            loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/luckysgaleria08.jpg" alt="Ilustración Beiconneitor" width="450" height="900"
+            loading="lazy">
+        </div>
 
       </div><!-- /ilGallery -->
 
       <!-- Lightbox ilustraciones -->
-      <div id="ilLightbox" role="dialog" aria-modal="true"
-           aria-label="Visualizador de ilustraciones">
+      <div id="ilLightbox" role="dialog" aria-modal="true" aria-label="Visualizador de ilustraciones">
         <button class="ct-lb__close" id="ilLbClose" aria-label="Cerrar">
-          <svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+          <svg viewBox="0 0 16 16">
+            <path d="M4 4l8 8M12 4l-8 8" />
+          </svg>
         </button>
         <button class="ct-lb__nav ct-lb__prev" id="ilLbPrev" aria-label="Imagen anterior">
-          <svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg>
+          <svg viewBox="0 0 16 16">
+            <path d="M10 3L5 8l5 5" />
+          </svg>
         </button>
         <img class="ct-lb__img" id="ilLbImg" src="" alt="">
         <button class="ct-lb__nav ct-lb__next" id="ilLbNext" aria-label="Imagen siguiente">
-          <svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg>
+          <svg viewBox="0 0 16 16">
+            <path d="M6 3l5 5-5 5" />
+          </svg>
         </button>
         <span class="ct-lb__counter" id="ilLbCounter" aria-live="polite"></span>
       </div>
@@ -791,184 +760,452 @@
           ─────────────────────────────────
         -->
 
-           <div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia04.webp" alt="Fotos JACS" width="900" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-w2" tabindex="0" aria-label="Fotos JACS">
-            <img src="../proyectos/fotografia03.webp" alt="Fotos JACS" width="900" height="450" loading="lazy">
-          </div>
-<div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia05.webp" alt="Fotos JACS" width="900" height="900" loading="lazy">
-          </div>
-<div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia06.webp" alt="Fotos JACS" width="900" height="900" loading="lazy">
-          </div>
+        <div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia04.webp" alt="Fotos JACS" width="900" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="Fotos JACS">
+          <img src="../proyectos/fotografia03.webp" alt="Fotos JACS" width="900" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia05.webp" alt="Fotos JACS" width="900" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia06.webp" alt="Fotos JACS" width="900" height="900" loading="lazy">
+        </div>
 
-      <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia08.webp" alt="Fotos Mision Cristo" width="450" height="900" loading="lazy">
-          </div>
-           <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia01.webp" alt="Foto Liga Chichos" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia02.webp" alt="Foto JACS" width="900" height="900" loading="lazy">
-          </div>
-<div class="ct-cell ct-w2" tabindex="0" aria-label="Fotos JACS">
-            <img src="../proyectos/fotografia09.webp" alt="Fotos Chicharron" width="900" height="450" loading="lazy">
-          </div>
-                <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia12.webp" alt="Raton" width="450" height="900" loading="lazy">
-          </div>
-<div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia14.webp" alt="Pedro Antonio Tejero" width="450" height="900" loading="lazy">
-          </div>
-<div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia18.webp" alt="Chicharron" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia19.webp" alt="Arturo Chicharron" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia22.webp" alt="Foto JACS" width="900" height="900" loading="lazy">
-          </div>
-<div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia24.webp" alt="Pedro Antonio Tejero" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia15.webp" alt="Foto JACS" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia16.webp" alt="Foto JACS" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia17.webp" alt="Foto JACS" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia18.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia19.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia20.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia21.webp" alt="Foto JACS" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia22.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia23.webp" alt="Foto JACS" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia24.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia25.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia26.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia27.webp" alt="Foto JACS" width="450" height="900" loading="lazy">
-          </div>
-          <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia28.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia29.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia30.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia31.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia32.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia33.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia34.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia35.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia36.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia37.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia38.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia39.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia40.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia41.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
-          <div class="ct-cell" tabindex="0" aria-label="…">
-            <img src="../proyectos/fotografia42.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
-          </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia08.webp" alt="Fotos Mision Cristo" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia01.webp" alt="Foto Liga Chichos" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2 ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia02.webp" alt="Foto JACS" width="900" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="Fotos JACS">
+          <img src="../proyectos/fotografia09.webp" alt="Fotos Chicharron" width="900" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia12.webp" alt="Raton" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia14.webp" alt="Pedro Antonio Tejero" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia18.webp" alt="Chicharron" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia19.webp" alt="Arturo Chicharron" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia22.webp" alt="Foto JACS" width="900" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia24.webp" alt="Pedro Antonio Tejero" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia15.webp" alt="Foto JACS" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia16.webp" alt="Foto JACS" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia17.webp" alt="Foto JACS" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia18.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia19.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia20.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia21.webp" alt="Foto JACS" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia22.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia23.webp" alt="Foto JACS" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia24.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia25.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia26.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell ct-h2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia27.webp" alt="Foto JACS" width="450" height="900" loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia28.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia29.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia30.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia31.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia32.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell ct-w2" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia33.webp" alt="Foto JACS" width="900" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia34.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia35.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia36.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia37.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia38.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia39.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia40.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia41.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
+        <div class="ct-cell" tabindex="0" aria-label="…">
+          <img src="../proyectos/fotografia42.webp" alt="Foto JACS" width="450" height="450" loading="lazy">
+        </div>
       </div><!-- /fotGallery -->
 
       <!-- Lightbox fotografía -->
-      <div id="fotLightbox" role="dialog" aria-modal="true"
-           aria-label="Visualizador de fotografía">
+      <div id="fotLightbox" role="dialog" aria-modal="true" aria-label="Visualizador de fotografía">
         <button class="ct-lb__close" id="fotLbClose" aria-label="Cerrar">
-          <svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+          <svg viewBox="0 0 16 16">
+            <path d="M4 4l8 8M12 4l-8 8" />
+          </svg>
         </button>
         <button class="ct-lb__nav ct-lb__prev" id="fotLbPrev" aria-label="Imagen anterior">
-          <svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg>
+          <svg viewBox="0 0 16 16">
+            <path d="M10 3L5 8l5 5" />
+          </svg>
         </button>
         <img class="ct-lb__img" id="fotLbImg" src="" alt="">
         <button class="ct-lb__nav ct-lb__next" id="fotLbNext" aria-label="Imagen siguiente">
-          <svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg>
+          <svg viewBox="0 0 16 16">
+            <path d="M6 3l5 5-5 5" />
+          </svg>
         </button>
         <span class="ct-lb__counter" id="fotLbCounter" aria-live="polite"></span>
       </div>
 
 
+      <!-- ══════════════════════════════════════
+           GALERÍA OTROS
+           Visible solo al pulsar el botón "Otros".
+           A diferencia de las demás, se organiza en BLOQUES:
+           cada bloque = título + breve texto + rejilla de fotos.
+
+           Para añadir un bloque nuevo:
+             1. Duplica un <article class="otros-block"> entero.
+             2. Cambia su id (otros-bloque-3, …) → debe coincidir
+                con el data-goto de su tarjeta 1×1 en el bento grid.
+             3. Edita título, texto e imágenes.
+
+           Clases de celda dentro de .otros-block__grid (igual que el resto):
+             (sin clase)   → 1×1 cuadrado
+             .ct-h2        → 1×2 story vertical
+             .ct-w2        → 2×1 banner apaisado
+             .ct-w3        → 3×1 banner muy ancho
+             .ct-w2.ct-h2  → 2×2 pieza grande
+      ══════════════════════════════════════ -->
+      <div id="otrosGallery" role="region" aria-label="Galería de otros proyectos">
+
+        <!-- ── PROYECTO 01 ── -->
+        <article class="otros-block" id="otros-bloque-1">
+          <header class="otros-block__head">
+            <span class="otros-block__eyebrow">Personalización</span>
+            <h3 class="otros-block__title">Cofre Decorativo</h3>
+            <p class="otros-block__text">
+              Un regalo único para una personal especial: se compró un cofre de madera sin tratar y se decoró con
+              rotuladores Posca, intentando simular un estilo viñeta. Luego, se aplicó una capa de barniz para proteger
+              el diseño y darle un acabado más profesional.
+            </p>
+          </header>
+
+          <div class="otros-block__grid">
+            <div class="ct-cell .ct-w2.ct-h2" tabindex="0" aria-label="Cofre Decorativo — pieza destacada">
+              <img src="../proyectos/cofre01.webp" alt="Cofre Decorativo" width="900" height="900" loading="lazy">
+            </div>
+            <div class="ct-cell" tabindex="0" aria-label="Cofre Decorativo">
+              <img src="../proyectos/cofre04.webp" alt="Cofre Decorativo" width="450" height="450" loading="lazy">
+            </div>
+            <div class="ct-cell" tabindex="0" aria-label="Cofre Decorativo">
+              <img src="../proyectos/cofre02.webp" alt="Cofre Decorativo" width="450" height="450" loading="lazy">
+            </div>
+            <div class="ct-cell ct-w3" tabindex="0" aria-label="Cofre Decorativo">
+              <img src="../proyectos/cofre03.webp" alt="Cofre Decorativo" width="1350" height="450" loading="lazy">
+            </div>
+
+
+          </div>
+        </article>
+
+        <!-- ── BLOQUE 2 ── -->
+        <article class="otros-block" id="otros-bloque-2">
+          <header class="otros-block__head">
+            <span class="otros-block__eyebrow">Personalización</span>
+            <h3 class="otros-block__title">Cartas Contra la Humanidad</h3>
+            <p class="otros-block__text">
+              Un juego Web que se hizo popular en épocas de Covid y combina Humor negro y respuestas random a cada
+              frase. Sacaron de forma gratuita el formato físico en .pdf. ¿Cómo prepararlo en entorno físico? En este
+              caso, se personalizó una bandeja para guardar las cartas, imprimir las respuestas y juego en papel
+              Cartulina, recortar y plastificar. Echa un vistazo al resultado:
+            </p>
+          </header>
+
+          <div class="otros-block__grid">
+            <div class="ct-cell" tabindex="0" aria-label="Proyecto Dos — Cartas Contra la Humanidad">
+              <img src="../proyectos/cartashumanidad12.webp" alt="Cartas Contra la Humanidad" width="900" height="900"
+                loading="lazy">
+            </div>
+            <div class="ct-cell" tabindex="0" aria-label="Proyecto Dos — Cartas Contra la Humanidad">
+              <img src="../proyectos/cartashumanidad02.webp" alt="Cartas Contra la Humanidad" width="450" height="450"
+                loading="lazy">
+            </div>
+            <div class="ct-cell" tabindex="0" aria-label="Cartas Contra la Humanidad">
+              <img src="../proyectos/cartashumanidad03.webp" alt="Cartas Contra la Humanidad" width="450" height="450"
+                loading="lazy">
+            </div>
+            <div class="ct-cell ct-w3" tabindex="0" aria-label="Cartas Contra la Humanidad">
+              <img src="../proyectos/cartashumanidad04.webp" alt="Cartas Contra la Humanidad" width="1350" height="450"
+                loading="lazy">
+            </div>
+          </div>
+        </article>
+
+        <!-- ── BLOQUE 3 ── -->
+        <article class="otros-block" id="otros-bloque-3">
+          <header class="otros-block__head">
+            <span class="otros-block__eyebrow">Personalización</span>
+            <h3 class="otros-block__title">Equipación Atco. Algabeño</h3>
+            <p class="otros-block__text">
+              Personalización Completa de la Primera Equipación del Atlético Algabeño. Se tuvo en cuenta el escudo retro
+              del equipo, las ruedas antiguas de la Plaza de Toros de La Algaba y los colores principales del equipo .
+              Un honor de proyecto, ya que el Atlético Algabeño es el equipo de mi pueblo, La Algaba, y es un orgullo
+              haber podido formar parte del equipo desde que formaba parte de la cantera hasta plasmar mis diseños en la
+              primera equipación del primer equipo. Aquí puedes ver el resultado:
+            </p>
+          </header>
+
+          <div class="otros-block__grid">
+            <div class="ct-cell" tabindex="0" aria-label="Proyecto Tres — Atco. Algabeño">
+              <img src="../proyectos/atcoalgabeno01.webp" alt="Atco. Algabeño" width="900" height="900" loading="lazy">
+            </div>
+            <div class="ct-cell" tabindex="0" aria-label="Proyecto Tres — Atco. Algabeño">
+              <img src="../proyectos/atcoalgabeno02.webp" alt="Atco. Algabeño" width="450" height="450" loading="lazy">
+            </div>
+            <div class="ct-cell" tabindex="0" aria-label="Proyecto Tres — Atco. Algabeño">
+              <img src="../proyectos/atcoalgabeno03.webp" alt="Atco. Algabeño" width="450" height="450" loading="lazy">
+            </div>
+          </div>
+        </article>
+
+        <!-- ── BLOQUE 4 ── -->
+        <article class="otros-block" id="otros-bloque-4">
+          <header class="otros-block__head">
+            <span class="otros-block__eyebrow">Personalización</span>
+            <h3 class="otros-block__title">Camiseta Deportiva Diego Tristán</h3>
+            <p class="otros-block__text">
+              Una camiseta que reúne la carrera Futbolística de Diego Tristán, desde su paso por el Real Betis hasta la
+              Selección Española. Se recreó de manera vectorial todas las equipaciones llevadas, un estilo parche y la
+              parte trasera personalizada con monumentos emblemáticos de La Algaba, imagen de su paso por La Coruña y el
+              equipo en cual ha sido entrenador, el Atlético Algabeño. Impresión Full Print.
+            </p>
+          </header>
+
+          <div class="otros-block__grid">
+            <div class="ct-cell" tabindex="0" aria-label="Proyecto Cuatro — Diego Tristán">
+              <img src="../proyectos/diegotristan01.webp" alt="Diego Tristán" width="900" height="900" loading="lazy">
+            </div>
+            <div class="ct-cell" tabindex="0" aria-label="Proyecto Cuatro — Diego Tristán">
+              <img src="../proyectos/diegotristan02.webp" alt="Diego Tristán" width="450" height="450" loading="lazy">
+            </div>
+            <div class="ct-cell" tabindex="0" aria-label="Proyecto Cuatro — Diego Tristán">
+              <img src="../proyectos/diegotristan03.webp" alt="Diego Tristán" width="450" height="450" loading="lazy">
+            </div>
+            <div class="ct-cell" tabindex="0" aria-label="Proyecto Cuatro — Diego Tristán">
+              <img src="../proyectos/diegotristan04.webp" alt="Diego Tristán" width="450" height="450" loading="lazy">
+            </div>
+          </div>
+        </article>
+
+
+
+      </div><!-- /otrosGallery -->
+
+      <!-- Lightbox otros -->
+      <div id="otrosLightbox" role="dialog" aria-modal="true" aria-label="Visualizador de otros proyectos">
+        <button class="ct-lb__close" id="otrosLbClose" aria-label="Cerrar">
+          <svg viewBox="0 0 16 16">
+            <path d="M4 4l8 8M12 4l-8 8" />
+          </svg>
+        </button>
+        <button class="ct-lb__nav ct-lb__prev" id="otrosLbPrev" aria-label="Imagen anterior">
+          <svg viewBox="0 0 16 16">
+            <path d="M10 3L5 8l5 5" />
+          </svg>
+        </button>
+        <img class="ct-lb__img" id="otrosLbImg" src="" alt="">
+        <button class="ct-lb__nav ct-lb__next" id="otrosLbNext" aria-label="Imagen siguiente">
+          <svg viewBox="0 0 16 16">
+            <path d="M6 3l5 5-5 5" />
+          </svg>
+        </button>
+        <span class="ct-lb__counter" id="otrosLbCounter" aria-live="polite"></span>
+      </div>
+
 
     </section>
- 
+
+    <!-- ── SECCIÓN SOBRE MÍ ── -->
+    <section class="about-section" id="sobre-mi" aria-labelledby="sobre-mi-heading">
+
+      <div class="about-intro">
+
+        <div class="about-photo reveal-up">
+          <img src="assets/sobre-mi.jpg" alt="Retrato de José Antonio Cruz Segura" width="640" height="800"
+            loading="lazy">
+          <span class="about-photo__badge">La Algaba · Sevilla</span>
+        </div>
+
+        <div class="about-copy reveal-up">
+          <span class="about-eyebrow">Sobre mí</span>
+          <h2 class="about-title" id="sobre-mi-heading">José Antonio<br>Cruz Segura</h2>
+          <p class="about-text">
+            Soy diseñador gráfico y creador 3D de La Algaba (Sevilla). Me muevo entre el branding, la
+            cartelería, la ilustración y el modelado, siempre buscando el punto exacto en el que una idea
+            encuentra su forma definitiva. Disfruto tanto dándole personalidad a una marca como dando
+            volumen a algo que antes solo existía en mi cabeza — y, sobre todo, sigo aprendiendo
+            herramientas nuevas con las que ampliar lo que puedo construir.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- ══════════════════════════════════════
+           HERRAMIENTAS — iconos 3D (.glb / .gltf)
+           Cada tarjeta usa <model-viewer> para renderizar
+           un modelo 3D del logo de la herramienta.
+           Para añadir una herramienta: duplica un .tool-card,
+           cambia el src del modelo (.glb), el alt y el nombre.
+      ══════════════════════════════════════ -->
+      <div class="about-tools">
+        <span class="about-tools__eyebrow">Lo que uso</span>
+        <h3 class="about-tools__title">Herramientas de Diseño &amp; 3D</h3>
+        <!-- ../proyectos/iconos3d/iconoai.glb -->
+
+        <ul class="tools-grid" role="list">
+
+
+
+          <li class="tool-card reveal-up">
+            <model-viewer class="tool-card__model" src="assets/iconos/photoshop.glb" alt="Icono 3D de Adobe Photoshop"
+              camera-controls disable-zoom auto-rotate interaction-prompt="none" loading="lazy"></model-viewer>
+            <span class="tool-card__name">Photoshop</span>
+          </li>
+
+          <li class="tool-card reveal-up">
+            <model-viewer class="tool-card__model" src="assets/iconos/indesign.glb" alt="Icono 3D de Adobe InDesign"
+              camera-controls disable-zoom auto-rotate interaction-prompt="none" loading="lazy"></model-viewer>
+            <span class="tool-card__name">InDesign</span>
+          </li>
+
+          <li class="tool-card reveal-up">
+            <model-viewer class="tool-card__model" src="assets/iconos/premiere.glb" alt="Icono 3D de Adobe Premiere Pro"
+              camera-controls disable-zoom auto-rotate interaction-prompt="none" loading="lazy"></model-viewer>
+            <span class="tool-card__name">Premiere Pro</span>
+          </li>
+
+          <li class="tool-card reveal-up">
+            <model-viewer class="tool-card__model" src="assets/iconos/blender.glb" alt="Icono 3D de Blender"
+              camera-controls disable-zoom auto-rotate interaction-prompt="none" loading="lazy"></model-viewer>
+            <span class="tool-card__name">Blender</span>
+          </li>
+
+          <li class="tool-card reveal-up">
+            <model-viewer class="tool-card__model" src="assets/iconos/zbrush.glb" alt="Icono 3D de ZBrush"
+              camera-controls disable-zoom auto-rotate interaction-prompt="none" loading="lazy"></model-viewer>
+            <span class="tool-card__name">ZBrush</span>
+          </li>
+
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- ── SECCIÓN CONTACTO ── -->
+    <section class="contact-section" id="contacto" aria-labelledby="contacto-heading">
+      <div class="contact-inner reveal-up">
+        <span class="contact-eyebrow">¿Tienes algo en mente?</span>
+        <h2 class="contact-title" id="contacto-heading">Comencemos un<br>nuevo proyecto</h2>
+        <p class="contact-text">
+          Cuéntame tu idea — branding, cartelería, ilustración o un modelo 3D — y le damos forma juntos,
+          desde el primer boceto hasta el resultado final.
+        </p>
+        <a class="contact-cta" href="mailto:tucorreo@ejemplo.com">
+          <span>Hablemos del proyecto</span>
+          <span class="contact-cta__arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10" />
+              <path d="M9 4l4 4-4 4" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </section>
+
   </main>
 
 
-    <footer class="site-footer" role="contentinfo">
-        <p class="site-footer__name">JACS</p>
-        <ul class="site-footer__links" role="list" aria-label="Perfiles profesionales">
-            <li><a href="https://linkedin.com/in/TUUSUARIO" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
-            <li><a href="https://github.com/TUUSUARIO" rel="noopener noreferrer" target="_blank">GitHub</a></li>
-            <li><a href="https://behance.net/TUUSUARIO" rel="noopener noreferrer" target="_blank">Behance</a></li>
-        </ul>
-        <p class="site-footer__copy">
-            <small>&copy; <span id="year"></span> José Antonio Cruz Segura</small>
-        </p>
-    </footer>
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__name">JACS</p>
+    <ul class="site-footer__links" role="list" aria-label="Perfiles profesionales">
+      <li><a href="https://linkedin.com/in/TUUSUARIO" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
+      <li><a href="https://github.com/TUUSUARIO" rel="noopener noreferrer" target="_blank">GitHub</a></li>
+      <li><a href="https://behance.net/TUUSUARIO" rel="noopener noreferrer" target="_blank">Behance</a></li>
+    </ul>
+    <p class="site-footer__copy">
+      <small>&copy; <span id="year"></span> José Antonio Cruz Segura</small>
+    </p>
+  </footer>
 
 
-    <noscript>
-        <style>
-            .full-name {
-                opacity: 1 !important;
-                transform: none !important;
-                animation: none !important;
-            }
+  <noscript>
+    <style>
+      .full-name {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
 
-            .site-nav__links {
-                opacity: 1 !important;
-            }
-        </style>
-    </noscript>
+      .site-nav__links {
+        opacity: 1 !important;
+      }
+    </style>
+  </noscript>
 
 </body>
 
