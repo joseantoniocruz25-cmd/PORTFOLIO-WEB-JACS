@@ -582,23 +582,109 @@ body {
 
 
 /* ════════════════════════════════════════
-   VISORES 3D (model-viewer) — grid bento
+   HERRAMIENTAS — diseño y 3D
 ════════════════════════════════════════ */
+.tools-section {
+  background: var(--clr-bg);
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.2rem, 4vw, 4rem);
+}
+
+.section-header {
+  max-width: 72rem;
+  margin: 0 auto clamp(2rem, 4vw, 3rem);
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-size: .58rem; font-weight: 400;
+  letter-spacing: .55em; text-transform: uppercase;
+  color: var(--clr-accent); margin-bottom: .8rem;
+}
+
+.section-title {
+  font-family: var(--font); font-weight: 900;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  letter-spacing: -.02em; color: var(--clr-text);
+  line-height: 1;
+}
+
+.tools-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.tool-group {
+  background: var(--clr-bg-2);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--card-radius);
+  padding: clamp(1.8rem, 4vw, 2.4rem);
+}
+
+.tool-group-title {
+  font-family: var(--font); font-weight: 900;
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+  color: var(--clr-text);
+  margin-bottom: 1rem;
+}
+
+.tool-group-copy {
+  font-size: clamp(.95rem, 1.4vw, 1rem);
+  line-height: 1.8;
+  color: var(--clr-muted);
+}
+
+.models-group {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.models-group:last-child { margin-bottom: 0; }
+
+.models-group-title {
+  font-family: var(--font); font-weight: 900;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: -.02em; text-transform: uppercase;
+  color: var(--clr-text);
+  text-align: center;
+  margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+}
+
 .models-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--grid-gap);
-  padding: clamp(1.2rem, 4vw, 4rem);
+  padding: clamp(.8rem, 2vw, 1.2rem) 0 0;
+  width: 100%;
 }
 
 .model-card {
   display: block;
   width: 100%;
-  height: clamp(220px, 32vw, 420px);
+  min-height: clamp(260px, 32vw, 380px);
+  aspect-ratio: 4 / 3;
   border-radius: var(--card-radius);
   border: 1px solid var(--clr-border);
   background: var(--clr-bg-2);
   overflow: hidden;
+  position: relative;
+}
+
+.model-card .ar-prompt {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.model-card .ar-prompt img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* ════════════════════════════════════════
@@ -764,8 +850,9 @@ body {
     text-align: center;
   }
 
-  /* Herramientas: bloque centrado sobre la rejilla */
-  /* Se eliminó la sección de iconos 3D, este estilo ya no es necesario. */
+  .tools-groups {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ── Mobile (≤ 640px) ── */
