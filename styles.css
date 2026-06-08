@@ -85,7 +85,7 @@ body {
 .site-nav__logo {
   font-family: var(--font-logo);
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   letter-spacing: -0.01em;
   color: var(--clr-text);
   text-decoration: none;
