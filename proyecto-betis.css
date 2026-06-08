@@ -605,22 +605,6 @@
     }
     .project-nav__item--next { align-items: flex-end; text-align: right; }
 
-    /* ── Volver al inicio ── */
-    .back-to-home {
-      display: flex; align-items: center; justify-content: center; gap: .5rem;
-      margin-top: clamp(2rem, 4vw, 3rem);
-      font-size: .58rem; font-weight: 900; letter-spacing: .35em;
-      text-transform: uppercase; color: var(--clr-muted);
-      text-decoration: none; transition: color .2s ease;
-    }
-    .back-to-home:hover { color: var(--clr-text); }
-    .back-to-home svg {
-      width: 14px; height: 14px; fill: none; stroke: currentColor;
-      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
-      transition: transform .2s ease;
-    }
-    .back-to-home:hover svg { transform: translateX(-3px); }
-
 
     /* ════════════════════════════════════════
        FOOTER
@@ -635,7 +619,9 @@
     .site-footer__name {
       font-size: .6rem; font-weight: 900; letter-spacing: .5em;
       text-transform: uppercase; color: var(--clr-text);
+      text-decoration: none; transition: color .2s ease;
     }
+    .site-footer__name:hover { color: var(--clr-accent); }
     .site-footer__links { list-style: none; display: flex; gap: 1.8rem; }
     .site-footer__links a {
       font-size: .58rem; font-weight: 400; letter-spacing: .3em;

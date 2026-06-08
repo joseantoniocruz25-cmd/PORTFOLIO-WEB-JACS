@@ -876,12 +876,17 @@ body {
 }
 
 .site-footer__name {
+  display: inline-block;
   font-size: 2rem;
   font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--font-logo);
+  color: var(--clr-text);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
+.site-footer__name:hover,
+.site-footer__name:focus-visible { color: var(--clr-accent); }
 
 .site-footer__copy {
   font-size: 0.58rem;
