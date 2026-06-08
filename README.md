@@ -1,8 +1,8 @@
 # JACS — Portfolio web
 
-Portfolio personal de José Antonio Cruz Segura («JACS»): diseño gráfico, branding, cartelería, ilustración y modelado 3D. *Píxeles, polígonos y actitud.*
+Portfolio personal de José Antonio Cruz Segura («JACS»): diseño gráfico, branding, cartelería, ilustración y modelado 3D.
 
-Sitio estático en HTML, CSS y JavaScript vanilla, sin dependencias de build.
+Sitio estático en HTML, CSS y JavaScript Vanilla.
 
 ## Estructura
 
