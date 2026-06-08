@@ -10,7 +10,7 @@
   --clr-surface: #162F4F;                       /* fondo de tarjetas */
   --clr-border:  rgba(228, 221, 208, 0.10);     /* bordes sutiles */
   --card-radius: clamp(10px, 1.2vw, 16px);
-  --grid-gap:    clamp(0.5rem, 1vw, 1rem);
+  --grid-gap:    clamp(0.85rem, 1.6vw, 1.5rem);
   --font-family: 'Satoshi', sans-serif;
   --font:        'Satoshi', sans-serif;
   --font-logo:   "aBidDeal", sans-serif;
@@ -279,7 +279,7 @@ body {
     ════════════════════════════════════════ */
     .projects-section {
       background: var(--clr-bg);
-      padding: clamp(4rem, 8vw, 7rem) clamp(1.2rem, 4vw, 4rem);
+      padding: clamp(4.5rem, 9vw, 7.5rem) clamp(1.5rem, 6vw, 9rem);
     }
  
     /* ── Cabecera de sección ── */
@@ -489,7 +489,7 @@ body {
 ════════════════════════════════════════ */
 .about-section {
   background: var(--clr-bg);
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.2rem, 4vw, 4rem);
+  padding: clamp(4.5rem, 9vw, 7.5rem) clamp(1.5rem, 6vw, 9rem);
 }
 
 /* ── Encabezado de sección, mismo lenguaje visual que "Proyectos" ── */
@@ -632,7 +632,7 @@ body {
 ════════════════════════════════════════ */
 .tools-section {
   background: var(--clr-bg);
-  padding: clamp(4rem, 8vw, 6rem) clamp(1.2rem, 4vw, 4rem);
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 9rem);
 }
 
 .section-header {
@@ -738,7 +738,7 @@ body {
 ════════════════════════════════════════ */
 .contact-section {
   background: var(--clr-bg-2);
-  padding: clamp(4.5rem, 10vw, 8rem) clamp(1.2rem, 4vw, 4rem);
+  padding: clamp(4.5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 9rem);
 }
 
 .contact-inner {
@@ -1037,7 +1037,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: clamp(150px, 18vw, 255px);
   grid-auto-flow: dense;
-  gap: clamp(3px, 0.4vw, 5px);
+  gap: clamp(8px, 1.1vw, 16px);
   opacity: 0;
   transform: scale(.98);
   transition: opacity .38s ease, transform .38s cubic-bezier(.16,1,.3,1);
@@ -1141,7 +1141,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: clamp(150px, 18vw, 255px);
   grid-auto-flow: dense;
-  gap: clamp(3px, 0.4vw, 5px);
+  gap: clamp(8px, 1.1vw, 16px);
   opacity: 0;
   transform: scale(.98);
   transition: opacity .38s ease, transform .38s cubic-bezier(.16,1,.3,1);
@@ -1169,7 +1169,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: clamp(150px, 18vw, 255px);
   grid-auto-flow: dense;
-  gap: clamp(3px, 0.4vw, 5px);
+  gap: clamp(8px, 1.1vw, 16px);
   opacity: 0;
   transform: scale(.98);
   transition: opacity .38s ease, transform .38s cubic-bezier(.16,1,.3,1);
@@ -1276,7 +1276,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: clamp(150px, 18vw, 255px);
   grid-auto-flow: dense;
-  gap: clamp(3px, 0.4vw, 5px);
+  gap: clamp(8px, 1.1vw, 16px);
 }
 
 /* Visor 3D integrado en la rejilla "otros-block__grid" — se ajusta a la
