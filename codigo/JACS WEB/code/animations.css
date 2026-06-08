@@ -12,6 +12,11 @@
   }
 }
 
+@keyframes nameCharIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
@@ -48,5 +53,6 @@
     transition-duration: 0.01ms !important;
   }
   .full-name    { opacity: 1; transform: none; }
+  .full-name__char { animation: none; opacity: 1; transform: none; }
   .slogan__char { animation: none; }
 }

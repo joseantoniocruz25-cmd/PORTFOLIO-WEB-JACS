@@ -7,6 +7,20 @@ const slogan      = document.getElementById('slogan');
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Split full name into per-character spans for a staggered cascade reveal,
+// preservando los <br> del marcado para que el salto de línea no se pierda
+let fullNameCharIndex = 0;
+fullName.innerHTML = [...fullName.childNodes].map((node) => {
+  if (node.nodeName === 'BR') return '<br>';
+  return [...node.textContent].map((char) => {
+    const span = char === ' '
+      ? '<span class="full-name__space">&nbsp;</span>'
+      : `<span class="full-name__char" style="animation-delay:${(0.55 + fullNameCharIndex * 0.035).toFixed(2)}s">${char}</span>`;
+    fullNameCharIndex++;
+    return span;
+  }).join('');
+}).join('');
+
 // Split slogan into per-character spans for the bounce wave
 slogan.innerHTML = [...slogan.textContent].map((char, i) =>
   char === ' '
@@ -25,7 +39,8 @@ function mapRange(val, inMin, inMax, outMin, outMax) {
 
 let scrollReady = false;
 
-fullName.addEventListener('animationend', () => {
+fullName.addEventListener('animationend', (e) => {
+  if (e.target !== fullName) return; // ignora el reveal de cada letra, solo cuenta el del bloque
   scrollReady = true;
   fullName.style.animation = 'none';
   fullName.style.opacity   = '1';
