@@ -21,6 +21,13 @@
       --bleed-w:   min(96vw, 1060px);
     }
 
+    @font-face {
+      font-family: "aBigDeal";
+      src: url("fonts/aBigDeal.woff2") format("woff2");
+      font-weight: 400 900;
+      font-display: swap;
+    }
+
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { font-size: 16px; scroll-behavior: smooth; }
     body {
@@ -618,7 +625,7 @@
       align-items: center; gap: 1.2rem; text-align: center;
     }
     .site-footer__name {
-      font-size: .6rem; font-weight: 900; letter-spacing: .5em;
+      font-family: var(--font-logo); font-size: .6rem; font-weight: 900; letter-spacing: .5em;
       text-transform: uppercase; color: var(--clr-text);
       text-decoration: none; transition: color .2s ease;
     }

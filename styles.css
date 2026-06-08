@@ -833,25 +833,6 @@ body {
 .contact-cta__arrow svg { width: 14px; height: 14px; }
 .contact-cta:hover .contact-cta__arrow { transform: translateX(4px); }
 
-.back-to-projects {
-  display: inline-flex; align-items: center; gap: .5rem;
-  margin-top: 1.6rem;
-  font-family: var(--font); font-size: .6rem; font-weight: 700;
-  letter-spacing: .25em; text-transform: uppercase;
-  color: var(--clr-muted); text-decoration: none;
-  transition: color .25s ease;
-}
-.back-to-projects:hover,
-.back-to-projects:focus-visible { color: var(--clr-accent); }
-
-.back-to-projects__arrow {
-  display: flex; align-items: center; justify-content: center;
-  width: 16px; height: 16px;
-  transition: transform .3s ease;
-}
-.back-to-projects__arrow svg { width: 13px; height: 13px; }
-.back-to-projects:hover .back-to-projects__arrow { transform: translateX(-4px); }
-
 
 /* ── Reveal genérico al hacer scroll ── */
 .reveal-up {
@@ -877,6 +858,7 @@ body {
 
 .site-footer__name {
   display: inline-block;
+  font-family: var(--font-logo);
   font-size: 2rem;
   font-weight: 900;
   letter-spacing: 0.1em;
