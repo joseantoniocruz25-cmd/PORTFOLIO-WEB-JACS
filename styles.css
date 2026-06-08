@@ -256,8 +256,8 @@ body {
   height: clamp(1.2rem, 3vw, 2.2rem);
   position: relative;
   overflow: hidden;
-  -webkit-mask-image: url('../JACSlogo02.svg');
-          mask-image: url('../JACSlogo02.svg');
+  -webkit-mask-image: url('JACSlogo02.svg');
+          mask-image: url('JACSlogo02.svg');
   -webkit-mask-size: contain;
           mask-size: contain;
   -webkit-mask-repeat: no-repeat;
@@ -1357,7 +1357,7 @@ body {
    Ajusta el tamaño del glifo con --bg-pattern-size
 ══════════════════════════════════════════ */
 :root {
-  --bg-pattern:      url("../proyectos/bg-pattern.svg");
+  --bg-pattern:      url("proyectos/bg-pattern.svg");
   --bg-pattern-size: clamp(400px, 42vw, 400px);   /* escala del tile */
 }
 
