@@ -709,7 +709,6 @@
     @media (max-width: 540px) {
       /* Nav compacta */
       .site-nav { padding: 1rem 4vw; }
-      .site-nav__logo { font-size: 0.85rem; }
       .site-nav__back span { display: none; }
 
       /* Imágenes */
