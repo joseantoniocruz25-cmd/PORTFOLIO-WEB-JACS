@@ -7,19 +7,8 @@ const slogan      = document.getElementById('slogan');
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Split full name into per-character spans for a staggered cascade reveal,
-// preservando los <br> del marcado para que el salto de línea no se pierda
-let fullNameCharIndex = 0;
-fullName.innerHTML = [...fullName.childNodes].map((node) => {
-  if (node.nodeName === 'BR') return '<br>';
-  return [...node.textContent].map((char) => {
-    const span = char === ' '
-      ? '<span class="full-name__space">&nbsp;</span>'
-      : `<span class="full-name__char" style="animation-delay:${(0.55 + fullNameCharIndex * 0.035).toFixed(2)}s">${char}</span>`;
-    fullNameCharIndex++;
-    return span;
-  }).join('');
-}).join('');
+// "Bienvenido" hidden — show JACS directly
+fullName.style.display = 'none';
 
 // Split slogan into per-character spans for the bounce wave
 slogan.innerHTML = [...slogan.textContent].map((char, i) =>
@@ -28,49 +17,10 @@ slogan.innerHTML = [...slogan.textContent].map((char, i) =>
     : `<span class="slogan__char" style="animation-delay:${(i * 0.08).toFixed(2)}s">${char}</span>`
 ).join('');
 
-function easeInOut(t) {
-  return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-}
-
-function mapRange(val, inMin, inMax, outMin, outMax) {
-  const clamped = Math.max(0, Math.min(1, (val - inMin) / (inMax - inMin)));
-  return outMin + (outMax - outMin) * clamped;
-}
-
-let scrollReady = false;
-
-fullName.addEventListener('animationend', (e) => {
-  if (e.target !== fullName) return; // ignora el reveal de cada letra, solo cuenta el del bloque
-  scrollReady = true;
-  fullName.style.animation = 'none';
-  fullName.style.opacity   = '1';
-  fullName.style.transform = 'translateY(0) scale(1)';
-});
-
 function update() {
-  const rect       = heroSection.getBoundingClientRect();
-  const scrollable = heroSection.offsetHeight - window.innerHeight;
-  const scrolled   = -rect.top;
-  const raw        = Math.max(0, Math.min(1, scrolled / scrollable));
-
-  if (scrollReady) {
-    const nameOut = easeInOut(mapRange(raw, 0, 0.45, 0, 1));
-    fullName.style.opacity   = String(1 - nameOut);
-    fullName.style.transform = `translateY(${-nameOut * 32}px) scale(${1 - nameOut * 0.04})`;
-  }
-
-  const logoIn = easeInOut(mapRange(raw, 0.28, 0.90, 0, 1));
-  logoMark.style.opacity   = String(logoIn);
-  logoMark.style.transform = `scale(${0.65 + logoIn * 0.35})`;
-
-  scrollCue.style.opacity = String(Math.max(0, 1 - raw * 7));
-
-  const sloganIn  = easeInOut(mapRange(raw, 0.42, 0.80, 0, 1));
-  const sloganOut = easeInOut(mapRange(raw, 0.88, 1.00, 0, 1));
-  slogan.style.opacity = String(sloganIn * (1 - sloganOut));
-
-  siteNav.classList.toggle('scrolled',     -rect.top > window.innerHeight * 0.8);
-  siteNav.classList.toggle('logo-visible', logoIn > 0.5);
+  siteNav.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.3);
+  siteNav.classList.add('logo-visible');
+  scrollCue.style.opacity = String(Math.max(0, 1 - window.scrollY / (window.innerHeight * 0.4)));
 }
 
 window.addEventListener('scroll', update, { passive: true });
@@ -755,3 +705,27 @@ update();
     }, { threshold: 0.12 });
 
     revealUpEls.forEach(el => revealUpObserver.observe(el));
+
+
+    /* ══════════════════════════════════════
+       FOOTER — volver a inicio: proyectos + filtro "Todos"
+    ══════════════════════════════════════ */
+    const footerLogo = document.querySelector('.site-footer__name');
+    if (footerLogo) {
+      footerLogo.addEventListener('click', e => {
+        e.preventDefault();
+        const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+        if (allBtn && !allBtn.classList.contains('active')) allBtn.click();
+        document.getElementById('proyectos').scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    /* ══════════════════════════════════════
+       MODEL-VIEWER — desactiva camera-controls en táctil
+       para que el scroll de página no quede bloqueado
+    ══════════════════════════════════════ */
+    if (window.matchMedia('(hover: none)').matches) {
+      document.querySelectorAll('.model-card[camera-controls]').forEach(mv => {
+        mv.removeAttribute('camera-controls');
+      });
+    }
