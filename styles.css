@@ -144,7 +144,9 @@ body {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: radial-gradient(ellipse 90% 80% at 30% 40%, #1e1a12 0%, #0b0b0a 68%);
+  background:
+    radial-gradient(ellipse 90% 80% at 30% 40%, rgba(30,26,18,.78) 0%, rgba(11,11,10,.88) 68%),
+    url("proyectos/estudio.webp") center / cover no-repeat;
 }
 
 .hero-overlay {
