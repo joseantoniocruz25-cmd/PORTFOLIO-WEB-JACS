@@ -243,24 +243,6 @@
         </a>
 
 
-        <!-- 7 · Proyectos 3D — 3D · 2×1 -->
-        <a class="bento-card card--1x1" href="proyectos/3d" data-category="3d" aria-label="Ver proyectos 3D">
-          <img class="card__img" src="assets/proyectos/3d.jpg" alt="Proyectos de modelado e impresión 3D" width="900"
-            height="380" loading="lazy">
-          <div class="card__overlay"></div>
-          <div class="card__info">
-            <span class="card__category">3D</span>
-            <p class="card__name">Modelado &amp;<br>Impresión 3D</p>
-          </div>
-          <div class="card__arrow" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 8h10" />
-              <path d="M9 4l4 4-4 4" />
-            </svg>
-          </div>
-        </a>
-
 
         <!-- ══════════════════════════════════════
              TARJETAS DE ENLACE A "OTROS"  · 1×1
@@ -1100,12 +1082,16 @@
           <p class="about-text">
             Dicen que nunca hay que perder al niño que uno lleva dentro. Ese niño curioso por descubrir y aprender algo
             nuevo cada día; el que con un lápiz y un papel dibujaba mundos enteros; el que intentaba moldear con
-            plastilina a su personaje favorito. Esos rasgos siguen siendo parte de mi manera de afrontar cada proyecto.</p><br>
-<p class="about-text">Nací en Sevilla y dibujo desde que tengo uso de razón: bocetos de cualquier cosa que me pasaba por la
+            plastilina a su personaje favorito. Esos rasgos siguen siendo parte de mi manera de afrontar cada proyecto.
+          </p><br>
+          <p class="about-text">Nací en Sevilla y dibujo desde que tengo uso de razón: bocetos de cualquier cosa que me
+            pasaba por la
             cabeza, mis primeros blogs, una cámara entre las manos… hasta que entendí que no podía vivir sin crear. Para
             mí nunca ha sido un trabajo, sino mi forma de ser y de mirar el mundo.</p><br>
-<p class="about-text">Hoy sigo formándome en las nuevas tendencias y herramientas que hacen crecer mi manera de trabajar, porque
-            <em><strong>el mundo es demasiado  grande como para dejar de aprender.</em></strong></p><br>
+          <p class="about-text">Hoy sigo formándome en las nuevas tendencias y herramientas que hacen crecer mi manera
+            de trabajar, porque
+            <em><strong>el mundo es demasiado grande como para dejar de aprender.</em></strong>
+          </p><br>
           </p>
         </div>
 
@@ -1113,8 +1099,8 @@
 
     </section>
 
-    <section class="models-section" aria-labelledby="modelos-heading">
-      <h2 id="modelos-heading" class="sr-only">Modelos 3D</h2>
+    <section class="models-section" id="herramientas-diseno" aria-labelledby="modelos-heading">
+      <h2 id="modelos-heading" class="sr-only">Herramientas y Diseño</h2>
 
       <div class="models-group">
         <h3 class="models-group-title">Herramientas Diseño Digital</h3>
@@ -1215,11 +1201,22 @@
         </div>
       </div>
 
-      <!-- HERRAMIENTAS 3D -->
       <div class="models-group">
-        <h3 class="models-group-title">Herramientas 3D</h3>
+        <h3 class="models-group-title">Herramientas Diseño 3D</h3>
         <div class="models-grid">
+
           <model-viewer class="model-card" src="../proyectos/iconos3d/iconomaya.glb" ar
+            ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral"
+            poster="../proyectos/iconos3d/posterpsd.webp" shadow-intensity="1">
+            <div class="progress-bar hide" slot="progress-bar">
+              <div class="update-bar"></div>
+            </div>
+            <div class="ar-prompt">
+              <img src="../proyectos/visor3d.svg" alt="AR prompt icon">
+            </div>
+          </model-viewer>
+
+          <model-viewer class="model-card" src="../proyectos/iconos3d/iconfusion.glb" ar
             ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral"
             poster="../proyectos/iconos3d/poster.webp" shadow-intensity="1">
             <div class="progress-bar hide" slot="progress-bar">
@@ -1229,7 +1226,7 @@
               <img src="../proyectos/visor3d.svg" alt="AR prompt icon">
             </div>
           </model-viewer>
-          <model-viewer class="model-card" src="../proyectos/iconos3d/iconfusion.glb" ar
+          <model-viewer class="model-card" src="../proyectos/iconos3d/iconblender.glb" ar
             ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral"
             poster="../proyectos/iconos3d/poster.webp" shadow-intensity="1">
             <div class="progress-bar hide" slot="progress-bar">
@@ -1259,16 +1256,6 @@
               <img src="../proyectos/visor3d.svg" alt="AR prompt icon">
             </div>
           </model-viewer>
-          <model-viewer class="model-card" src="../proyectos/iconos3d/iconblender.glb" ar
-            ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral"
-            poster="../proyectos/iconos3d/poster.webp" shadow-intensity="1">
-            <div class="progress-bar hide" slot="progress-bar">
-              <div class="update-bar"></div>
-            </div>
-            <div class="ar-prompt">
-              <img src="../proyectos/visor3d.svg" alt="AR prompt icon">
-            </div>
-          </model-viewer>
           <model-viewer class="model-card" src="../proyectos/iconos3d/iconmagnifiq.gltf" ar
             ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral"
             poster="../proyectos/iconos3d/poster.webp" shadow-intensity="1">
@@ -1280,10 +1267,199 @@
             </div>
           </model-viewer>
 
+
         </div>
       </div>
+    </section>
 
 
+    <!-- ── SECCIÓN GALERÍA 3D — independiente, exclusiva del filtro "3D" ── -->
+    <section class="models-section models-3d-gallery filter-hidden" id="modelos-3d" aria-labelledby="modelos-3d-heading"
+      style="display: none;">
+      <div class="models-3d-header">
+        <span class="models-3d-eyebrow">Trabajo en 3D</span>
+        <h2 class="models-3d-title" id="modelos-3d-heading">Modelado &amp; Impresión 3D</h2>
+      </div>
+      <!-- CRIPTA GEEK -->
+      <article class="otros-block" id="modelos-3d-bloque-1">
+        <header class="otros-block__head">
+          <span class="otros-block__eyebrow">Diseño e Impresión 3D</span>
+          <h3 class="otros-block__title">EXPOSITOR DE CARTAS LA CRIPTA GEEK</h3>
+          <p class="otros-block__text">
+            <!-- TODO: sustituir por una descripción real del proyecto -->
+            Proceso de diseño, escultura digital e impresión 3D de piezas personalizadas: desde el boceto y el
+            modelado en Blender/ZBrush hasta el laminado en Cura y la impresión final.
+          </p>
+        </header>
+
+        <div class="otros-block__grid">
+          <div class="ct-cell" tabindex="0" aria-label="Cripta Geek — foto 1">
+            <img src="../proyectos/criptageek01.webp" alt="Cripta Geek — foto 1" width="450" height="450"
+              loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Cripta Geek — foto 2">
+            <img src="../proyectos/criptageek02.webp" alt="Cripta Geek — foto 2" width="450" height="450"
+              loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Cripta Geek — foto 3">
+            <img src="../proyectos/criptageek03.webp" alt="Cripta Geek — foto 3" width="450" height="450"
+              loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Cripta Geek — foto 4">
+            <img src="../proyectos/criptageek04.webp" alt="Cripta Geek — foto 4" width="450" height="450"
+              loading="lazy">
+          </div>
+        </div>
+
+        <!-- LINTERNA VERDE -->
+      </article>
+      <article class="otros-block" id="modelos-3d-bloque-2">
+        <header class="otros-block__head">
+          <span class="otros-block__eyebrow">Diseño personaje 3D</span>
+          <h3 class="otros-block__title">Lego linterna verde</h3>
+
+        </header>
+
+        <div class="otros-block__grid">
+          <!-- TODO: sustituir por fotografías reales del proceso/resultado 3D -->
+          <div class="ct-cell" tabindex="0" aria-label="Lego Linterna — foto 1">
+            <img src="../proyectos/legolinterna1.webp" alt="Modelado 3D — foto 1" width="450" height="600"
+              loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Modelado 3D — foto 2">
+            <img src="../proyectos/legolinterna2.webp" alt="Lego Linterna — foto 2" width="450" height="600"
+              loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Modelado 3D — foto 3">
+            <img src="../proyectos/legolinterna3.webp" alt="Lego Linterna — foto 3" width="450" height="600"
+              loading="lazy">
+          </div>
+
+          <model-viewer class="model-card" src="../proyectos/iconos3d/liternaverde.glb" ar
+            ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral"
+            poster="../proyectos/iconos3d/poster.webp">
+            <div class="progress-bar hide" slot="progress-bar">
+              <div class="update-bar"></div>
+            </div>
+            <div class="ar-prompt">
+              <img src="../proyectos/visor3d.svg" alt="AR prompt icon">
+            </div>
+          </model-viewer>
+        </div>
+      </article>
+
+      <!-- PIPO -->
+      <article class="otros-block" id="modelos-3d-bloque-2">
+        <header class="otros-block__head">
+          <span class="otros-block__eyebrow">Animación y Modelo 3D</span>
+          <h3 class="otros-block__title">Pipo</h3>
+          <p class="otros-block__text">
+            Proceso Completo de Diseño de Personaje y Animación 2D, Modelado y Texturizado 3D</p>
+
+        </header>
+
+
+        <div class="otros-block__grid">
+          <!-- TODO: sustituir por fotografías reales del proceso/resultado 3D -->
+          <div class="ct-cell" tabindex="0" aria-label="Lego Linterna — foto 1">
+            <img src="../proyectos/pipo01.webp" alt="Pipo — foto 1" width="450" height="600" loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Modelado 3D — foto 2">
+            <img src="../proyectos/pipo02.webp" alt="Pipo — foto 2" width="450" height="600" loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Modelado 3D — foto 3">
+            <img src="../proyectos/pipo03.webp" alt="Pipo — foto 3" width="450" height="600" loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Modelado 3D — foto 3">
+            <img src="../proyectos/pipo04.webp" alt="Pipo — foto 3" width="450" height="600" loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Modelado 3D — foto 3">
+            <img src="../proyectos/pipo00.gif" alt="Pipo — animacion" width="450" height="600" loading="lazy">
+          </div>
+
+          <model-viewer class="model-card" src="../proyectos/iconos3d/pipo3d.glb" ar
+            ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral"
+            poster="../proyectos/iconos3d/posterpipo.webp">
+            <div class="progress-bar hide" slot="progress-bar">
+              <div class="update-bar"></div>
+            </div>
+            <div class="ar-prompt">
+              <img src="../proyectos/visor3d.svg" alt="AR prompt icon">
+            </div>
+          </model-viewer>
+        </div>
+      </article>
+
+      <!-- MAJIN BOO -->
+      <article class="otros-block" id="modelos-3d-bloque-2">
+        <header class="otros-block__head">
+          <span class="otros-block__eyebrow">Impresión y PostProcesado 3D</span>
+          <h3 class="otros-block__title">Majin Boo DBZ</h3>
+        </header>
+
+
+        <div class="otros-block__grid">
+          <!-- TODO: sustituir por fotografías reales del proceso/resultado 3D -->
+          <div class="ct-cell" tabindex="0" aria-label="Lego Linterna — foto 1">
+            <img src="../proyectos/boo03.webp" alt="Majin Boo — foto 1" width="450" height="600" loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Modelado 3D — foto 2">
+            <img src="../proyectos/boo02.webp" alt="Majin Boo — foto 2" width="450" height="600" loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Modelado 3D — foto 3">
+            <img src="../proyectos/boo01.webp" alt="Majin Boo — foto 3" width="450" height="600" loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Modelado 3D — foto 3">
+            <img src="../proyectos/boo00.webp" alt="Majin Boo — foto 3" width="450" height="600" loading="lazy">
+          </div>
+        </div>
+      </article>
+
+      <!-- DEADPOOL -->
+      <article class="otros-block" id="modelos-3d-bloque-2">
+        <header class="otros-block__head">
+          <span class="otros-block__eyebrow">Impresión y PostProcesado 3D</span>
+          <h3 class="otros-block__title">DEADPOOL</h3>
+        </header>
+
+
+        <div class="otros-block__grid">
+          <!-- TODO: sustituir por fotografías reales del proceso/resultado 3D -->
+          <div class="ct-cell" tabindex="0" aria-label="Lego Linterna — foto 1">
+            <img src="../proyectos/boo03.webp" alt="DEADPOOL — foto 1" width="450" height="600" loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Modelado 3D — foto 2">
+            <img src="../proyectos/boo02.webp" alt="DEADPOOL — foto 2" width="450" height="600" loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Modelado 3D — foto 3">
+            <img src="../proyectos/boo01.webp" alt="DEADPOOL — foto 3" width="450" height="600" loading="lazy">
+          </div>
+          <div class="ct-cell" tabindex="0" aria-label="Modelado 3D — foto 3">
+            <img src="../proyectos/boo00.webp" alt="DEADPOOL — foto 3" width="450" height="600" loading="lazy">
+          </div>
+        </div>
+      </article>
+
+      <!-- Lightbox modelos 3D -->
+      <div id="modelos3dLightbox" role="dialog" aria-modal="true" aria-label="Visualizador de fotos 3D">
+        <button class="ct-lb__close" id="m3dLbClose" aria-label="Cerrar">
+          <svg viewBox="0 0 16 16">
+            <path d="M4 4l8 8M12 4l-8 8" />
+          </svg>
+        </button>
+        <button class="ct-lb__nav ct-lb__prev" id="m3dLbPrev" aria-label="Imagen anterior">
+          <svg viewBox="0 0 16 16">
+            <path d="M10 3L5 8l5 5" />
+          </svg>
+        </button>
+        <img class="ct-lb__img" id="m3dLbImg" src="" alt="">
+        <button class="ct-lb__nav ct-lb__next" id="m3dLbNext" aria-label="Imagen siguiente">
+          <svg viewBox="0 0 16 16">
+            <path d="M6 3l5 5-5 5" />
+          </svg>
+        </button>
+        <span class="ct-lb__counter" id="m3dLbCounter" aria-live="polite"></span>
+      </div>
     </section>
 
 

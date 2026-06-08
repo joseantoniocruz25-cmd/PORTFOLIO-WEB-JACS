@@ -508,7 +508,25 @@ body {
   text-transform: uppercase; color: var(--clr-text); line-height: .92;
 }
 
-/* ── "Sobre mí" y "Herramientas" solo se muestran con el filtro "Todos" ── */
+/* ── Encabezado propio de la galería "Modelado & Impresión 3D" ── */
+.models-3d-header {
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+.models-3d-eyebrow {
+  display: inline-block;
+  font-size: .58rem; font-weight: 400; letter-spacing: .55em;
+  text-transform: uppercase; color: var(--clr-accent);
+  margin-bottom: .6rem;
+}
+.models-3d-title {
+  font-family: var(--font); font-weight: 900;
+  font-size: clamp(2.4rem, 6vw, 5rem); letter-spacing: -.02em;
+  text-transform: uppercase; color: var(--clr-text); line-height: .92;
+}
+
+/* ── "Sobre mí" y "Herramientas y Diseño" solo se muestran con el filtro
+   "Todos"; "Modelado & Impresión 3D" es independiente y exclusiva del
+   filtro "3D". Las tres comparten la misma transición de aparición. ── */
 .about-section,
 .models-section {
   transition: opacity .35s ease, transform .35s ease;
@@ -1261,6 +1279,16 @@ body {
   gap: clamp(3px, 0.4vw, 5px);
 }
 
+/* Visor 3D integrado en la rejilla "otros-block__grid" — se ajusta a la
+   celda igual que una foto, en vez de usar su tamaño/aspecto por defecto */
+.otros-block__grid .model-card {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+  border-radius: var(--card-radius);
+}
+
 /* ── Lightbox otros ── */
 #otrosLightbox {
   position: fixed; inset: 0; z-index: 200;
@@ -1272,6 +1300,19 @@ body {
   -webkit-backdrop-filter: blur(14px);
 }
 #otrosLightbox.open { opacity: 1; pointer-events: all; }
+
+/* ── Lightbox modelos 3D ── */
+#modelos3dLightbox {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(5,12,24,.97);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+#modelos3dLightbox.open { opacity: 1; pointer-events: all; }
+#modelos3dLightbox.open .ct-lb__img { transform: scale(1); }
 
 /* ── Responsive galería otros ── */
 @media (max-width: 860px) {

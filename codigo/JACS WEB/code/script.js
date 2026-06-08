@@ -169,24 +169,24 @@ update();
       }, HIDE_MS);
     }
 
-    /* ── "Sobre mí" y "Herramientas": solo visibles con el filtro "Todos" ── */
-    const aboutSections = [
-      document.querySelector('.about-section'),
-      document.querySelector('.models-section'),
-    ].filter(Boolean);
+    /* ── "Sobre mí" y "Herramientas y Diseño": solo visibles con el
+       filtro "Todos". La galería "Modelado & Impresión 3D" es una
+       sección independiente, propia del filtro "3D". ── */
+    const aboutSection    = document.querySelector('.about-section');
+    const toolsSection    = document.getElementById('herramientas-diseno');
+    const models3dSection = document.getElementById('modelos-3d');
 
-    function toggleAboutSections(show) {
-      aboutSections.forEach(sec => {
-        if (show) {
-          sec.style.display = '';
-          requestAnimationFrame(() => sec.classList.remove('filter-hidden'));
-        } else {
-          sec.classList.add('filter-hidden');
-          setTimeout(() => {
-            if (sec.classList.contains('filter-hidden')) sec.style.display = 'none';
-          }, HIDE_MS);
-        }
-      });
+    function toggleSection(sec, show) {
+      if (!sec) return;
+      if (show) {
+        sec.style.display = '';
+        requestAnimationFrame(() => sec.classList.remove('filter-hidden'));
+      } else {
+        sec.classList.add('filter-hidden');
+        setTimeout(() => {
+          if (sec.classList.contains('filter-hidden')) sec.style.display = 'none';
+        }, HIDE_MS);
+      }
     }
 
     /* ── Listener de filtros ── */
@@ -203,12 +203,21 @@ update();
 
         const filter = btn.dataset.filter;
 
-        toggleAboutSections(filter === 'all');
+        toggleSection(aboutSection, filter === 'all');
+        toggleSection(toolsSection, filter === 'all');
+        toggleSection(models3dSection, filter === '3d');
 
         if (filter in specialGalleries) {
           showSpecialGallery(filter);
         } else {
           hideAllSpecialGalleries(filter);
+        }
+
+        /* "3D" trae su propia galería independiente a la vista */
+        if (filter === '3d' && models3dSection) {
+          setTimeout(() => {
+            models3dSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, HIDE_MS + 140);
         }
       });
     });
@@ -592,6 +601,98 @@ update();
       lb.addEventListener('touchstart', e => { tX = e.touches[0].clientX; }, { passive: true });
       lb.addEventListener('touchend', e => {
         const d = tX - e.changedTouches[0].clientX;
+        if (Math.abs(d) > 50) goTo(d > 0 ? cur + 1 : cur - 1);
+      });
+
+      lb.addEventListener('keydown', e => {
+        if (e.key !== 'Tab') return;
+        const fs = [...lb.querySelectorAll('button')];
+        const first = fs[0], last = fs[fs.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    })();
+
+
+    /* ══════════════════════════════════════
+       LIGHTBOX MODELOS 3D
+       Mismo patrón que el lightbox de "Otros",
+       pero recorre las fotos de #modelos-3d.
+    ══════════════════════════════════════ */
+    (function initModelos3dLightbox() {
+      const lb    = document.getElementById('modelos3dLightbox');
+      if (!lb) return;
+
+      const lbImg = document.getElementById('m3dLbImg');
+      const lbCtr = document.getElementById('m3dLbCounter');
+      const cells = () => [...document.querySelectorAll('#modelos-3d .ct-cell')];
+      let cur = 0, trigger = null;
+
+      function imgs() { return cells().map(c => c.querySelector('img')); }
+
+      function update() {
+        const img = imgs()[cur];
+        lbImg.src = img.src; lbImg.alt = img.alt;
+        lbCtr.textContent = `${cur + 1} / ${imgs().length}`;
+      }
+
+      function goTo(idx, anim = true) {
+        cur = (idx + imgs().length) % imgs().length;
+        if (anim) {
+          lbImg.classList.add('switching');
+          setTimeout(() => { update(); lbImg.classList.remove('switching'); }, 200);
+        } else update();
+      }
+
+      function openLb(idx) {
+        goTo(idx, false);
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('m3dLbClose').focus();
+      }
+
+      function closeLb() {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+        if (trigger) { trigger.focus(); trigger = null; }
+      }
+
+      const gallery = document.getElementById('modelos-3d');
+      if (gallery) {
+        gallery.addEventListener('click', e => {
+          const cell = e.target.closest('.ct-cell');
+          if (!cell) return;
+          trigger = cell;
+          openLb(cells().indexOf(cell));
+        });
+        gallery.addEventListener('keydown', e => {
+          const cell = e.target.closest('.ct-cell');
+          if (!cell) return;
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            trigger = cell;
+            openLb(cells().indexOf(cell));
+          }
+        });
+      }
+
+      document.getElementById('m3dLbClose').addEventListener('click', closeLb);
+      document.getElementById('m3dLbPrev').addEventListener('click', () => goTo(cur - 1));
+      document.getElementById('m3dLbNext').addEventListener('click', () => goTo(cur + 1));
+
+      lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+
+      document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape')     closeLb();
+        if (e.key === 'ArrowLeft')  goTo(cur - 1);
+        if (e.key === 'ArrowRight') goTo(cur + 1);
+      });
+
+      let tX2 = 0;
+      lb.addEventListener('touchstart', e => { tX2 = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', e => {
+        const d = tX2 - e.changedTouches[0].clientX;
         if (Math.abs(d) > 50) goTo(d > 0 ? cur + 1 : cur - 1);
       });
 
