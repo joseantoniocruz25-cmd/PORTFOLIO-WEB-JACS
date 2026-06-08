@@ -11,9 +11,9 @@
   --clr-border:  rgba(228, 221, 208, 0.10);     /* bordes sutiles */
   --card-radius: clamp(10px, 1.2vw, 16px);
   --grid-gap:    clamp(0.85rem, 1.6vw, 1.5rem);
-  --font-family: 'Satoshi', sans-serif;
-  --font:        'Satoshi', sans-serif;
-  --font-logo:   "aBigDeal", sans-serif;
+  --font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font:        'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-logo:   "aBigDeal", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 @font-face {
