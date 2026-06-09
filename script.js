@@ -187,6 +187,26 @@ update();
       });
     });
 
+    /* ── Nav "Sobre mí": la sección se oculta con cualquier filtro
+       distinto de "Todos". Antes de saltar a ella, restablecemos el
+       filtro "Todos" para revelarla y luego hacemos scroll. ── */
+    const aboutNavLink = document.querySelector('.site-nav__links a[href="#sobre-mi"]');
+    if (aboutNavLink) {
+      aboutNavLink.addEventListener('click', e => {
+        const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+        const aboutHidden = aboutSection &&
+          (aboutSection.classList.contains('filter-hidden') ||
+           aboutSection.style.display === 'none');
+        if (aboutHidden && allBtn) {
+          e.preventDefault();
+          if (!allBtn.classList.contains('active')) allBtn.click();
+          setTimeout(() => {
+            aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, HIDE_MS + 140);
+        }
+      });
+    }
+
     /* ── Tarjetas que abren un filtro en lugar de navegar ── */
     cards.forEach(card => {
       const href = card.getAttribute('href') || '';
