@@ -721,11 +721,44 @@ update();
     }
 
     /* ══════════════════════════════════════
-       MODEL-VIEWER — desactiva camera-controls en táctil
-       para que el scroll de página no quede bloqueado
+       MODEL-VIEWER — interacción táctil "activar al tocar"
+       En móvil los modelos quedan estáticos (la página hace
+       scroll por encima) hasta que se tocan; entonces giran
+       libremente con un dedo. Al tocar otro modelo o hacer
+       scroll se desactivan y vuelve a poder scrollearse.
     ══════════════════════════════════════ */
     if (window.matchMedia('(hover: none)').matches) {
-      document.querySelectorAll('.model-card[camera-controls]').forEach(mv => {
+      const viewers = [...document.querySelectorAll('.model-card')];
+      let active = null;
+
+      function deactivate(mv) {
+        if (!mv) return;
         mv.removeAttribute('camera-controls');
+        mv.removeAttribute('touch-action');
+        mv.classList.remove('mv-active');
+        if (active === mv) active = null;
+      }
+
+      function activate(mv) {
+        if (active && active !== mv) deactivate(active);
+        mv.setAttribute('touch-action', 'none');  // un dedo gira en cualquier dirección
+        mv.setAttribute('camera-controls', '');
+        mv.classList.add('mv-active');
+        active = mv;
+      }
+
+      viewers.forEach(mv => {
+        /* Estado inicial: sin controles → el scroll de la página fluye */
+        mv.removeAttribute('camera-controls');
+        /* La primera pulsación solo activa; el arrastre siguiente ya gira */
+        mv.addEventListener('click', () => { if (active !== mv) activate(mv); });
+      });
+
+      /* Hacer scroll libera el modelo activo (permite seguir bajando) */
+      window.addEventListener('scroll', () => { if (active) deactivate(active); }, { passive: true });
+
+      /* Tocar fuera de cualquier modelo también lo desactiva */
+      document.addEventListener('click', e => {
+        if (active && !e.target.closest('.model-card')) deactivate(active);
       });
     }

@@ -2,13 +2,13 @@
    TOKENS DE DISEÑO — cambia aquí los colores
 ══════════════════════════════════════════ */
 :root {
-  --clr-bg:      #0F2038;                       /* noche marina del mural */
-  --clr-bg-2:    #162F4F;                       /* marino extraído del mural */
-  --clr-text:    #E4DDD0;                       /* crema de la pared */
-  --clr-accent:  #40759C;                       /* royal blue del mural */
-  --clr-muted:   rgba(228, 221, 208, 0.40);
-  --clr-surface: #162F4F;                       /* fondo de tarjetas */
-  --clr-border:  rgba(228, 221, 208, 0.10);     /* bordes sutiles */
+  --clr-bg:      hsl(215, 58%, 14%);                       /* noche marina del mural */
+  --clr-bg-2:    hsl(214, 56%, 20%);                       /* marino extraído del mural */
+  --clr-text:    hsl(39, 27%, 85%);                       /* crema de la pared */
+  --clr-accent:  hsl(205, 42%, 43%);                       /* royal blue del mural */
+  --clr-muted:   hsla(39, 27%, 85%, 0.4);
+  --clr-surface: hsl(214, 56%, 20%);                       /* fondo de tarjetas */
+  --clr-border:  hsla(39, 27%, 85%, 0.1);     /* bordes sutiles */
   --card-radius: clamp(10px, 1.2vw, 16px);
   --grid-gap:    clamp(0.85rem, 1.6vw, 1.5rem);
   --font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -736,6 +736,12 @@ body {
   background: var(--clr-bg-2);
   overflow: hidden;
   position: relative;
+}
+
+/* Modelo activado al tocar en móvil: anillo de acento como feedback */
+.model-card.mv-active {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: -2px;
 }
 
 .model-card .ar-prompt {
