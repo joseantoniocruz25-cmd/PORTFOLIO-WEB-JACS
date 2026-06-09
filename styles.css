@@ -530,6 +530,13 @@ body {
   text-transform: uppercase; color: var(--clr-text); line-height: .92;
 }
 
+/* ── Galería "Modelado & Impresión 3D": sección independiente, por lo
+   que necesita su propio inset para alinearse con .projects-section y
+   no pegar el contenido a los bordes de la pantalla. ── */
+.models-3d-gallery {
+  padding: clamp(4.5rem, 9vw, 7.5rem) clamp(1.5rem, 6vw, 9rem);
+}
+
 /* ── Encabezado propio de la galería "Modelado & Impresión 3D" ── */
 .models-3d-header {
   margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
