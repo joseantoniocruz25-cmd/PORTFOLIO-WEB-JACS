@@ -2,7 +2,7 @@
    TOKENS DE DISEÑO — cambia aquí los colores
 ══════════════════════════════════════════ */
 :root {
-  --clr-bg:      hsl(215, 58%, 14%);                       /* noche marina del mural */
+  --clr-bg:      rgb(11, 35, 65);                       /* noche marina del mural */
   --clr-bg-2:    hsl(214, 56%, 20%);                       /* marino extraído del mural */
   --clr-text:    hsl(39, 27%, 85%);                       /* crema de la pared */
   --clr-accent:  hsl(205, 42%, 43%);                       /* royal blue del mural */

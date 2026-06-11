@@ -2,7 +2,7 @@
        TOKENS
     ══════════════════════════════════════════ */
     :root {
-      --clr-bg:      #0F2038;
+      --clr-bg:      rgb(11, 35, 65);
       --clr-bg-2:    #162F4F;
       --clr-surface: #1C3A5C;
       --clr-text:    #E4DDD0;
