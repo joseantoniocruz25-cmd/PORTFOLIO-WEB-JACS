@@ -751,23 +751,6 @@ body {
   outline-offset: -2px;
 }
 
-.model-card .ar-prompt {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-}
-
-.model-card .ar-prompt img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 /* ════════════════════════════════════════
    SECCIÓN CONTACTO
 ════════════════════════════════════════ */
