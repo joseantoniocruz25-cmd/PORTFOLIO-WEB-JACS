@@ -776,7 +776,7 @@ update();
         const hint = document.createElement('div');
         hint.className = 'mv-hint';
         hint.setAttribute('aria-hidden', 'true');
-        hint.innerHTML = '<span class="mv-hint__ico" aria-hidden="true">↻</span>Toca para rotar';
+        hint.innerHTML = '<span class="mv-hint__ico" aria-hidden="true">↻</span>Ver 3D';
         mv.appendChild(hint);
 
         /* La primera pulsación solo activa; el arrastre siguiente ya gira */
