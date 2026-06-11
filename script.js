@@ -770,8 +770,20 @@ update();
       viewers.forEach(mv => {
         /* Estado inicial: sin controles → el scroll de la página fluye */
         mv.removeAttribute('camera-controls');
+
+        /* Pista "Toca para rotar": se inyecta sobre el modelo (slot por
+           defecto del model-viewer) y se desvanece tras la 1ª interacción */
+        const hint = document.createElement('div');
+        hint.className = 'mv-hint';
+        hint.setAttribute('aria-hidden', 'true');
+        hint.innerHTML = '<span class="mv-hint__ico" aria-hidden="true">↻</span>Toca para rotar';
+        mv.appendChild(hint);
+
         /* La primera pulsación solo activa; el arrastre siguiente ya gira */
-        mv.addEventListener('click', () => { if (active !== mv) activate(mv); });
+        mv.addEventListener('click', () => {
+          if (active !== mv) activate(mv);
+          hint.classList.add('is-dismissed');
+        });
       });
 
       /* Hacer scroll libera el modelo activo (permite seguir bajando) */

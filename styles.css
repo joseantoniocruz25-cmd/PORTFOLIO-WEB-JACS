@@ -1040,7 +1040,94 @@ body {
 @media (hover: none) {
   .card__info     { transform: translateY(0); }
   .card__category { opacity: 1; transform: translateY(0); }
-  .card__arrow    { opacity: 1; transform: translate(0, 0); }
+
+  /* La flecha "ver más" se lee como un botón táctil real */
+  .card__arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+    transform-origin: center;
+    background: rgba(64,117,156,.42);
+    border-color: rgba(64,117,156,.7);
+  }
+
+  /* Anillo que irradia desde la flecha para señalar el toque */
+  .card__arrow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--clr-accent);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* "Pulso al aparecer": al entrar la tarjeta en pantalla (.in-view)
+     la flecha late unas pocas veces y luego se calma. */
+  .bento-card.in-view .card__arrow {
+    animation: cardTapNudge 1.5s ease-in-out 3;
+  }
+  .bento-card.in-view .card__arrow::after {
+    animation: cardTapRing 1.5s ease-out 3;
+  }
+
+  /* ── Pista "Toca para rotar" sobre cada visor 3D ── */
+  .mv-hint {
+    position: absolute;
+    left: 50%;
+    bottom: .9rem;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .4rem .85rem;
+    border-radius: 999px;
+    background: rgba(15,32,56,.74);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(64,117,156,.6);
+    color: var(--clr-text);
+    font-size: .58rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    animation: mvHintIn .4s ease-out .25s forwards,
+               mvHintPulse 2.6s ease-in-out 1.4s infinite;
+  }
+  .mv-hint__ico { font-size: .85rem; line-height: 1; }
+
+  /* Desaparece al activar el modelo o tras la primera interacción */
+  .model-card.mv-active .mv-hint,
+  .mv-hint.is-dismissed {
+    opacity: 0 !important;
+    animation: none;
+    transition: opacity .25s ease;
+  }
+}
+
+@keyframes cardTapNudge {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.14); }
+}
+@keyframes cardTapRing {
+  0%        { opacity: .6; transform: scale(.65); }
+  70%, 100% { opacity: 0;  transform: scale(1.95); }
+}
+@keyframes mvHintIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(6px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+@keyframes mvHintPulse {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50%      { transform: translateX(-50%) scale(1.06); }
+}
+
+/* Respeta a quien prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .bento-card.in-view .card__arrow,
+  .bento-card.in-view .card__arrow::after,
+  .mv-hint { animation: none; }
+  .mv-hint { opacity: 1; }
 }
 
 
