@@ -815,8 +815,8 @@ update();
    inicial ni penaliza el "JavaScript sin usar" en la carga.
 ══════════════════════════════════════ */
 (function lazyLoadModelViewer() {
-  const section = document.getElementById('herramientas-diseno');
-  if (!section) return;
+  const viewers = [...document.querySelectorAll('model-viewer')];
+  if (!viewers.length) return;
 
   let loaded = false;
   const load = () => {
@@ -829,13 +829,16 @@ update();
   };
 
   if ('IntersectionObserver' in window) {
+    // Vigilamos CADA model-viewer (no solo una sección): los que están en
+    // galerías ocultas por filtro tienen área 0 y no disparan hasta que se
+    // revelan; en ese momento se carga la librería y se renderizan.
     const io = new IntersectionObserver((entries, obs) => {
       if (entries.some(e => e.isIntersecting)) {
         load();
         obs.disconnect();
       }
-    }, { rootMargin: '600px' });   // empieza a cargar 600px antes de que sea visible
-    io.observe(section);
+    }, { rootMargin: '600px' });   // empieza a cargar 600px antes de ser visible
+    viewers.forEach(mv => io.observe(mv));
   } else {
     load();   // navegadores antiguos: carga directa
   }
