@@ -8,11 +8,20 @@
 
   <link rel="preconnect" href="https://api.fontshare.com">
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+
+  <!-- Fuente Satoshi: carga asíncrona para que NO bloquee el renderizado inicial -->
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap"
+    media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap">
+  </noscript>
+
   <link rel="stylesheet" href="animations.css?v=3">
   <link rel="stylesheet" href="styles.css?v=7">
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"></script>
-  <script src="script.js?v=3" defer></script>
+
+  <!-- model-viewer (~1 MB) se carga de forma diferida desde script.js (IntersectionObserver) -->
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <script src="script.js?v=4" defer></script>
 </head>
 
 <body>
@@ -99,8 +108,8 @@
            BENTO GRID
            Estructura 4 columnas:
            Fila 1-2: [Reyemar 2×2] [Al Alba 1×2] [Hoyo10 1×2]
-           Fila 3:   [De Paso 2×1            ] [Peña Bética 1×1] [Chicharrón 1×1]
-           Fila 4:   [Silvio 1×1] [3D 2×1            ] [WibraNet 1×1]
+           Fila 3:   [De Paso 2×1] [Peña Bética 1×1] [Chicharrón 1×1]
+           Fila 4:   [Silvio 1×1] [3D 2×1]
       ══════════════════════════════════════ -->
       <div class="bento-grid" id="bentoGrid">
 
@@ -603,8 +612,7 @@
 
 
         <!--
-          AÑADE MÁS PIEZAS AQUÍ
-          ─────────────────────────────────
+
           Cuadrado:
           <div class="ct-cell" tabindex="0" aria-label="…">
             <img src="proyectos/X.webp" alt="…"
@@ -619,7 +627,6 @@
 
           Pieza grande:
           <div class="ct-cell ct-w2 ct-h2" …>  900×900
-          ─────────────────────────────────
         -->
 
       </div><!-- /ctGallery -->
@@ -952,8 +959,7 @@
       <!-- ══════════════════════════════════════
            GALERÍA OTROS
            Visible solo al pulsar el botón "Otros".
-           A diferencia de las demás, se organiza en BLOQUES:
-           cada bloque = título + breve texto + rejilla de fotos.
+
 
            Para añadir un bloque nuevo:
              1. Duplica un <article class="otros-block"> entero.
@@ -1162,44 +1168,38 @@
         <h3 class="models-group-title">Herramientas Diseño Digital</h3>
         <div class="models-grid">
 
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconopsd.glb"
-            camera-controls tone-mapping="neutral"
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconopsd.glb" camera-controls tone-mapping="neutral"
             poster="proyectos/iconos3d/posterpsd.webp" shadow-intensity="1">
             <div class="progress-bar hide" slot="progress-bar">
               <div class="update-bar"></div>
             </div>
           </model-viewer>
 
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconoai.glb"
-            camera-controls tone-mapping="neutral"
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconoai.glb" camera-controls tone-mapping="neutral"
             poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
             <div class="progress-bar hide" slot="progress-bar">
               <div class="update-bar"></div>
             </div>
           </model-viewer>
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconaffinity.glb"
-            camera-controls tone-mapping="neutral"
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconaffinity.glb" camera-controls
+            tone-mapping="neutral" poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
+            <div class="progress-bar hide" slot="progress-bar">
+              <div class="update-bar"></div>
+            </div>
+          </model-viewer>
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconid.glb" camera-controls tone-mapping="neutral"
             poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
             <div class="progress-bar hide" slot="progress-bar">
               <div class="update-bar"></div>
             </div>
           </model-viewer>
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconid.glb"
-            camera-controls tone-mapping="neutral"
-            poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconpremiere.glb" camera-controls
+            tone-mapping="neutral" poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
             <div class="progress-bar hide" slot="progress-bar">
               <div class="update-bar"></div>
             </div>
           </model-viewer>
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconpremiere.glb"
-            camera-controls tone-mapping="neutral"
-            poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
-            <div class="progress-bar hide" slot="progress-bar">
-              <div class="update-bar"></div>
-            </div>
-          </model-viewer>
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconoae.glb"
-            camera-controls tone-mapping="neutral"
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconoae.glb" camera-controls tone-mapping="neutral"
             poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
             <div class="progress-bar hide" slot="progress-bar">
               <div class="update-bar"></div>
@@ -1216,16 +1216,14 @@
         <h3 class="models-group-title">DESARROLLO WEB</h3>
         <div class="models-grid">
 
-          <model-viewer class="model-card" src="proyectos/iconos3d/icongithub.glb"
-            camera-controls tone-mapping="neutral"
-            poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
+          <model-viewer class="model-card" src="proyectos/iconos3d/icongithub.glb" camera-controls
+            tone-mapping="neutral" poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
             <div class="progress-bar hide" slot="progress-bar">
               <div class="update-bar"></div>
             </div>
           </model-viewer>
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconvisualstudio.glb"
-            camera-controls tone-mapping="neutral"
-            poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconvisualstudio.glb" camera-controls
+            tone-mapping="neutral" poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
             <div class="progress-bar hide" slot="progress-bar">
               <div class="update-bar"></div>
             </div>
@@ -1237,45 +1235,39 @@
         <h3 class="models-group-title">Herramientas Diseño 3D</h3>
         <div class="models-grid">
 
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconomaya.glb"
-            camera-controls tone-mapping="neutral"
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconomaya.glb" camera-controls tone-mapping="neutral"
             poster="proyectos/iconos3d/posterpsd.webp" shadow-intensity="1">
             <div class="progress-bar hide" slot="progress-bar">
               <div class="update-bar"></div>
             </div>
           </model-viewer>
 
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconfusion.glb"
-            camera-controls tone-mapping="neutral"
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconfusion.glb" camera-controls
+            tone-mapping="neutral" poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
+            <div class="progress-bar hide" slot="progress-bar">
+              <div class="update-bar"></div>
+            </div>
+          </model-viewer>
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconblender.glb" camera-controls
+            tone-mapping="neutral" poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
+            <div class="progress-bar hide" slot="progress-bar">
+              <div class="update-bar"></div>
+            </div>
+          </model-viewer>
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconzbrush.glb" camera-controls
+            tone-mapping="neutral" poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
+            <div class="progress-bar hide" slot="progress-bar">
+              <div class="update-bar"></div>
+            </div>
+          </model-viewer>
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconcura.glb" camera-controls tone-mapping="neutral"
             poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
             <div class="progress-bar hide" slot="progress-bar">
               <div class="update-bar"></div>
             </div>
           </model-viewer>
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconblender.glb"
-            camera-controls tone-mapping="neutral"
-            poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
-            <div class="progress-bar hide" slot="progress-bar">
-              <div class="update-bar"></div>
-            </div>
-          </model-viewer>
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconzbrush.glb"
-            camera-controls tone-mapping="neutral"
-            poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
-            <div class="progress-bar hide" slot="progress-bar">
-              <div class="update-bar"></div>
-            </div>
-          </model-viewer>
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconcura.glb"
-            camera-controls tone-mapping="neutral"
-            poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
-            <div class="progress-bar hide" slot="progress-bar">
-              <div class="update-bar"></div>
-            </div>
-          </model-viewer>
-          <model-viewer class="model-card" src="proyectos/iconos3d/iconmagnifiq.gltf"
-            camera-controls tone-mapping="neutral"
-            poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
+          <model-viewer class="model-card" src="proyectos/iconos3d/iconmagnifiq.gltf" camera-controls
+            tone-mapping="neutral" poster="proyectos/iconos3d/poster.webp" shadow-intensity="1">
             <div class="progress-bar hide" slot="progress-bar">
               <div class="update-bar"></div>
             </div>
@@ -1344,9 +1336,8 @@
               loading="lazy">
           </div>
 
-          <model-viewer class="model-card" src="proyectos/iconos3d/liternaverde.glb"
-            camera-controls tone-mapping="neutral"
-            poster="proyectos/iconos3d/poster.webp">
+          <model-viewer class="model-card" src="proyectos/iconos3d/liternaverde.glb" camera-controls
+            tone-mapping="neutral" poster="proyectos/iconos3d/poster.webp">
             <div class="progress-bar hide" slot="progress-bar">
               <div class="update-bar"></div>
             </div>
@@ -1383,8 +1374,7 @@
             <img src="proyectos/pipo00.gif" alt="Pipo — animacion" width="450" height="600" loading="lazy">
           </div>
 
-          <model-viewer class="model-card" src="proyectos/iconos3d/pipo3d.glb"
-            camera-controls tone-mapping="neutral"
+          <model-viewer class="model-card" src="proyectos/iconos3d/pipo3d.glb" camera-controls tone-mapping="neutral"
             poster="proyectos/iconos3d/posterpipo.webp">
             <div class="progress-bar hide" slot="progress-bar">
               <div class="update-bar"></div>

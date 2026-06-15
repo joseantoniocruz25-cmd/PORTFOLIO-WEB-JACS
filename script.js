@@ -17,13 +17,26 @@ slogan.innerHTML = [...slogan.textContent].map((char, i) =>
     : `<span class="slogan__char" style="animation-delay:${(i * 0.08).toFixed(2)}s">${char}</span>`
 ).join('');
 
+let scrollTicking = false;
 function update() {
-  siteNav.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.3);
+  // Lecturas de layout agrupadas al inicio del frame para evitar reflows forzados
+  const y  = window.scrollY;
+  const vh = window.innerHeight;
+  siteNav.classList.toggle('scrolled', y > vh * 0.3);
   siteNav.classList.add('logo-visible');
-  scrollCue.style.opacity = String(Math.max(0, 1 - window.scrollY / (window.innerHeight * 0.4)));
+  scrollCue.style.opacity = String(Math.max(0, 1 - y / (vh * 0.4)));
+  scrollTicking = false;
 }
 
-window.addEventListener('scroll', update, { passive: true });
+function onScroll() {
+  // Un único trabajo por frame: el navegador no recalcula estilos en cada evento de scroll
+  if (!scrollTicking) {
+    scrollTicking = true;
+    requestAnimationFrame(update);
+  }
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
 update();
   /* ══════════════════════════════════════
        PROYECTOS — filtro con slide animado
@@ -794,3 +807,36 @@ update();
         if (active && !e.target.closest('.model-card')) deactivate(active);
       });
     }
+
+/* ══════════════════════════════════════
+   MODEL-VIEWER — carga diferida (lazy load)
+   La librería (~1 MB + WebGL) solo se descarga cuando el usuario
+   se acerca a la sección de iconos 3D. Así no bloquea el render
+   inicial ni penaliza el "JavaScript sin usar" en la carga.
+══════════════════════════════════════ */
+(function lazyLoadModelViewer() {
+  const section = document.getElementById('herramientas-diseno');
+  if (!section) return;
+
+  let loaded = false;
+  const load = () => {
+    if (loaded) return;
+    loaded = true;
+    const s = document.createElement('script');
+    s.type = 'module';
+    s.src  = 'https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js';
+    document.head.appendChild(s);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      if (entries.some(e => e.isIntersecting)) {
+        load();
+        obs.disconnect();
+      }
+    }, { rootMargin: '600px' });   // empieza a cargar 600px antes de que sea visible
+    io.observe(section);
+  } else {
+    load();   // navegadores antiguos: carga directa
+  }
+})();
